@@ -1,3 +1,4 @@
+drop database computrabajo;
 create database computrabajo;
 use computrabajo;
 
@@ -11,7 +12,7 @@ create table empresa(
     direccion varchar(500),
     sector varchar(300),
     numTrabajadores int
-)
+);
 
 create table usuarioEmpresa(
 	idUsuarioEmpresa int primary key auto_increment,
@@ -19,7 +20,7 @@ create table usuarioEmpresa(
     apellido varchar(300),
     idEmpresa int,
     foreign key fk_idempresa (idEmpresa) references empresa(idEmpresa)
-)
+);
 
 create table propuesta(
 	idPropuesta int primary key auto_increment,
@@ -29,29 +30,29 @@ create table propuesta(
     fecha date,
     pruebaTecnica varchar(500),
     foreign key fk_idusuarioempresa (idUsuarioEmpresa) references usuarioEmpresa(idUsuarioEmpresa)
-)
+);
 
 create table tipoTelefono(
 	idTipoTelefono int primary key auto_increment,
     tipo varchar(250)
-)
+);
 
 create table telefonos(
 	idTelefono int primary key auto_increment,
     idTipoTelefono int,
     numero varchar(9),
     foreign key fk_idtipotelefono (idTipoTelefono) references tipoTelefono(idTipoTelefono)
-)
+);
 
 create table conocimientos(
 	idConocimientos int primary key auto_increment,
     conocimientos varchar(500)
-)
+);
 
 create table niveles(
 	idNivel int primary key auto_increment,
     Nivel varchar(250)
-)
+);
 
 
 create table usuario(
@@ -62,16 +63,15 @@ create table usuario(
     fechaNacimiento date,
     genero varchar(250),
     estadoCivil varchar(250),
-    skype varchar(300),
+    email varchar(300),
     pais varchar(250),
     departamento varchar(250),
     ciudad varchar(250),
     direccion varchar(500),
-    nacionalidad varchar(300),
     foto varchar(500),
     idTelefono int,
     foreign key fk_idtelefono (idTelefono) references telefonos(idTelefono)
-)
+);
 
 create table usuarioConocimiento(
 	idUsuario int,
@@ -80,7 +80,7 @@ create table usuarioConocimiento(
     foreign key fk_usuario (idUsuario) references usuario(idUsuario),
     foreign key fk_idconocimiento (idConocimiento) references conocimientos(idConocimiento),
     foreign key fk_nivel (idNivel) references niveles(idNivel)
-)
+);
 
 
 create table postulaciones(
@@ -92,7 +92,7 @@ create table postulaciones(
     uploadPruebaTecnica varchar(500),
     foreign key fk_idUsuarioPostulacion (idUsuario) references usuario(idUsuario),
     foreign key fk_PropuestaPostulacion (idPropuesta) references propuesta(idPropuesta)
-)
+);
 
 create table mensajes(
 	idPostulacion int,
@@ -100,7 +100,7 @@ create table mensajes(
     mensaje varchar(500),
     fecha date,
     foreign key fk_postulacionmsg (idPostulacion) references postulaciones(idPostulacion)
-)
+);
 
 create table propuestaConocimiento(
 	idConocimiento int,
@@ -108,5 +108,7 @@ create table propuestaConocimiento(
     idNivel int,
     foreign key fk_proconocimiento (idConocimiento) references conocimientos(idConocimientos),
     foreign key fk_propuesta (idPropuesta) references propuesta(idPropuesta)
-)
+);
 
+alter table usuario add password varchar(500);
+select * from usuario
