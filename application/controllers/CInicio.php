@@ -14,5 +14,10 @@ class cInicio extends CI_Controller
       $this->load->view('vInicio');
       $this->load->view('home/footer');
     }
+    public function inicioUsuario()
+    {
+      
+    }
+
 }
 ?>
