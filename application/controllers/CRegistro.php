@@ -5,8 +5,6 @@ class CRegistro extends CI_Controller
    public function  __construct()
    {
     parent::__construct();
-    $this->load->model('file');
-    $this->load->model('photo');
     $this->load->model('UsuariosModel');
    }
 
