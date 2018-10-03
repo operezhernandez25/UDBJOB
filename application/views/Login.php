@@ -2,7 +2,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>CompuTrabajo | Log in</title>
+  <title>GuanaJob | Log in</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -29,19 +29,19 @@
 <body class="hold-transition login-page" style="background-image: url('<?php echo base_url(); ?>public/img/login1.png'); background-repeat: no-repeat;background-size: cover;">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>Compu</b>Trabajo</a>
+    <a href="../../index2.html"><b>Guana</b>Job</a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg">Inicia tu sesión</p>
 
-    <form action="../../index2.html" method="post">
+    <form action="<?php echo base_url(); ?>verificar" method="post">
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="Email">
+        <input type="email" class="form-control" placeholder="Email" name="txtemail">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password">
+        <input type="password" class="form-control" placeholder="Password" name="txtPass">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
@@ -54,7 +54,7 @@
       </div>
     </form>
 
-    <a href="register.html" class="text-center">Registrarte en CompuTrabajo</a>
+    <a href="register.html" class="text-center">Registrarte en GuanaJob</a>
 
   </div>
   <!-- /.login-box-body -->

@@ -49,6 +49,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'cInicio';
+$route['default_controller'] = 'CLogin';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+//rutas para inicio
+$route['inicio']='CInicio';
+
+//rutas para login
+$route["login"]="CLogin";
+$route["logout"]="CLogin/cerrarSesion";
+$route["verificar"]="CLogin/ingresar";
