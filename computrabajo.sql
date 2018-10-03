@@ -45,7 +45,7 @@ create table telefonos(
 );
 
 create table conocimientos(
-	idConocimientos int primary key auto_increment,
+	idConocimiento int primary key auto_increment,
     conocimientos varchar(500)
 );
 
@@ -56,7 +56,7 @@ create table niveles(
 
 
 create table usuario(
-	idUsusario int primary key auto_increment,
+	idUsuario int primary key auto_increment,
     nombres varchar(300),
     apellidos varchar(300),
     curriculum varchar(500),
@@ -77,9 +77,9 @@ create table usuarioConocimiento(
 	idUsuario int,
     idConocimiento int,
     idNivel int,
-    foreign key fk_usuario (idUsuario) references usuario(idUsuario),
-    foreign key fk_idconocimiento (idConocimiento) references conocimientos(idConocimiento),
-    foreign key fk_nivel (idNivel) references niveles(idNivel)
+    foreign key fk_usuario_conocimient (idUsuario) references usuario(idUsuario),
+    foreign key fk_idconocimiento_conocimient (idConocimiento) references conocimientos(idConocimiento),
+    foreign key fk_nivel_conocimiento (idNivel) references niveles(idNivel)
 );
 
 
@@ -106,7 +106,7 @@ create table propuestaConocimiento(
 	idConocimiento int,
     idPropuesta int,
     idNivel int,
-    foreign key fk_proconocimiento (idConocimiento) references conocimientos(idConocimientos),
+    foreign key fk_proconocimiento (idConocimiento) references conocimientos(idConocimiento),
     foreign key fk_propuesta (idPropuesta) references propuesta(idPropuesta)
 );
 

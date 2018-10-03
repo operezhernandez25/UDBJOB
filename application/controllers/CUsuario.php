@@ -23,6 +23,14 @@ class CUsuario extends CI_Controller
     $this->load->view('home/footer');
    }
 
+   public function verPostulacion($id)
+   {
+    $this->load->view('home/header');
+    $this->load->view('home/asidenav');
+    $this->load->view('usuario/verpostulacion');
+    $this->load->view('home/footer');
+   }
+
 
 }
 
