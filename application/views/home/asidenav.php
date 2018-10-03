@@ -90,8 +90,13 @@
             </a>
         </li>
         <li >
-            <a href="#">
+            <a href="<?php echo base_url(); ?>usuarioEmpresa">
               <i class="fa fa-cubes"></i> <span>Ver Perfil</span>
+            </a>
+        </li>
+        <li >
+            <a href="<?php echo base_url(); ?>usuarioEmpresa">
+              <i class="fa fa-cubes"></i> <span>Usuarios</span>
             </a>
         </li>
     </ul>

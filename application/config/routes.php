@@ -63,3 +63,7 @@ $route["verificar"]="CLogin/ingresar";
 //rutas para login empresarial
 $route["loginEmpresarial"]="CLogin/loginEmpresarial";
 $route["verificarEmpresa"]="CLogin/ingresarEmpresa";
+
+
+//rutas para UsuarioEmpresa
+$route["usuarioEmpresa"]="CUsuarioE";

@@ -24,9 +24,9 @@
         }
 
         if(isset($mensaje)){
-          $this->load->view('Login',$data);
+          $this->load->view('login/Login',$data);
         }else {
-          $this->load->view('Login');
+          $this->load->view('login/Login');
         }
     }
 
@@ -61,9 +61,9 @@
         }
 
         if(isset($mensaje)){
-          $this->load->view('vLoginE',$data);
+          $this->load->view('login/vLoginE',$data);
         }else {
-          $this->load->view('vLoginE');
+          $this->load->view('login/vLoginE');
         }
     }
 
