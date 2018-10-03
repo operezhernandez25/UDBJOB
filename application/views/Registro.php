@@ -35,18 +35,18 @@
 
   <div class="register-box-body">
     <p class="login-box-msg">Complete el formulario para registrarse!</p>
-
-    <form action="" method="post">
+    <!--<form action="<?php echo base_url()."CRegistro/registrar" ?>" method="post" enctype="multipart/form-data" accept-charset="utf-8"> -->
+    <?php echo form_open_multipart('CRegistro/registrar'); ?>
       <div class="row">
         <div class="col-xs-6">
           <div class="form-group has-feedback">
-            <input type="text" class="form-control" placeholder="Nombres">
+            <input type="text" class="form-control" placeholder="Nombres" name="nombre" required>
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
           </div>
         </div>
         <div class="col-xs-6">
           <div class="form-group has-feedback">
-            <input type="text" class="form-control" placeholder="Apellidos">
+            <input type="text" class="form-control" placeholder="Apellidos" name="apellido" required>
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
           </div>
         </div>
@@ -55,13 +55,13 @@
       <div class="row">
         <div class="col-xs-6">
           <div class="form-group has-feedback">
-            <input type="date" class="form-control" placeholder="Fecha nacimiento">
+            <input type="date" class="form-control" placeholder="Fecha nacimiento" name="fechanac" required>
             <span class="fa fa-calendar form-control-feedback"></span>
           </div>
         </div>
         <div class="col-xs-6">
           <div class="form-group has-feedback">
-            <select id="cmbNacionalidad" name="cmbNacionalidad" class="form-control selectpicker" data-live-search="true" name="cmbPaciente" id="cmbPaciente" required>
+            <select id="cmbNacionalidad" name="cmbNacionalidad" class="form-control selectpicker" data-live-search="true" required>
               <option value="" selected>Seleccione su Pais</option>
               <option value="AL">Albania</option>
               <option value="DE">Alemania</option>
@@ -285,19 +285,19 @@
           <label>Genero</label>
           <div class="radio">
             <label>
-              <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
+              <input type="radio" name="rbGenero" id="optionsRadios1" value="Masculino" checked="">
               Masculino
             </label>
           </div>
           <div class="radio">
             <label>
-              <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+              <input type="radio" name="rbGenero" id="optionsRadios2" value="Femenino">
               Femenino
             </label>
           </div>
           <div class="radio">
             <label>
-              <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">
+              <input type="radio" name="rbGenero" id="optionsRadios3" value="Otro">
               Otro
             </label>
           </div>
@@ -308,19 +308,19 @@
             <label>Estado civil</label>
             <div class="radio">
               <label>
-                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
+                <input type="radio" name="rbEstadoC" id="optionsRadios1" value="Soltero/a"  checked="">
                 Soltero/a
               </label>
             </div>
             <div class="radio">
               <label>
-                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                <input type="radio" name="rbEstadoC" id="optionsRadios2" value="Casado/a">
                 Casado/a
               </label>
             </div>
             <div class="radio">
               <label>
-                <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">
+                <input type="radio" name="rbEstadoC" id="optionsRadios3" value="Otro">
                 Otro
               </label>
             </div>
@@ -331,13 +331,13 @@
       <div class="row">
         <div class="col-xs-6">
           <div class="form-group has-feedback">
-            <input type="email" class="form-control" placeholder="Correo electronico">
+            <input type="email" class="form-control" placeholder="Correo electronico" name="email" required>
             <span class="fa fa-at form-control-feedback"></span>
           </div>
         </div>
         <div class="col-xs-6">
           <div class="form-group has-feedback">
-            <input type="text" class="form-control" placeholder="Telefono">
+            <input type="text" class="form-control" placeholder="Telefono" name="telefono" required>
             <span class="fa fa-phone-square form-control-feedback"></span>
           </div>
         </div>
@@ -346,33 +346,42 @@
       <div class="row">
         <div class="col-xs-6">
           <div class="form-group has-feedback">
-            <input type="text" class="form-control" placeholder="Departamento/Provincia">
+            <input type="text" class="form-control" placeholder="Departamento/Provincia" name="departamento" required>
             <span class="fa fa-map form-control-feedback"></span>
           </div>
         </div>
         <div class="col-xs-6">
           <div class="form-group has-feedback">
-            <input type="text" class="form-control" placeholder="Ciudad">
+            <input type="text" class="form-control" placeholder="Ciudad" name="ciudad" required>
             <span class="fa fa-map-marker form-control-feedback"></span>
           </div>
         </div>
       </div>
-
-      <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="Direccion">
-        <span class="fa fa-map-signs form-control-feedback"></span>
+      <div class="row">
+        <div class="col-xs-8">
+          <div class="form-group has-feedback">
+            <input type="text" class="form-control" placeholder="Direccion" name="direccion" required>
+            <span class="fa fa-map-signs form-control-feedback"></span>
+          </div>
+        </div>
+        <div class="col-xs-4">
+          <div class="form-group has-feedback">
+            <input type="text" class="form-control" placeholder="Skype" name="skype" required>
+            <span class="fa fa-skype form-control-feedback"></span>
+          </div>
+        </div>
       </div>
 
       <div class="row">
         <div class="col-xs-6">
           <div class="form-group has-feedback">
-            <input type="password" class="form-control" placeholder="Password">
+            <input type="password" class="form-control" placeholder="Password" name="password" required>
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
         </div>
         <div class="col-xs-6">
           <div class="form-group has-feedback">
-            <input type="password" class="form-control" placeholder="Verifique el password">
+            <input type="password" class="form-control" placeholder="Verifique el password" name="confirm" required>
             <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
           </div>
         </div>
@@ -382,24 +391,30 @@
         <div class="col-xs-6">
           <div class="form-group">
             <label for="exampleInputFile">Foto</label>
-            <input type="file" id="exampleInputFile">
-
-            <p class="help-block">Formato incorrecto.</p>
+            <input type="file" id="exampleInputFile" name="foto" required>
+            <p class="help-block">Extención del archivo: jpg,png,jpeg.</p>
+            <?php if ($error)
+            {
+              echo "<span class='error'>$error_archivo</span>";
+            } ?>
           </div>
         </div>
         <div class="col-xs-6">
           <div class="form-group">
             <label for="exampleInputFile">Curriculum Vitae</label>
-            <input type="file" id="exampleInputFile">
-
-            <p class="help-block">Formato incorrecto.</p>
+            <input type="file" id="exampleInputFile" name="curriculum" required>
+            <p class="help-block">Extención del archivo: pdf,doc,docx.</p>
+            <?php if ($error)
+            {
+              echo "<span class='error'>$error_archivo</span>";
+            } ?>
           </div>
         </div>
       </div>
       <div class="row">
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Registrarse </button>
+          <button type="submit" name="registrar" class="btn btn-primary btn-block btn-flat">Registrarse </button>
         </div>
         <!-- /.col -->
       </div>

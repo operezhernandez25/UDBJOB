@@ -52,3 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'cInicio';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+//login
+
+//Usuarios
+$route['registrar'] = 'CRegistro/ingresar';
