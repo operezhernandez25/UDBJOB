@@ -53,8 +53,21 @@
         <!-- /.col -->
       </div>
     </form>
+    <a href="<?php echo base_url(); ?>loginEmpresarial" class="text-center">Ingresar como empresa,</a><br>
+    <a href="<?php echo base_url(); ?>" class="text-center">Registrarte en GuanaJob</a><br>
+    <a href="<?php echo base_url(); ?>" class="text-center">Registrarte como empresa.</a>
 
-    <a href="register.html" class="text-center">Registrarte en GuanaJob</a>
+    <?php
+    if(isset($mensaje))
+    {
+      ?>
+     <div class="alert alert-danger alert-dismissible">
+       <h4><i class="icon fa fa-ban"></i>Error</h4>
+       <?php echo $mensaje; ?>
+     </div>
+   <?php
+    }
+    ?>
 
   </div>
   <!-- /.login-box-body -->

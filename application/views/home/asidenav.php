@@ -57,23 +57,28 @@
     <section class="sidebar" style="height: auto;">
 
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header ">Opciones</li>
-        <li class="treeview active menu-open">
-          <a href="#">
-            <i class="fa fa-files-o"></i>
-            <span>Opcion 1</span>
-            <span class="pull-right-container">
-              <i class="fa fa-cubes-left pull-right"></i>
-            </span>
-          </a>
-        </li>
-
-        <li>
+        <li class="header ">Usuario</li>
+        <li class="active">
           <a href="">
-            <i class="fa fa-cubes"></i> <span>Opcion 2</span>
+            <i class="fa fa-cubes"></i> <span>Ver Propuestas</span>
           </a>
         </li>
-
+        <li >
+            <a href="">
+              <i class="fa fa-cubes"></i> <span>Ver mis postulaciones</span>
+            </a>
+        </li>
+        <li >
+            <a href="">
+              <i class="fa fa-cubes"></i> <span>Perfil</span>
+            </a>
+        </li>
+        <li >
+            <a href="">
+              <i class="fa fa-cubes"></i> <span>Cerrar Sesión</span>
+            </a>
+        </li>
+        
 
     </ul>
     </section>

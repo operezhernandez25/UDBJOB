@@ -46,6 +46,43 @@
       }
     }
 
+    public function loginEmpresarial(){
+      if ($this->session->userdata('s_usuario')) {
+        redirect('/loginEmpresarial/','refresh');
+      }
+
+      $mensaje=$this->session->flashdata("mensaje");
+        if(isset($mensaje)){
+            $data["mensaje"]=$mensaje;
+        }
+        $error=$this->session->flashdata("error");
+        if(isset($error)){
+            $data["error"]=$error;
+        }
+
+        if(isset($mensaje)){
+          $this->load->view('vLoginE',$data);
+        }else {
+          $this->load->view('vLoginE');
+        }
+    }
+
+    public function ingresarEmpresa(){
+      $email=$this->input->post('txtemail');
+      $pass=sha1($this->input->post('txtPass'));
+
+      $res=$this->MLogin->ingresarEmpresa($email,$pass);
+
+      if ($res==1) {
+        redirect('/inicio/', 'refresh');
+      }
+      else{
+        $this->session->set_flashdata('mensaje',$res["mensaje"]);
+        $this->session->set_flashdata('error',$res["error"]);
+        redirect('/loginEmpresarial/','refresh');
+      }
+    }
+
     public function cerrarSesion(){
       $this->session->sess_destroy();
       redirect('/login/', 'refresh');

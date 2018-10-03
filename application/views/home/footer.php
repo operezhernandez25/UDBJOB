@@ -50,6 +50,7 @@
 <script src="<?php echo base_url(); ?>public/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <!-- Slimscroll -->
 <script src="<?php echo base_url(); ?>public/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+
 <!-- FastClick -->
 <script src="<?php echo base_url(); ?>public/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
@@ -62,8 +63,7 @@
 <!-- html2canvas -->
 <script src="<?php echo base_url(); ?>public/bower_components/jsPDF/html2canvas.js"></script>
 
-<!-- Push.js -->
-<script src="<?php echo base_url(); ?>public/dist/js/push.min.js"></script>
+
 
 <script src="<?php echo base_url(); ?>public/dist/js/adminlte.min.js"></script>
 
@@ -82,6 +82,10 @@
 <script src="<?php echo base_url(); ?>public/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
 <script src="<?php echo base_url(); ?>public/bower_components/fullcalendar/dist/locale/es.js"></script>
 <!-- Page specific script -->
+
+<script>
+  $("html, body").animate({ scrollTop: $("#caja-chat").offset().top }, 1000);
+</script>
 
 
 </div>
