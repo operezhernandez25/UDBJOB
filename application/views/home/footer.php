@@ -84,7 +84,9 @@
 <!-- Page specific script -->
 
 <script>
-  $("html, body").animate({ scrollTop: $("#caja-chat").offset().top }, 1000);
+  //$("#caja-chat").animate({ scrollTop: $("#caja-chat").offset().top }, 1000);
+  var objDiv = document.getElementById("caja-chat");
+  objDiv.scrollTop = objDiv.scrollHeight;
 </script>
 
 

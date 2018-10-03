@@ -16,7 +16,7 @@
             </div>
             <div class="box-body">
               <div class="list-group">
-              <a href="#" class="list-group-item">
+              <a href="<?php echo base_url(); ?>index.php/CUsuario/verPostulacion/1" class="list-group-item">
                 <h4 class="list-group-item-heading">Programador Java Web</h4>
                
                   Fecha de postulación: <strong>xx/xx/xxxx</strong>

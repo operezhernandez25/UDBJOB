@@ -17,15 +17,15 @@
                 
                                   <div class="box-tools pull-right">
                                     <span data-toggle="tooltip" title="" class="badge bg-yellow" data-original-title="3 New Messages">3</span>
-                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                                     </button>
                                     
                                   </div>
                                 </div>
                                 <!-- /.box-header -->
-                                <div class="box-body" id="caja-chat"  >
+                                <div class="box-body"  >
                                   <!-- Conversations are loaded here -->
-                                  <div class="direct-chat-messages">
+                                  <div class="direct-chat-messages" id="caja-chat" >
                                     <!-- Message. Default to the left -->
                                     <div class="direct-chat-msg">
                                       <div class="direct-chat-info clearfix">
@@ -188,6 +188,7 @@
                                       <!-- End Contact Item -->
                                     </ul>
                                     <!-- /.contatcts-list -->
+                                   
                                   </div>
                                   <!-- /.direct-chat-pane -->
                                 </div>
@@ -197,7 +198,7 @@
                                     <div class="input-group">
                                       <input type="text" name="message" placeholder="Type Message ..." class="form-control">
                                       <span class="input-group-btn">
-                                            <button type="button" class="btn btn-warning btn-flat">Send</button>
+                                            <button type="button" class="btn btn-warning btn-flat">Enviar</button>
                                           </span>
                                     </div>
                                   </form>
@@ -354,7 +355,7 @@
    right: 0;
    bottom: 0;
    padding: 10px;
-
+   margin: 0 auto;
 }
 
 

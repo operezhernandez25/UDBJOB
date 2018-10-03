@@ -29,27 +29,41 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header ">Usuario</li>
         <li class="active">
-          <a href="">
+          <a href="<?php echo base_url(); ?>index.php/CInicio">
             <i class="fa fa-cubes"></i> <span>Ver Propuestas</span>
           </a>
         </li>
         <li >
-            <a href="">
+            <a href="<?php echo base_url(); ?>index.php/CUsuario/verPostulaciones">
               <i class="fa fa-cubes"></i> <span>Ver mis postulaciones</span>
             </a>
         </li>
         <li >
-            <a href="">
+            <a href="#">
               <i class="fa fa-cubes"></i> <span>Perfil</span>
             </a>
         </li>
         <li >
-            <a href="">
+            <a href="#">
               <i class="fa fa-cubes"></i> <span>Cerrar Sesión</span>
             </a>
         </li>
-        
-
+        <li class="header ">Empresa</li>
+        <li >
+            <a href="#">
+              <i class="fa fa-cubes"></i> <span>Realizar Propuesta</span>
+            </a>
+        </li>
+        <li >
+            <a href="#">
+              <i class="fa fa-cubes"></i> <span>Revisar Propuestas</span>
+            </a>
+        </li>
+        <li >
+            <a href="#">
+              <i class="fa fa-cubes"></i> <span>Ver Perfil</span>
+            </a>
+        </li>
     </ul>
     </section>
     <!-- /.sidebar -->
