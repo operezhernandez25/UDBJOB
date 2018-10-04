@@ -78,9 +78,10 @@
               <i class="fa fa-cubes"></i> <span>Cerrar Sesión</span>
             </a>
         </li>
+        <!--EMPRESA -->
         <li class="header ">Empresa</li>
         <li >
-            <a href="#">
+            <a href="<?php echo base_url() ?>CEmpresa/nuevaPropuesta">
               <i class="fa fa-cubes"></i> <span>Realizar Propuesta</span>
             </a>
         </li>
