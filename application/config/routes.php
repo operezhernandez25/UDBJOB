@@ -55,7 +55,6 @@ $route['translate_uri_dashes'] = FALSE;
 
 //rutas para inicio
 $route['inicio']='CInicio';
-
 //rutas para login Usuario
 $route["login"]="CLogin";
 $route["logout"]="CLogin/cerrarSesion";
@@ -63,3 +62,7 @@ $route["verificar"]="CLogin/ingresar";
 //rutas para login empresarial
 $route["loginEmpresarial"]="CLogin/loginEmpresarial";
 $route["verificarEmpresa"]="CLogin/ingresarEmpresa";
+//rutas para UsuarioEmpresa
+$route["usuarioEmpresa"]="CUsuarioE";
+//Usuarios
+$route['registrar'] = 'CRegistro/ingresar';

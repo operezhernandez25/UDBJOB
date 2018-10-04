@@ -49,7 +49,8 @@
 
         $s_usuario=array(
           's_idusuario'=>$r->idUsuarioEmpresa,
-          's_usuario'=>$r->apellido.", ".$r->nombre
+          's_usuario'=>$r->apellido.", ".$r->nombre,
+          's_idempresa'=>$r->idEmpresa
         );
 
         $this->session->set_userdata($s_usuario);
