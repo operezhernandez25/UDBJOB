@@ -86,8 +86,8 @@
             </a>
         </li>
         <li >
-            <a href="#">
-              <i class="fa fa-cubes"></i> <span>Revisar Propuestas</span>
+            <a href="<?php echo base_url();?>CEmpresa/verMisPropuestas">
+              <i class="fa fa-cubes"></i> <span>Propuestas de la empresa</span>
             </a>
         </li>
         <li >

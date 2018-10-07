@@ -7,43 +7,7 @@ class CEmpresa extends CI_Controller
     parent::__construct();
    }
 
-   function index()
-   {
-    $this->load->helper('form');
-    echo form_open_multipart('CEmpresa/do_upload');
-    echo form_input(array('type' => 'file','name' => 'userfile'));
-    echo form_submit('submit','upload'); 
-    echo form_close(); 
-
-   }
-   //PRUEBA
-   function do_upload()
-    {
-        // load codeigniter helpers
-        $this->load->helper(array('form','url'));
-        // set path to store uploaded files
-        $config['upload_path'] = './uploads/';
-        // set allowed file types
-        $config['allowed_types'] = 'pdf';
-        // set upload limit, set 0 for no limit
-        $config['max_size']    = 0;
- 
-        // load upload library with custom config settings
-        $this->load->library('upload', $config);
- 
-         // if upload failed , display errors
-        if (!$this->upload->do_upload())
-        {
-            $this->data['error'] = $this->upload->display_errors();
-             $this->data['page_data'] = 'admin/upload_view';
-             $this->load->view('admin/admin', $this->data);
-         }
-        else
-        {
-              print_r($this->upload->data());
-             // print uploaded file data
-        }
-    }
+   
 
 
     function nuevaPropuesta()
@@ -56,14 +20,64 @@ class CEmpresa extends CI_Controller
         $this->load->view('empresa/vnuevapropuesta',$data);
         $this->load->view('home/footer');
     }
+
+    function verMisPropuestas()
+    {
+        $this->db->select("idPropuesta,titulo,fecha,estado,jornada,salario");
+        $this->db->from("propuesta");
+        $data["propuestas"]=$this->db->get()->result();
+        $this->load->view('home/header');
+        $this->load->view('home/asidenav');
+        $this->load->view('empresa/vvermisPropuestas',$data);
+        $this->load->view('home/footer');
+    }
+
+    function verPropuesta($id)
+    {
+        $this->load->view('home/header');
+        $this->load->view('home/asidenav');
+        $this->load->view("empresa/verPropuesta");
+        $this->load->view('home/footer');
+    }
+
     function guardarPropuesta()
     {
        $this->input->post("titulo"); 
        $conocimientos =$this->input->post("conocimientos");
       
        $this->input->post("descripcion");
+        $idUsuario=$this->session->userdata('s_idusuario');
+        $datos = array(
+            'titulo'=>$this->input->post("titulo"),
+            'descripcion'=>$this->input->post("descripcion"),
+            'fecha'=>date('Y-m-d h:i:s'),
+            'jornada'=>$this->input->post("jornada"),
+            'salario'=>$this->input->post("salario"),
+            'idUsuarioEmpresa'=>$idUsuario
+        );
+        $this->db->insert("propuesta",$datos);
+        $id=$this->db->insert_id();
 
-       
+        foreach($conocimientos as $cono)
+        {
+            $dataConocimiento = array(
+                'idPropuesta'=>$id,
+                'idConocimiento'=>$cono,
+                'idNivel'=>1
+            );
+            $this->db->insert("propuestaConocimiento",$dataConocimiento);
+        }
+
+
+        redirect('/CEmpresa/nuevaPropuesta','refresh');
+
+    }
+
+    function agregarConocimiento()
+    {
+        $this->db->insert("conocimientos",array('conocimientos'=>$this->input->post("conocimiento")));
+
+        echo json_encode(array('error'=>false,'id'=>$this->db->insert_id()));
     }
 
 

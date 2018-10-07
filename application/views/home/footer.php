@@ -150,7 +150,7 @@
 </script>
 
 
-<!-- SOlo PDFS-->
+<!-- SOlo PDFS
 <script>
 $('#archivo').on( 'change', function() {
    myfile= $( this ).val();
@@ -164,13 +164,68 @@ $('#archivo').on( 'change', function() {
    }
 });
 </script>
-
+-->
 
 <!-- Conocimientos creando una nueva propuesta 
 <script>
  
   $("#conocimientosAdd").val(["1", "2", "3"]);
 </script>-->
+
+<!--agregar conocimientos en nuevaPropuesta-->foreach
+
+<script>
+  $("#AgregarConocimientoBoton").click(function()
+  {
+    
+    $("#conocimientos > option").each(function() {
+   
+
+   if($(this).text().toLowerCase()===$("#conocimientoAdd").val().toLowerCase())
+    {
+      alert("Ya existe este Conocimiento!");
+      $("#conocimientoAdd").val("")
+    }
+    });
+
+   
+    $.ajax({
+            url: baseurl+'index.php/CEmpresa/agregarConocimiento',
+            method: 'post',
+            data:{  conocimiento:$("#conocimientoAdd").val(),
+                    id:$("#idModificar").val()},
+            beforeSend: function(){
+                $("#boxAgregarConocimiento").append(
+                                '<div class="overlay">'+
+                                  '<i class="fa fa-refresh fa-spin"></i>'+
+                                '</div>');
+            },
+            success: function(data) {
+                console.log(data);
+                data=JSON.parse(data);
+                if(!data.error)
+                {
+                 
+                    $("#mensajeUpdate").empty();
+                    $("#mensajeUpdate").append(
+                        '<div class="alert alert-success" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button> '+
+                            'Insertado correctamente!'+ 
+                        '</div>'
+                    );
+                    $("#conocimientos").append('<option value="'+data.id+'">'+$("#conocimientoAdd").val()+'</option>');
+                    $("#conocimientoAdd").val("");
+                    $("#conocimientos").selectpicker("refresh");
+                }else
+                {
+                    alert(data.mensaje);
+                }
+                $(".overlay").remove();
+            }
+        });
+  });
+</script>
+
+
 </div>
 </body>
 </html>
