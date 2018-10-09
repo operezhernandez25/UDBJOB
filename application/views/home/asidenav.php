@@ -57,6 +57,8 @@
     <section class="sidebar" style="height: auto;">
 
       <ul class="sidebar-menu" data-widget="tree">
+      <?php
+        if($this->session->userdata("s_tipo")==1)  { ?>
         <li class="header ">Usuario</li>
         <li class="active">
           <a href="<?php echo base_url(); ?>index.php/CInicio">
@@ -78,15 +80,18 @@
               <i class="fa fa-cubes"></i> <span>Cerrar Sesión</span>
             </a>
         </li>
+        <?php } ?>
+        <!--EMPRESA -->
+       <?php if($this->session->userdata("s_tipo")==0)  { ?>
         <li class="header ">Empresa</li>
         <li >
-            <a href="#">
+            <a href="<?php echo base_url() ?>CEmpresa/nuevaPropuesta">
               <i class="fa fa-cubes"></i> <span>Realizar Propuesta</span>
             </a>
         </li>
         <li >
-            <a href="#">
-              <i class="fa fa-cubes"></i> <span>Revisar Propuestas</span>
+            <a href="<?php echo base_url();?>CEmpresa/verMisPropuestas">
+              <i class="fa fa-cubes"></i> <span>Propuestas de la empresa</span>
             </a>
         </li>
         <li >
@@ -99,6 +104,7 @@
               <i class="fa fa-cubes"></i> <span>Usuarios</span>
             </a>
         </li>
+        <?php } ?>
     </ul>
     </section>
     <!-- /.sidebar -->

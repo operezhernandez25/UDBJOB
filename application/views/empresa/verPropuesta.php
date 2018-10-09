@@ -1,0 +1,54 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <h1>
+           Propuesta
+        </h1>
+
+        
+    </section>
+    <section class="content">
+        <div class="row">
+            
+                <div class="col-md-6">
+                    <div class="box box-success">
+                        <div class="box-header">
+                            <p>
+                                <h4>Información de la propuesta</h4>
+                            </p>
+                        </div>
+                        <div class="box-body">
+                            <p><strong>Titulo:</strong> <?php echo $datosPropuesta->titulo; ?></p>
+                            <p><strong>Descripción</strong> </p>
+                            <?php echo $datosPropuesta->descripcion; ?>
+                            <p><strong>Jornada: </strong> <?php echo $datosPropuesta->jornada; ?></p>
+                            <p><strong>Salario: </strong> <?php echo $datosPropuesta->salario; ?></p>
+                            <p><strong>Conocimientos</strong></p>
+                            <ul class="list-group">
+                                <?php
+                                    if(isset($conocimientos))
+                                    {
+                                        foreach($conocimientos as $cono)
+                                        {
+                                            echo '<li class="list-group-item">'.$cono->conocimientos.' </li>';
+                                        }
+                                    }
+                                ?>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="box box-primary">
+                        <div class="box-header">
+                            <p>
+                                <h4>Listado de aplicantes</h4>
+                            </p>
+                        </div>
+                        <div class="box-body">
+                            
+                        </div>
+                    </div>
+                </div>
+            
+        </div>
+    </section>  

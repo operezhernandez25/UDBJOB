@@ -21,7 +21,8 @@
           's_idusuario'=>$r->idUsuario,
           's_usuario'=>$r->apellidos.", ".$r->nombres,
           's_Correo'=>$r->email,
-          's_Foto'=>$r->foto
+          's_Foto'=>$r->foto,
+          's_tipo'=>1
         );
 
         $this->session->set_userdata($s_usuario);
@@ -50,7 +51,8 @@
         $s_usuario=array(
           's_idusuario'=>$r->idUsuarioEmpresa,
           's_usuario'=>$r->apellido.", ".$r->nombre,
-          's_idempresa'=>$r->idEmpresa
+          's_idempresa'=>$r->idEmpresa,
+          's_tipo'=>0
         );
 
         $this->session->set_userdata($s_usuario);

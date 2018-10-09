@@ -495,7 +495,7 @@
       var header = this.options.header ? '<div class="popover-title"><button type="button" class="close" aria-hidden="true">&times;</button>' + this.options.header + '</div>' : '';
       var searchbox = this.options.liveSearch ?
       '<div class="bs-searchbox">' +
-      '<input type="text" class="form-control" autocomplete="off"' +
+      '<input type="text" class="form-control" id="buscadorSelect" autocomplete="off"' +
       (null === this.options.liveSearchPlaceholder ? '' : ' placeholder="' + htmlEscape(this.options.liveSearchPlaceholder) + '"') + ' role="textbox" aria-label="Search">' +
       '</div>'
           : '';
