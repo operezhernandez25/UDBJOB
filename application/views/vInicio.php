@@ -10,70 +10,39 @@
 
     <section class="content">
       <ul class="list-group">
-        <li class="list-group-item">
-            
-          <article class="search-result row box">
-            
-            <div class="col-xs-12 col-sm-12 col-md-2">
-              <ul class="meta-search">
-                <li><i class="glyphicon glyphicon-calendar"></i> <span>01/10/2018</span></li>
-                <li><i class="glyphicon glyphicon-time"></i> <span>6:00pm</span></li>
-                <li><i class="glyphicon glyphicon-tags"></i> <span>Programación</span></li>
-              </ul>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-7 excerpet">
-              <h3><a href="#" title="">Se solicita programación para JAVA</a></h3>
-              <p>
-                Se solicita programador JAVA.
-                HTML, CSS, JAVA WEB.
-              </p>						
-                    
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-3">
-              <ul class="meta-search">
-                <li><i class="glyphicon glyphicon-briefcase"></i> <span>Empresa</span></li>
-                <li><i class="glyphicon glyphicon-time"></i> <span>Pais</span></li>
-                <li><i class="glyphicon glyphicon-tags"></i> <span>Sector</span></li>
-              </ul>
-            </div>
-            <span class="clearfix borda">
-              
-            </span>
-          </article>
-  
-        </li>
+      <?php
+        foreach($propuestas as $pro)
+        {
+          ?>
           <li class="list-group-item">
-            
-              <article class="search-result row box">
-                
-                <div class="col-xs-12 col-sm-12 col-md-2">
-                  <ul class="meta-search">
-                    <li><i class="glyphicon glyphicon-calendar"></i> <span>01/10/2018</span></li>
-                    <li><i class="glyphicon glyphicon-time"></i> <span>6:00pm</span></li>
-                    <li><i class="glyphicon glyphicon-tags"></i> <span>Programación</span></li>
-                  </ul>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-7 excerpet">
-                  <h3><a href="#" title="">Se solicita Diseñador Grafico</a></h3>
-                  <p>
-                    Se necesita diseñador para maquetación de proyectos web.
-                    HTML, CSS, JAVA WEB.
-                  </p>						
-                        
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-3">
-                  <ul class="meta-search">
-                    <li><i class="glyphicon glyphicon-briefcase"></i> <span>Empresa</span></li>
-                    <li><i class="glyphicon glyphicon-time"></i> <span>Pais</span></li>
-                    <li><i class="glyphicon glyphicon-tags"></i> <span>Sector</span></li>
-                  </ul>
-                </div>
-                <span class="clearfix borda">
-                  
-                </span>
-              </article>
-      
+            <article class="search-result">
+              <div class="col-xs-12 col-sm-12 col-md-2">
+                <ul class="meta-search">
+                  <li><i class="glyphicon glyphicon-calendar"></i> <span><?php echo $pro->fecha ?></span></li>
+                  <li><i class="glyphicon glyphicon-time"></i> <span><?php echo $pro->jornada ?></span></li>
+
+                </ul>
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-7 excerpet">
+                <h2><a href="<?php echo base_url(); ?>propuesta/<?php echo $pro->idPropuesta ?>" title=""><?php echo $pro->titulo ?></a></h2>
+                						    
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-3">
+                <ul class="meta-search">
+                  <li><i class="glyphicon glyphicon-briefcase"></i> <span><?php echo $pro->nombre ?></span></li>
+                  <li><i class="glyphicon glyphicon-time"></i> <span><?php echo $pro->pais ?></span></li>
+                  <li><i class="glyphicon glyphicon-tags"></i> <span><?php echo $pro->sector ?></span></li>
+                </ul>
+              </div>
+              <span class="clearfix borda">  
+              </span>
+            </article>
           </li>
+          <?php
+        }
+      ?>
+        
+          
       </ul>
     </section>
 
@@ -91,13 +60,13 @@ hgroup h2.lead { font: normal normal 1.125em "Roboto",Arial,Verdana,sans-serif; 
 .search-result .thumbnail { border-radius: 0 !important; }
 .search-result:first-child { margin-top: 0 !important; }
 .search-result { margin-top: 5px; }
-.search-result .col-md-2 { border-right: 1px dotted #ccc; min-height: 140px; }
+.search-result .col-md-2 { border-right: 1px dotted #ccc; min-height: 50px; }
 .search-result ul { padding-left: 0 !important; list-style: none;  }
 .search-result ul li { font: 400 normal .85em "Roboto",Arial,Verdana,sans-serif;  line-height: 30px; }
 .search-result ul li i { padding-right: 5px; }
 .search-result .col-md-7 { position: relative; }
-.search-result h3 { font: 500 normal 1.375em "Roboto",Arial,Verdana,sans-serif; margin-top: 0 !important; margin-bottom: 10px !important; }
-.search-result h3 > a, .search-result i { color: #248dc1 !important; }
+.search-result h2 { font: 500 normal 1.375em "Roboto",Arial,Verdana,sans-serif; margin-top: 0 !important; margin-bottom: 10px !important; }
+.search-result h2 > a, .search-result i { color: #248dc1 !important; }
 .search-result p { font: normal normal 1.125em "Roboto",Arial,Verdana,sans-serif; } 
 .search-result span.plus { position: absolute; right: 0; top: 126px; }
 .search-result span.plus a { background-color: #248dc1; padding: 5px 5px 3px 5px; }
