@@ -89,6 +89,11 @@
   objDiv.scrollTop = objDiv.scrollHeight;
 </script>
 
+<?php if ($this->uri->segment(1)=='usuarioEmpresa') {?>
+  <script src="<?php echo base_url(); ?>public/dist/js/megapix-image.js"></script>
+  <script src="<?php echo base_url(); ?>public/dist/js/usere.js"></script>
+<?php } ?>
+
 
 </div>
 </body>
