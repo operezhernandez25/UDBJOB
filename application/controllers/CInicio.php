@@ -84,8 +84,27 @@ class cInicio extends CI_Controller
       $this->db->join("empresa","empresa.idEmpresa = usuarioEmpresa.idEmpresa");
       $this->db->where_in("propuesta.idPropuesta",$coincidenciasFiltradas);
       $data["propuestas"]=$this->db->get()->result();
- 
+      //Agregando campo
+      foreach($data["propuestas"] as $pro)
+      {
+        $pro->realizado=0;
+      }
 
+      //Buscamos las postulaciones de el usuario
+      $this->db->select("idPropuesta");
+      $this->db->from("postulaciones");
+      $postulaciones=$this->db->get()->result();
+      foreach($data["propuestas"] as $pro)
+      {
+        foreach($postulaciones as $pos)
+        {
+          if($pos->idPropuesta==$pro->idPropuesta)
+          {
+            $pro->realizado=1;
+            
+          }
+        }
+      }
 
       $this->load->view('home/header');
       $this->load->view('home/asidenav');

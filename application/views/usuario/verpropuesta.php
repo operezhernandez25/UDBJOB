@@ -38,7 +38,7 @@
                                             ?>
                                         </ul>
                                   <p>
-                                        <button type="button" class="btn btn-primary btn-lg btn-block">Postularme</button>
+                                        <a <?php if($comprobador->cont>0) echo 'style="pointer-events: none;" disabled' ?> href="<?php echo base_url(); ?>postularme/<?php echo $propuesta->idPropuesta ?>" class="btn btn-primary btn-lg btn-block">Postularme</a>
                                   </p>
                             </div>
                             <!-- /.box-body -->

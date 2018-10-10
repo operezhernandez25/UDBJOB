@@ -53,10 +53,17 @@ class CEmpresa extends CI_Controller
         $data["conocimientos"]=$this->db->get()->result();
 
         //propuesta
-        $this->db->select("p.titulo,p.descripcion,p.fecha,p.jornada,p.salario,p.estado");
+        $this->db->select("p.idPropuesta,p.titulo,p.descripcion,p.fecha,p.jornada,p.salario,p.estado");
         $this->db->from("propuesta p");
         $this->db->where("p.idPropuesta",$id);
         $data["datosPropuesta"]=$this->db->get()->result()[0];
+        
+        //Usuarios Postulados
+        $this->db->select("postulaciones.idUsuario,postulaciones.fecha, postulaciones.estado,concat(usuario.nombres,' ',usuario.apellidos) nombreUsuario");
+        $this->db->from("postulaciones");
+        $this->db->join("usuario","usuario.idUsuario=postulaciones.idUsuario");
+        $this->db->where("postulaciones.idPropuesta",$id);
+        $data["postulaciones"]=$this->db->get()->result();
         
         $this->load->view('home/header');
         $this->load->view('home/asidenav');
@@ -104,6 +111,117 @@ class CEmpresa extends CI_Controller
         echo json_encode(array('error'=>false,'id'=>$this->db->insert_id()));
     }
 
+    function perfilPostulante($id,$idPropuesta)
+    {
+        /*
+
+        update postulaciones set estado=1 where idUsuario = 18 and idPropuesta=39;
+        insert into postulacionEventos values(39,'Perfil Visto');*/
+        //Verficamos si el perfil del usuario nunca habia sido visto
+        $this->db->select("estado,idPostulacion");
+        $this->db->from("postulaciones");
+        $this->db->where("idUsuario",$id);
+        $this->db->where("idPropuesta",$idPropuesta);
+        $data["estadoPostulacion"]=$this->db->get()->result()[0];
+       // echo json_encode($data["estadoPostulacion"]);
+        if($data["estadoPostulacion"]->estado==0)
+        {
+            $this->db->where("idUsuario",$id);
+            $this->db->where("idPropuesta",$idPropuesta);
+            $this->db->update("postulaciones",array('estado'=>1));
+            $data["estadoPostulacion"]->estado=1;
+          //  echo json_encode($data["estadoPostulacion"]);
+            $datos=array('idpostulacion'=>$data["estadoPostulacion"]->idPostulacion,'texto'=>'Perfil Visto','fecha'=>date('Y-m-d h:i:s'));
+            $this->db->insert("postulacionEventos",$datos);
+        }    
+
+
+        $data["idPropuesta"]=$idPropuesta;
+        //Verificando si es correcto el id
+        $this->db->select("count(*) cont");
+        $this->db->from("usuario");
+        $this->db->where("idUsuario",$id);
+        if($this->db->get()->result()[0]->cont==0)redirect('/CEmpresa/verMisPropuestas','refresh');
+
+        //Obteniendo datos del usuario
+        $this->db->select("idUsuario,upper(concat(nombres,' ',apellidos)) nombre, curriculum,fechaNacimiento,genero,estadoCivil,email,pais,departamento,ciudad,direccion,foto,skype");
+        $this->db->from("usuario");
+        $this->db->where("idUsuario",$id);
+        $data["datosUsuario"]=$this->db->get()->result()[0];
+
+        //Obteniendo conocimientos del usuario
+        $this->db->select("usuarioConocimiento.idConocimiento,conocimientos");
+        $this->db->from("usuarioConocimiento");
+        $this->db->join("conocimientos","usuarioConocimiento.idConocimiento= conocimientos.idConocimiento");
+        $this->db->where("idUsuario",$id);
+        $data["conocimientosUsuario"]=$this->db->get()->result();
+
+        //Obteniendo mensajes
+        $this->db->select("postulaciones.idPostulacion,remitente,mensaje,mensajes.fecha,idmensaje ,concat(usuario.nombres,' ',usuario.apellidos) nombre");
+        $this->db->from("mensajes");
+        $this->db->join("postulaciones","postulaciones.idPostulacion=mensajes.idPostulacion");
+        $this->db->join("usuario","usuario.idUsuario=postulaciones.idUsuario");
+        
+        $this->db->where("postulaciones.idPostulacion",$data["estadoPostulacion"]->idPostulacion);
+        $data["mensajes"]=$this->db->get()->result();
+        
+        echo '<script> var idPostulacion="'.$data["estadoPostulacion"]->idPostulacion.'"</script>';
+
+        $this->load->view('home/header');
+        $this->load->view('home/asidenav');
+        $this->load->view("empresa/verPerfilPostulante",$data);
+        $this->load->view('home/footer');
+    }
+
+
+    function descargarCurriculum($idUsuario)
+    {
+        $this->load->helper('download');
+        $this->db->select("curriculum");
+        $this->db->from("usuario");
+        $this->db->where("idUsuario",$idUsuario);
+        $curriculum = $this->db->get()->result()[0];
+
+        force_download('public/files/'.$curriculum->curriculum, NULL);
+        redirect('/CEmpresa/verPerfulilPostulante'.$idUsuario,'refresh');
+    }
+
+
+    function contactarPostulante($idUsuario,$idPropuesta)
+    {
+        //obtenes el id de la postulacion
+        $this->db->select("idPostulacion");
+        $this->db->from("postulaciones");
+        $this->db->where("idUsuario",$idUsuario);
+        $this->db->where("idPropuesta",$idPropuesta);
+        $data["idPostulacion"]=$this->db->get()->result()[0];
+
+        $this->db->where("idUsuario",$idUsuario);
+        $this->db->where("idPropuesta",$idPropuesta);
+        $this->db->update("postulaciones",array('estado'=>2));
+        
+        $data=array('idpostulacion'=>$data["idPostulacion"]->idPostulacion,'texto'=>'Contactar mediante chat','fecha'=>date('Y-m-d h:i:s'));
+        $this->db->insert("postulacionEventos",$data);
+        redirect('/CEmpresa/perfilPostulante/'.$idUsuario.'/'.$idPropuesta,'refresh');
+    }
+
+
+    function guardarMensaje()
+    {
+        $this->input->post("idPostulacion");
+        $this->input->post("mensaje");
+        $data=array('idPostulacion'=>$this->input->post("idPostulacion"),
+                    'remitente'=>0,
+                    'mensaje'=>$this->input->post("mensaje"),
+                    'fecha'=>date('Y-m-d h:i:s'),
+                    'visto'=>0);
+        $this->db->insert("mensajes",$data);
+        $num= $this->db->affected_rows();
+        if($num>0)
+        {
+            echo json_encode(array('error'=>false));
+        }
+    }
 
 
 }

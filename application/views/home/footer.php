@@ -81,6 +81,21 @@
 
 <script src="<?php echo base_url(); ?>public/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
 <script src="<?php echo base_url(); ?>public/bower_components/fullcalendar/dist/locale/es.js"></script>
+
+<script src="<?php echo base_url(); ?>public/dist/js/list.min.js"></script> 
+<script>
+var options = {
+    valueNames: [ 'titulo','jornada','salario','fecha'],page: 3,
+  pagination: true
+};
+
+var hackerList = new List('test-list', options);
+var options2 = {
+    valueNames: [ 'titulo','jornada','salario','fecha'],page: 3,
+  pagination: true
+};
+var hackerList2 = new List('listaMisPropuestas', options);
+</script>
 <!-- Page specific script -->
 <script>
 
@@ -172,7 +187,7 @@ $('#archivo').on( 'change', function() {
   $("#conocimientosAdd").val(["1", "2", "3"]);
 </script>-->
 
-<!--agregar conocimientos en nuevaPropuesta-->foreach
+<!--agregar conocimientos en nuevaPropuesta-->
 
 <script>
   $("#AgregarConocimientoBoton").click(function()
@@ -225,6 +240,17 @@ $('#archivo').on( 'change', function() {
   });
 </script>
 
+
+<!-- SCRIPT para el chat -->
+<?php if($this->uri->segment(1)=='CEmpresa' && $this->uri->segment(2)=='perfilPostulante') { ?>
+<script src="<?php echo base_url(); ?>public/dist/js/chat.js"></script>
+
+<?php } ?>
+
+<?php if($this->uri->segment(1)=='CUsuario' && $this->uri->segment(2)=='verPostulacion') { ?>
+<script src="<?php echo base_url(); ?>public/dist/js/chatUsu.js"></script>
+
+<?php } ?>
 
 </div>
 </body>

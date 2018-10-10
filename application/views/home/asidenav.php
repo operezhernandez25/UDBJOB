@@ -75,11 +75,7 @@
               <i class="fa fa-cubes"></i> <span>Perfil</span>
             </a>
         </li>
-        <li >
-            <a href="#">
-              <i class="fa fa-cubes"></i> <span>Cerrar Sesión</span>
-            </a>
-        </li>
+        
         <?php } ?>
         <!--EMPRESA -->
        <?php if($this->session->userdata("s_tipo")==0)  { ?>

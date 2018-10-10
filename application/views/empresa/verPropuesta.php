@@ -45,7 +45,34 @@
                             </p>
                         </div>
                         <div class="box-body">
-                            
+                            <ul class="list-group">
+                                <?php
+                                    if(isset($postulaciones))
+                                    {
+                                        foreach($postulaciones as $pos)
+                                        {
+                                            ?>
+                                <li class="list-group-item">
+                                    <p>   <a href="<?php echo base_url(); ?>CEmpresa/perfilPostulante/<?php echo $pos->idUsuario.'/'.$datosPropuesta->idPropuesta;?>" class="btn btn-primary btn-sm pull-right">Ver Perfil</a>
+                                        Nombre Postulante: <strong><?php echo $pos->nombreUsuario ?></strong><br>
+                                       Fecha Postulación: <strong><?php echo $pos->fecha ?></strong><br>
+                                        Estado: <strong>
+                                                <?php 
+                                                    switch($pos->estado)
+                                                    {
+                                                        case 0: echo 'Pendiente de revisión';
+                                                        break;
+                                                    }
+                                                ?>
+                                                </strong>    
+                                    </p>
+                                </li>
+                                            <?php
+                                        }
+                                    }
+
+                                ?>
+                            </ul>
                         </div>
                     </div>
                 </div>
