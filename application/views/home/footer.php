@@ -240,6 +240,11 @@ $('#archivo').on( 'change', function() {
   });
 </script>
 
+<?php if ($this->uri->segment(1)=='usuarioEmpresa') {?>
+  <script src="<?php echo base_url(); ?>public/dist/js/megapix-image.js"></script>
+  <script src="<?php echo base_url(); ?>public/dist/js/usere.js"></script>
+<?php } ?>
+
 
 <!-- SCRIPT para el chat -->
 <?php if($this->uri->segment(1)=='CEmpresa' && $this->uri->segment(2)=='perfilPostulante') { ?>

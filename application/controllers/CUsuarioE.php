@@ -27,5 +27,36 @@ class CUsuarioE extends CI_Controller
       $this->load->view('empresa/vUsuariosE',$data);
       $this->load->view('home/footer');
    }
+
+   //funcion para insertar un nuevo user empresa
+   public function setUserE()
+   {
+    // definiendo la carpeta donde se guardara la imagen
+    $img = $this->input->post("imgSend");
+    $nombreArchivo=$this->input->post("nombreArchivo");
+
+    //variables
+    $nombres=$this->input->post("nombreIngresar");
+    $apellidos=$this->input->post("apellidoIngresar");
+    $empresa=$this->session->userdata('s_idempresa');
+    $pass=$this->input->post("passIngresar");
+    $correo=$this->input->post("correoIngresar");
+    $tipouser=$this->input->post("selectuser");
+
+    //enviar en un array
+    $datos=array( 'nombre'=>$nombres,
+                  'apellido'=>$apellidos,
+                  'idEmpresa'=>$empresa,
+                  'password'=>sha1($pass),
+                  'correoElectronico'=>$correo,
+                  'tipoUsuario'=>$tipouser,
+                  'img'=>'uploads/usere/'.$nombreArchivo.'.jpg'
+                );
+
+    $data=$this->MUsuarioE->setUserE($datos,$img);
+    $this->session->set_flashdata('mensaje',$data["mensaje"]);
+    $this->session->set_flashdata('error',$data["error"]);
+    redirect('usuarioEmpresa','refresh');
+   }
  }
  ?>
