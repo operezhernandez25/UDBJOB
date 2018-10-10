@@ -24,7 +24,7 @@
                 </ul>
               </div>
               <div class="col-xs-12 col-sm-12 col-md-7 excerpet">
-                <h2><a href="<?php echo base_url(); ?>propuesta/<?php echo $pro->idPropuesta ?>" title=""><?php echo $pro->titulo ?></a></h2>
+                <h2><a href="<?php echo base_url(); ?>propuesta/<?php echo $pro->idPropuesta ?>" title=""><?php echo $pro->titulo ?></a><?php if($pro->realizado==1) echo '<span class="label label-danger">Postulado</span>' ?></h2>
                 						    
               </div>
               <div class="col-xs-12 col-sm-12 col-md-3">

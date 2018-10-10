@@ -128,7 +128,8 @@ class CRegistro extends CI_Controller
          'direccion' => $direccion,
          'foto' => $foto,
          'idTelefono' => $idTel,
-         'password' => $password
+         'password' => $password,
+         'skype'=>$skype
        );
 
        if($this->UsuariosModel->registrar($data))
