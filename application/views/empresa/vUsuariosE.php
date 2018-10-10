@@ -61,8 +61,8 @@
                   <tr>
                   <td><?php echo $usuario->idUsuarioEmpresa ?> </td>
                   <td class="classNombre"><?php echo $usuario->nombre ?></td>
-                  <td class="classTipo"><?php echo $usuario->apellido ?></td>
-                  <td class="classTipo"><?php echo $usuario->correoElectronico ?></td>
+                  <td class="classApellido"><?php echo $usuario->apellido ?></td>
+                  <td class="classCorreo"><?php echo $usuario->correoElectronico ?></td>
                   <?php if ($usuario->tipoUsuario == 0): ?>
                     <td class="classTipo"><span class="label label-info">Administrador</span></td>
                   <?php else: ?>
@@ -125,7 +125,6 @@
                       </div>
                       </div>
                     <div class ="col-md-6">
-
                         <input type="hidden" name="imgSend" id="imgSend" value="">
                         <input type="hidden" name="nombreArchivo" id="nombreArchivo" value="">
                             <div class="box-body">
@@ -256,13 +255,11 @@
                                 <option value="1">Empleado</option>
                               </select>
                               <div class="input-group-btn">
-                                  <button type="button" id="actualizarTBase" class="btn bg-aqua color-palette">Actualizar</button>
+                                  <button type="button" id="actualizarTipo" class="btn bg-aqua color-palette">Actualizar</button>
                                 </div>
                             </div>
                           </div>
-                          <div class="box-footer">
-                            <button type="submit" class="btn btn-primary">Guardar usuario</button>
-                          </div>
+
                           <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                           </div>
@@ -285,14 +282,14 @@
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">×</span></button>
-                <h4 class="modal-title">Eliminar base </h4>
+                <h4 class="modal-title">Desactivar Usuario</h4>
               </div>
               <div class="modal-body">
                 <p>Al dar click en aceptar se desactivara al Usuario</p>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
-                  <form method="post" action="<?php echo base_url(); ?>index.php/CBases/deleteBase" onsubmit="eliminar()">
+                  <form method="post" action="<?php echo base_url(); ?>index.php/CUsuarioE/deleteUsere" onsubmit="eliminar()">
                     <input type="hidden" name="id" id="idEliminar">
                     <button type="submit" class="btn btn-primary">Aceptar</button>
                   </form>

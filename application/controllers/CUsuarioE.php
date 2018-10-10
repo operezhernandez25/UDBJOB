@@ -58,5 +58,56 @@ class CUsuarioE extends CI_Controller
     $this->session->set_flashdata('error',$data["error"]);
     redirect('usuarioEmpresa','refresh');
    }
+
+   public function updateNombre()
+   {
+       $nombre= $this->input->post("nombre");
+       $id= $this->input->post("id");
+      $respuesta=$this->MUsuarioE->updateNombre($id,$nombre);
+       echo json_encode($respuesta);
+   }
+
+   public function updateApellido()
+   {
+       $apellido= $this->input->post("apellido");
+       $id= $this->input->post("id");
+      $respuesta=$this->MUsuarioE->updateApellido($id,$apellido);
+       echo json_encode($respuesta);
+   }
+
+   public function updateCorreo()
+   {
+      $correo= $this->input->post("correo");
+      $id= $this->input->post("id");
+      $respuesta=$this->MUsuarioE->updateCorreo($id,$correo);
+      echo json_encode($respuesta);
+   }
+
+   public function updateTipo()
+   {
+      $tipo= $this->input->post("idTipo");
+      $id= $this->input->post("id");
+      $respuesta=$this->MUsuarioE->updateTipo($id,$tipo);
+      echo json_encode($respuesta);
+   }
+
+   public function updateImagen()
+   {
+    $imagen= $this->input->post("imgSend");
+    $nombreArchivo=$this->input->post("nombreMod");
+    $id= $this->input->post("id");
+    $respuesta=$this->MUsuarioE->updateImagen($id,$imagen,$nombreArchivo);
+    echo json_encode($respuesta);
+   }
+
+   //funcion para borrar
+  public function deleteUsere()
+  {
+     $id=$this->input->post("id");
+     $data=$this->MUsuarioE->deleteUsere($id);
+     $this->session->set_flashdata('mensaje',$data["mensaje"]);
+     $this->session->set_flashdata('error',$data["error"]);
+      redirect('usuarioEmpresa','refresh');
+  }
  }
  ?>
