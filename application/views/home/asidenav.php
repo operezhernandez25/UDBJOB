@@ -62,45 +62,74 @@
         <li class="header ">Usuario</li>
         <li class="active">
           <a href="<?php echo base_url(); ?>index.php/CInicio">
-            <i class="fa fa-cubes"></i> <span>Ver Propuestas</span>
+            <i class="fa fa-newspaper-o"></i> <span>Ver Propuestas</span>
           </a>
         </li>
         <li >
             <a href="<?php echo base_url(); ?>index.php/CUsuario/verPostulaciones">
-              <i class="fa fa-cubes"></i> <span>Ver mis postulaciones</span>
+              <i class="glyphicon glyphicon-list-alt"></i> <span>Ver mis postulaciones</span>
             </a>
         </li>
         <li >
             <a href="#">
-              <i class="fa fa-cubes"></i> <span>Perfil</span>
+              <i class="fa fa-user-circle"></i> <span>Perfil</span>
             </a>
         </li>
-        
+
         <?php } ?>
         <!--EMPRESA -->
-       <?php if($this->session->userdata("s_tipo")==0)  { ?>
+       <?php if($this->session->userdata("s_tipo") == 0)  { ?>
+         <?php if ($this->session->userdata("s_admin") == 0) { ?>
         <li class="header ">Empresa</li>
         <li >
             <a href="<?php echo base_url() ?>CEmpresa/nuevaPropuesta">
-              <i class="fa fa-cubes"></i> <span>Realizar Propuesta</span>
+              <i class="fa fa-plus-square"></i> <span>Realizar Propuesta</span>
             </a>
         </li>
         <li >
             <a href="<?php echo base_url();?>CEmpresa/verMisPropuestas">
-              <i class="fa fa-cubes"></i> <span>Propuestas de la empresa</span>
+              <i class="fa fa-newspaper-o"></i> <span>Propuestas de la empresa</span>
             </a>
         </li>
         <li >
             <a href="<?php echo base_url(); ?>usuarioEmpresa">
-              <i class="fa fa-cubes"></i> <span>Ver Perfil</span>
+              <i class="fa fa-user-circle"></i> <span>Ver Perfil</span>
+            </a>
+        </li>
+        <li >
+            <a href="<?php echo base_url(); ?>CEmpresa/verConocimientos">
+              <i class="glyphicon glyphicon-list-alt"></i> <span>Verificar conocimientos</span>
             </a>
         </li>
         <li >
             <a href="<?php echo base_url(); ?>usuarioEmpresa">
-              <i class="fa fa-cubes"></i> <span>Usuarios</span>
+              <i class="fa fa-users"></i> <span>Usuarios</span>
             </a>
         </li>
-        <?php } ?>
+
+      <?php } elseif ($this->session->userdata("s_admin") == 1) {?>
+        <li class="header ">Empresa</li>
+        <li >
+            <a href="<?php echo base_url() ?>CEmpresa/nuevaPropuesta">
+              <i class="fa fa-plus-square"></i> <span>Realizar Propuesta</span>
+            </a>
+        </li>
+        <li >
+            <a href="<?php echo base_url();?>CEmpresa/verMisPropuestas">
+              <i class="fa fa-newspaper-o"></i> <span>Propuestas de la empresa</span>
+            </a>
+        </li>
+        <li >
+            <a href="<?php echo base_url(); ?>usuarioEmpresa">
+              <i class="fa fa-user-circle"></i> <span>Ver Perfil</span>
+            </a>
+        </li>
+        <li >
+            <a href="<?php echo base_url(); ?>usuarioEmpresa">
+              <i class="fa fa-users"></i> <span>Usuarios</span>
+            </a>
+        </li>
+      <?php } }?>
     </ul>
     </section>
     <!-- /.sidebar -->

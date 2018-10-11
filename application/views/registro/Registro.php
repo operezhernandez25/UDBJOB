@@ -411,6 +411,45 @@
           </div>
         </div>
       </div>
+
+      <div class="row">
+        <div class="col-xs-6">
+          <div class="form-group">
+            <label for="exampleInputFile">DUI</label>
+            <input type="file" id="exampleInputFile" name="dui" required>
+            <p class="help-block">Extención del archivo: pdf,jpg,png,jpeg.</p>
+            <?php if ($error)
+            {
+              echo "<span class='error'>$error_archivo</span>";
+            } ?>
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <div class="form-group">
+            <label for="exampleInputFile">NIT</label>
+            <input type="file" id="exampleInputFile" name="nit" required>
+            <p class="help-block">Extención del archivo: pdf,jpg,png,jpeg.</p>
+            <?php if ($error)
+            {
+              echo "<span class='error'>$error_archivo</span>";
+            } ?>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6">
+          <div class="form-group">
+            <label for="exampleInputFile">Solvencia policial</label>
+            <input type="file" id="exampleInputFile" name="solvencia" required>
+            <p class="help-block">Extención del archivo: pdf,jpg,png,jpeg.</p>
+            <?php if ($error)
+            {
+              echo "<span class='error'>$error_archivo</span>";
+            } ?>
+          </div>
+        </div>
+      </div>
+
       <div class="row">
         <!-- /.col -->
         <div class="col-xs-4">

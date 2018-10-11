@@ -7,7 +7,7 @@ class CEmpresa extends CI_Controller
     parent::__construct();
    }
 
-   
+
 
 
     function nuevaPropuesta()
@@ -39,7 +39,7 @@ class CEmpresa extends CI_Controller
         $this->db->from("propuesta");
         $this->db->where("idPropuesta",$id);
 
-        
+
         if($this->db->get()->result()[0]->cont==0)
         {
             redirect('/CEmpresa/verMisPropuestas','refresh');
@@ -57,14 +57,14 @@ class CEmpresa extends CI_Controller
         $this->db->from("propuesta p");
         $this->db->where("p.idPropuesta",$id);
         $data["datosPropuesta"]=$this->db->get()->result()[0];
-        
+
         //Usuarios Postulados
         $this->db->select("postulaciones.idUsuario,postulaciones.fecha, postulaciones.estado,concat(usuario.nombres,' ',usuario.apellidos) nombreUsuario");
         $this->db->from("postulaciones");
         $this->db->join("usuario","usuario.idUsuario=postulaciones.idUsuario");
         $this->db->where("postulaciones.idPropuesta",$id);
         $data["postulaciones"]=$this->db->get()->result();
-        
+
         $this->load->view('home/header');
         $this->load->view('home/asidenav');
         $this->load->view("empresa/verPropuesta",$data);
@@ -73,9 +73,9 @@ class CEmpresa extends CI_Controller
 
     function guardarPropuesta()
     {
-       $this->input->post("titulo"); 
+       $this->input->post("titulo");
        $conocimientos =$this->input->post("conocimientos");
-      
+
        $this->input->post("descripcion");
         $idUsuario=$this->session->userdata('s_idusuario');
         $datos = array(
@@ -133,7 +133,7 @@ class CEmpresa extends CI_Controller
           //  echo json_encode($data["estadoPostulacion"]);
             $datos=array('idpostulacion'=>$data["estadoPostulacion"]->idPostulacion,'texto'=>'Perfil Visto','fecha'=>date('Y-m-d h:i:s'));
             $this->db->insert("postulacionEventos",$datos);
-        }    
+        }
 
 
         $data["idPropuesta"]=$idPropuesta;
@@ -161,10 +161,10 @@ class CEmpresa extends CI_Controller
         $this->db->from("mensajes");
         $this->db->join("postulaciones","postulaciones.idPostulacion=mensajes.idPostulacion");
         $this->db->join("usuario","usuario.idUsuario=postulaciones.idUsuario");
-        
+
         $this->db->where("postulaciones.idPostulacion",$data["estadoPostulacion"]->idPostulacion);
         $data["mensajes"]=$this->db->get()->result();
-        
+
         echo '<script> var idPostulacion="'.$data["estadoPostulacion"]->idPostulacion.'"</script>';
 
         $this->load->view('home/header');
@@ -199,7 +199,7 @@ class CEmpresa extends CI_Controller
         $this->db->where("idUsuario",$idUsuario);
         $this->db->where("idPropuesta",$idPropuesta);
         $this->db->update("postulaciones",array('estado'=>2));
-        
+
         $data=array('idpostulacion'=>$data["idPostulacion"]->idPostulacion,'texto'=>'Contactar mediante chat','fecha'=>date('Y-m-d h:i:s'));
         $this->db->insert("postulacionEventos",$data);
         redirect('/CEmpresa/perfilPostulante/'.$idUsuario.'/'.$idPropuesta,'refresh');
@@ -222,6 +222,30 @@ class CEmpresa extends CI_Controller
             echo json_encode(array('error'=>false));
         }
     }
+
+    function verConocimientos()
+    {
+      $this->db->select("*");
+      $this->db->from("conocimientos");
+      $this->db->where("verificado",0);
+      $data["conocimientos"] = $this->db->get()->result();
+
+      $this->load->view('home/header');
+      $this->load->view('home/asidenav');
+      $this->load->view("empresa/verConocimientos", $data);
+      $this->load->view('home/footer');
+    }
+
+    function aprobarConocimiento()
+    {
+      $id = $this->uri->segment(3);
+  		$data = array('verificado' => 1);
+      $this->db->where("idConocimiento",$id);
+      $this->db->update("conocimientos",$data);
+
+
+      redirect('conocimientos','refresh');
+	}
 
 
 }
