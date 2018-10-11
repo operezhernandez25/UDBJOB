@@ -161,10 +161,13 @@ class CEmpresa extends CI_Controller
         $this->db->from("mensajes");
         $this->db->join("postulaciones","postulaciones.idPostulacion=mensajes.idPostulacion");
         $this->db->join("usuario","usuario.idUsuario=postulaciones.idUsuario");
-        
         $this->db->where("postulaciones.idPostulacion",$data["estadoPostulacion"]->idPostulacion);
         $data["mensajes"]=$this->db->get()->result();
         
+                
+        //Poniendo en visto todos los mensajes
+        $this->db-> 
+
         echo '<script> var idPostulacion="'.$data["estadoPostulacion"]->idPostulacion.'"</script>';
 
         $this->load->view('home/header');
@@ -221,6 +224,11 @@ class CEmpresa extends CI_Controller
         {
             echo json_encode(array('error'=>false));
         }
+    }
+
+    function buscarMensajesSinVisto()
+    {
+        echo 'hola';
     }
 
 

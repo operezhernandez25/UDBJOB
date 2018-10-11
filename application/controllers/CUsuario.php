@@ -55,6 +55,8 @@ class CUsuario extends CI_Controller
             $this->db->select("count(*) cont");
             $this->db->from("mensajes");
             $this->db->where("idPostulacion",$pos->idPostulacion);
+            $this->db->where("visto",0);
+            $this->db->where("remitente",0);
             $pos->cont=$this->db->get()->result()[0]->cont;
         }
 
@@ -77,6 +79,8 @@ class CUsuario extends CI_Controller
         $this->db->where("postulaciones.idPropuesta",$id);
         $data["postulacion"]=$this->db->get()->result()[0];
 
+        
+
         //Conocimientos de la propuesta
         //CONOCIMIENTOS
         $this->db->select("conocimientos.idConocimiento, conocimientos.conocimientos");
@@ -97,6 +101,10 @@ class CUsuario extends CI_Controller
 
         $data["mensajes"]=$this->db->get()->result();
         
+        //modificando a visto el estado de todos los mensajes
+        $this->db->where("idPostulacion",$data["postulacion"]->idPostulacion);
+        $this->db->where("remitente",0);
+        $this->db->update("mensajes",array("visto"=>1));
 
         $this->load->view('home/header');
         $this->load->view('home/asidenav');

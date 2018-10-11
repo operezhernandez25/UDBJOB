@@ -52,7 +52,7 @@ $(document).ready(function()
        
     });
 
-    setInterval(function(){ 
+   /* setInterval(function(){ 
         $.ajax({
             url: baseurl+'index.php/CEmpresa/buscarMensajesSinVisto',
             method: 'post',
@@ -100,7 +100,7 @@ $(document).ready(function()
         
     
     
-    }, 1000);
+    }, 1000);*/
 
     
 
