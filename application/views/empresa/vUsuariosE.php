@@ -184,7 +184,7 @@
                         <input type="hidden" name="nombreArchivoMod" id="nombreArchivoMod" value="">
                             <div class="box-body">
                               <div id="mensajeUpdate"></div>
-                      <form action="<?php echo base_url(); ?>index.php/cInventario/updatedependencia" method="POST" role="form">
+                      <form action="" method="POST" role="form">
                       <div class="row">
                         <div class="col-xs-6">
                           <div class="form-group">

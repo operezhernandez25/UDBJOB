@@ -66,5 +66,6 @@ $route["verificarEmpresa"]="CLogin/ingresarEmpresa";
 $route["usuarioEmpresa"]="CUsuarioE";
 //Usuarios
 $route['registrar'] = 'CRegistro/ingresar';
+$route['perfil'] = 'CUsuario/verPerfilUsuario';
 $route["propuesta/(:num)"]='CUsuario/verPropuesta/$1';
 $route["postularme/(:num)"]='CUsuario/postularUsuario/$1';

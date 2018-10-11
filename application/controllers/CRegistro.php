@@ -29,7 +29,7 @@ class CRegistro extends CI_Controller
      $ciudad = $this->input->POST('ciudad');
      $direccion = $this->input->POST('direccion');
      $skype = $this->input->POST('skype');
-     $password = sha1(md5($this->input->POST('password')));
+     $password = sha1($this->input->POST('password'));
 
      //$error = true;
      $errores = array();
