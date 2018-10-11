@@ -70,12 +70,8 @@
               <i class="fa fa-cubes"></i> <span>Ver mis postulaciones</span>
             </a>
         </li>
-        <li >
-            <a href="#">
-              <i class="fa fa-cubes"></i> <span>Perfil</span>
-            </a>
-        </li>
         
+
         <?php } ?>
         <!--EMPRESA -->
        <?php if($this->session->userdata("s_tipo")==0)  { ?>
@@ -90,11 +86,7 @@
               <i class="fa fa-cubes"></i> <span>Propuestas de la empresa</span>
             </a>
         </li>
-        <li >
-            <a href="<?php echo base_url(); ?>usuarioEmpresa">
-              <i class="fa fa-cubes"></i> <span>Ver Perfil</span>
-            </a>
-        </li>
+
         <li >
             <a href="<?php echo base_url(); ?>usuarioEmpresa">
               <i class="fa fa-cubes"></i> <span>Usuarios</span>

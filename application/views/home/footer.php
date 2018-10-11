@@ -82,7 +82,7 @@
 <script src="<?php echo base_url(); ?>public/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
 <script src="<?php echo base_url(); ?>public/bower_components/fullcalendar/dist/locale/es.js"></script>
 
-<script src="<?php echo base_url(); ?>public/dist/js/list.min.js"></script> 
+<script src="<?php echo base_url(); ?>public/dist/js/list.min.js"></script>
 <script>
 var options = {
     valueNames: [ 'titulo','jornada','salario','fecha'],page: 3,
@@ -150,7 +150,7 @@ var hackerList2 = new List('listaMisPropuestas', options);
 </script>
 
 <script>
- 
+
  $('#descripcion').wysihtml5({
 	"font-styles": true, //Font styling, e.g. h1, h2, etc. Default true
 	"emphasis": true, //Italics, bold, etc. Default true
@@ -173,7 +173,7 @@ $('#archivo').on( 'change', function() {
    if(ext=="pdf" || ext=="docx" || ext=="doc"){
     $("#button").show();
    } else{
-    
+
     alert("SOLO PDF");
        $("#button").hide();
    }
@@ -181,9 +181,9 @@ $('#archivo').on( 'change', function() {
 </script>
 -->
 
-<!-- Conocimientos creando una nueva propuesta 
+<!-- Conocimientos creando una nueva propuesta
 <script>
- 
+
   $("#conocimientosAdd").val(["1", "2", "3"]);
 </script>-->
 
@@ -192,9 +192,9 @@ $('#archivo').on( 'change', function() {
 <script>
   $("#AgregarConocimientoBoton").click(function()
   {
-    
+
     $("#conocimientos > option").each(function() {
-   
+
 
    if($(this).text().toLowerCase()===$("#conocimientoAdd").val().toLowerCase())
     {
@@ -203,7 +203,7 @@ $('#archivo').on( 'change', function() {
     }
     });
 
-   
+
     $.ajax({
             url: baseurl+'index.php/CEmpresa/agregarConocimiento',
             method: 'post',
@@ -220,11 +220,11 @@ $('#archivo').on( 'change', function() {
                 data=JSON.parse(data);
                 if(!data.error)
                 {
-                 
+
                     $("#mensajeUpdate").empty();
                     $("#mensajeUpdate").append(
                         '<div class="alert alert-success" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button> '+
-                            'Insertado correctamente!'+ 
+                            'Insertado correctamente!'+
                         '</div>'
                     );
                     $("#conocimientos").append('<option value="'+data.id+'">'+$("#conocimientoAdd").val()+'</option>');
@@ -244,6 +244,12 @@ $('#archivo').on( 'change', function() {
   <script src="<?php echo base_url(); ?>public/dist/js/megapix-image.js"></script>
   <script src="<?php echo base_url(); ?>public/dist/js/usere.js"></script>
 <?php } ?>
+
+<!-- Script para verPerfilUsuario -->
+<?php if ($this->uri->segment(1)=='perfil') {?>
+  <script src="<?php echo base_url(); ?>public/dist/js/perfil.js"></script>
+<?php } ?>
+
 
 
 <!-- SCRIPT para el chat -->

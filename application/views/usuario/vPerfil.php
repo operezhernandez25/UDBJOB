@@ -3,6 +3,26 @@
   <h1>
     Perfil del Usuario
   </h1>
+  <?php
+  if(isset($mensaje))
+  {
+    ?>
+   <div class='<?php
+   if($error==false)
+   {
+      echo "alert alert-info alert-dismissible";
+   }else{
+
+    echo "alert alert-danger alert-dismissible";
+
+   } ?>'>
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <h4><i class="icon fa fa-info"></i> Mensaje</h4>
+    <?php echo $mensaje; ?>
+   </div>
+ <?php
+  }
+  ?>
 </section>
 
 <section class="content">
@@ -128,8 +148,8 @@
         <div class="col-md-9">
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-              <li><a href="#timeline" data-toggle="tab">Timeline</a></li>
               <li class="active"><a href="#settings" data-toggle="tab">Datos Generales</a></li>
+              <li><a href="#timeline" data-toggle="tab">Información adicional</a></li>
             </ul>
             <div class="tab-content">
               <!-- /.tab-pane -->
@@ -139,60 +159,55 @@
                   <!-- timeline time label -->
                   <li class="time-label">
                         <span class="bg-red">
-                          10 Feb. 2014
+                          Conocimientos
                         </span>
                   </li>
                   <!-- /.timeline-label -->
                   <!-- timeline item -->
                   <li>
-                    <i class="fa fa-envelope bg-blue"></i>
+                    <i class="fa fa-pencil bg-blue"></i>
 
                     <div class="timeline-item">
-                      <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
 
-                      <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
+                      <h3 class="timeline-header"><a>Conocimientos del Usuario</a></h3>
 
                       <div class="timeline-body">
-                        Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                        weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                        jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                        quora plaxo ideeli hulu weebly balihoo...
-                      </div>
-                      <div class="timeline-footer">
-                        <a class="btn btn-primary btn-xs">Read more</a>
-                        <a class="btn btn-danger btn-xs">Delete</a>
-                      </div>
-                    </div>
-                  </li>
-                  <!-- END timeline item -->
-                  <!-- timeline item -->
-                  <li>
-                    <i class="fa fa-user bg-aqua"></i>
 
-                    <div class="timeline-item">
-                      <span class="time"><i class="fa fa-clock-o"></i> 5 mins ago</span>
+                        <div class="box box-info box">
 
-                      <h3 class="timeline-header no-border"><a href="#">Sarah Young</a> accepted your friend request
-                      </h3>
-                    </div>
-                  </li>
-                  <!-- END timeline item -->
-                  <!-- timeline item -->
-                  <li>
-                    <i class="fa fa-comments bg-yellow"></i>
+                              <div class="box-header ui-sortable-handle">
+                                <!-- tools box -->
+                                <div class="box-body">
+                                  <div class="row">
+                                  <div class="col-sm-12">
+                                  <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#modal-success" id="btnAddSubServicio">
+                                    Agregar conocimiento <span class="fa fa-plus-circle" aria-hidden="true"></span>
+                                  </button>
+                                  </div>
+                                  <div class="row">
+                                    <p></p>
+                                  </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-md-12">
 
-                    <div class="timeline-item">
-                      <span class="time"><i class="fa fa-clock-o"></i> 27 mins ago</span>
+                                      <ul class="todo-list ui-sortable" id="ListarSub" style="overflow-y: hidden;">
 
-                      <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
+                                        <li id="Lista13"><small class="label label-info" style="font-size: 13px">PHP</small>
+                                          <div class="tools"><i class="fa fa-trash-o eliminarRequerimientos" onclick="" id="" name="" data-toggle="modal"></i></div>
+                                        </li>
 
-                      <div class="timeline-body">
-                        Take me to your leader!
-                        Switzerland is small and neutral!
-                        We are more like Germany, ambitious and misunderstood!
-                      </div>
-                      <div class="timeline-footer">
-                        <a class="btn btn-warning btn-flat btn-xs">View comment</a>
+                                      </ul>
+
+                                    </div>
+                                  </div>
+
+                                </div>
+                                <!-- /. tools -->
+                              </div>
+
+                            </div>
+
                       </div>
                     </div>
                   </li>
@@ -200,7 +215,7 @@
                   <!-- timeline time label -->
                   <li class="time-label">
                         <span class="bg-green">
-                          3 Jan. 2014
+                          Foto de perfil
                         </span>
                   </li>
                   <!-- /.timeline-label -->
@@ -209,9 +224,124 @@
                     <i class="fa fa-camera bg-purple"></i>
 
                     <div class="timeline-item">
-                      <span class="time"><i class="fa fa-clock-o"></i> 2 days ago</span>
 
-                      <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
+                      <h3 class="timeline-header"><a>Modificar foto de perfil</a></h3>
+                      <div class="timeline-body">
+
+                          <div class="form-group">
+                          <div class="row">
+                            <div class="col-sm-12 col-md-12">
+                              <div class="thumbnail">
+                               <div class="row">
+                                  <div class="col-md-3"></div>
+                                  <div class ="col-md-6">
+                                    <canvas id="modificarCanvas" width="250" height="250" style="border:1px solid #d3d3d3;"></canvas>
+                                  </div>
+                                  <div class="col-md-3"></div>
+                                </div>
+                                <div class="caption">
+                                  <p>Imagen a guardar</p>
+                                  <div class="form-group">
+                                  <div class="input-group">
+                                    <label class="btn btn-default">
+                                      <input type="file" id="imagenGuardarMod" name="imagenGuardarMod" onchange="validacionUpdate= validate_fileupload(this);">
+                                      </label>
+
+                                    <div class="input-group-btn">
+                                      <button type="button" id="actualizarImagen" class="btn btn bg-aqua color-palette">Actualizar</button>
+                                    </div>
+                                  </div>
+                                    <p class="help-block">Imagen de perfil.</p>
+                                  </div>
+                                 </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+
+                    </div>
+                  </li>
+                  <!-- END timeline item -->
+
+                  <li class="time-label">
+                        <span class="bg-yellow">
+                          Hoja de vida
+                        </span>
+                  </li>
+                  <!-- /.timeline-label -->
+                  <!-- timeline item -->
+                  <li>
+                    <i class="fa fa-newspaper-o bg-green"></i>
+
+                    <div class="timeline-item">
+
+                      <h3 class="timeline-header"><a>Actualizar hoja de vida</a></h3>
+                      <div class="timeline-body">
+                        <div class="form-group">
+                          <input type="file" id="exampleInputFile" name="curriculum" required>
+                          <p class="help-block">Extención del archivo: pdf,doc,docx.</p>
+                        </div>
+                        <div class="timeline-footer">
+                          <button type="button" id="actualizarImagen" class="btn btn bg-aqua color-palette">Actualizar</button>
+                        </div>
+                      </div>
+
+                    </div>
+                  </li>
+                  <!-- END timeline item -->
+
+                  <li class="time-label">
+                        <span class="bg-blue">
+                          Contraseña
+                        </span>
+                  </li>
+                  <!-- /.timeline-label -->
+                  <!-- timeline item -->
+                  <li>
+                    <i class="fa  fa-asterisk bg-red"></i>
+
+                    <div class="timeline-item">
+
+                      <h3 class="timeline-header"><a>Cambiar contraseña</a></h3>
+                      <div class="timeline-body">
+
+                        <div class="form-group">
+                          <label for="inputSkills" class="col-sm-5 control-label"><i class="fa fa-calendar margin-r-5"></i> Contraseña</label>
+                          <div class="col-sm-8 input-group">
+                              <input type="text" class="form-control" id="" value="" name="" placeholder="Contraseña" required>
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label for="inputSkills" class="col-sm-5 control-label"><i class="fa fa-calendar margin-r-5"></i> Verificar contraseña</label>
+                          <div class="col-sm-8 input-group">
+                              <input type="text" class="form-control" id="" value="" name="" placeholder="Verificar contraseña" required>
+                          </div>
+                          <div class="timeline-footer">
+                            <button type="button" id="actualizarImagen" class="btn btn bg-aqua color-palette">Actualizar</button>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+
+
+                  </li>
+                  <!-- END timeline item -->
+
+                  <li class="time-label">
+                        <span class="bg-red">
+                          Documentos extras
+                        </span>
+                  </li>
+                  <li>
+                    <i class="fa fa-paste bg-yellow"></i>
+
+                    <div class="timeline-item">
+
+                      <h3 class="timeline-header"><a>Documentos del usuario</a></h3>
 
                       <div class="timeline-body">
                         <img src="http://placehold.it/150x100" alt="..." class="margin">
@@ -221,16 +351,12 @@
                       </div>
                     </div>
                   </li>
-                  <!-- END timeline item -->
-                  <li>
-                    <i class="fa fa-clock-o bg-gray"></i>
-                  </li>
                 </ul>
               </div>
               <!-- /.tab-pane -->
 
               <div class=" active tab-pane" id="settings">
-                <form class="form-horizontal">
+                <form class="form-horizontal" action="<?php echo base_url();?>CUsuario/UpdateUser" id="formNuevo" method="POST" role="form">
                   <?php
                   foreach($usuario as $usu)
                   {
@@ -239,14 +365,14 @@
                   <div class="form-group">
                     <label for="inputSkills" class="col-sm-2 control-label"><i class="fa fa-user margin-r-5"></i> Nombres</label>
                     <div class="col-sm-8 input-group">
-                        <input type="text" class="form-control" id="nombreModificar" value="<?php echo $usu->nombres ?>" name="nombreModificar" placeholder="Nombres" required>
+                        <input type="text" class="form-control" id="nombreModificar" value="<?php echo $usu->nombres ?>" name="nombreModificar" placeholder="Nombres">
                     </div>
                   </div>
 
                   <div class="form-group">
                     <label for="inputSkills" class="col-sm-2 control-label"><i class="fa fa-user margin-r-5"></i> Apellidos</label>
                     <div class="col-sm-8 input-group">
-                        <input type="text" class="form-control" id="apellidoModificar" value="<?php echo $usu->apellidos ?>" name="apellidoModificar" placeholder="Apellidos" required>
+                        <input type="text" class="form-control" id="apellidoModificar" value="<?php echo $usu->apellidos ?>" name="apellidoModificar" placeholder="Apellidos" >
                     </div>
                   </div>
 
@@ -502,21 +628,21 @@
                   <div class="form-group">
                     <label for="inputSkills" class="col-sm-2 control-label"> Departamento</label>
                     <div class="col-sm-8 input-group">
-                        <input type="text" class="form-control" id="departamentoModificar" value="<?php echo $usu->departamento ?>" name="departamentoModificar" placeholder="Departamento" required>
+                        <input type="text" class="form-control" id="departamentoModificar" value="<?php echo $usu->departamento ?>" name="departamentoModificar" placeholder="Departamento" >
                     </div>
                   </div>
 
                   <div class="form-group">
                     <label for="inputSkills" class="col-sm-2 control-label"><i class="fa fa-map-pin margin margin-r-5"></i> Ciudad</label>
                     <div class="col-sm-8 input-group">
-                        <input type="text" class="form-control" id="ciudadModificar" value="<?php echo $usu->ciudad ?>" name="ciudadModificar" placeholder="Ciudad" required>
+                        <input type="text" class="form-control" id="ciudadModificar" value="<?php echo $usu->ciudad ?>" name="ciudadModificar" placeholder="Ciudad" >
                     </div>
                   </div>
 
                   <div class="form-group">
                     <label for="inputSkills" class="col-sm-2 control-label"><i class="fa fa-map-marker margin-r-5"></i> Dirección</label>
                     <div class="col-sm-8 input-group">
-                        <input type="text" class="form-control" id="direccionModificar" value="<?php echo $usu->direccion ?>" name="direccionModificar" placeholder="Dirección" required>
+                        <input type="text" class="form-control" id="direccionModificar" value="<?php echo $usu->direccion ?>" name="direccionModificar" placeholder="Dirección" >
                     </div>
                   </div>
 
@@ -524,14 +650,14 @@
                   <div class="form-group">
                     <label for="inputSkills" class="col-sm-2 control-label"><i class="fa fa-skype margin-r-5"></i> Skype</label>
                     <div class="col-sm-8 input-group">
-                        <input type="text" class="form-control" id="skypeModificar" value="<?php echo $usu->skype ?>" name="skypeModificar" placeholder="Skype" required>
+                        <input type="text" class="form-control" id="skypeModificar" value="<?php echo $usu->skype ?>" name="skypeModificar" placeholder="Skype" >
                     </div>
                   </div>
 
                   <div class="form-group">
                     <label for="inputSkills" class="col-sm-2 control-label"><i class="fa fa-at margin-r-5"></i> E-mail</label>
                     <div class="col-sm-8 input-group">
-                        <input type="email" class="form-control" id="emailModificar" value="<?php echo $usu->email ?>" name="emailModificar" placeholder="E-mail" required>
+                        <input type="email" class="form-control" id="emailModificar" value="<?php echo $usu->email ?>" name="emailModificar" placeholder="E-mail" >
                     </div>
                   </div>
 
@@ -556,3 +682,61 @@
         <!-- /.col -->
       </div>
       <!-- /.row -->
+
+
+      <!-- Modal para agregar Subservicio -->
+  <div class="modal modal-default fade" id="modal-success">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Agregar conocimiento</h4>
+          </div>
+          <div class="modal-body box" id="modalbody">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active"><a href="#existentes" aria-controls="existentes" role="tab" data-toggle="tab"><i class="fa fa-list-ul"></i> Existentes</a></li>
+              <li role="presentation"><a href="#nuevo" aria-controls="nuevo" role="tab" data-toggle="tab"><i class="fa fa-plus-circle"></i> Nuevo</a></li>
+            </ul>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="existentes">
+            <div class="form-group" id ="group-formPaquete">
+              <label for="exampleInputEmail1">Conocimientos</label>
+              <select class="selectpicker form-control" data-live-search="true" id="mcmbConocimientos">
+                <option value="0">Elegir un conocimiento</option>
+              </select>
+            </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Cerrar</button>
+                  <button type="button" class="btn btn-primary"name="mbtnAgregarConocimiento" id="mbtnAgregarConocimiento">Agregar</button>
+                </div>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="nuevo">
+              <div class ="row">
+                <div class ="col-md-1">
+                </div> <!--Fin de columna de 3 de ancho-->
+                <div class ="col-md-10">
+                    <form id="formularioNuevoSubServicio">
+                        <div class="box-body">
+                          <div class="form-group">
+                            <label for="nombreModificar">Nuevo conocimiento</label>
+                            <input type="text" class="form-control" id="emailModificar" value="" name="emailModificar" placeholder="Nuevo conocimiento" >
+                          </div><!-- /.form-group -->
+
+                        </div><!-- /.box-body -->
+                        <div class="box-footer">
+                          <button type="button" class="btn btn-primary" id="btnNuevoServicio">Guardar conocimiento </button>
+                        </div><!--Fin de box-footer-->
+                      </form>  <!--Fin Formulario-->
+                    </div><!--Fin de columna de 6 de ancho-->
+                    <div class ="col-md-1">
+                    </div> <!--Fin de columna de 3 de ancho-->
+               </div> <!-- Fin de row-->
+          </div>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+      </div>
+    </div>
