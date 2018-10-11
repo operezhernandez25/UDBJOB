@@ -25,18 +25,21 @@
                                    ?>
                                  <li  class="list-group-item">
                                 
-                                   
-                                   <a class="list-group-item" style="border: 0ch;" href="<?php echo base_url(); ?>index.php/CEmpresa/verPropuesta/<?php echo $pos->idPropuesta ?>">
+                                 <a class="list-group-item" style="border: 0ch;" href="<?php echo base_url(); ?>index.php/CEmpresa/verPropuesta/<?php echo $pos->idPropuesta ?>">
+                  
+                                    <p>
+                                        <p>
+                                            <h4 class="list-group-item-heading titulo"><?php echo $pos->titulo ?></h4>
                                     
-                                   <h4 class="list-group-item-heading titulo"><?php echo $pos->titulo ?></h4>
-                                   
-                                       Fecha de postulación: <strong class="fecha"><?php echo $pos->fecha ?></strong>
-                                     <p class="list-group-item-text">
-                                       Jornada: <strong class="jornada"><?php echo $pos->jornada ?></strong>
-                                     </p>
-                                     <p class="list-group-item-text">
-                                         Salario: <strong class="salario"><?php echo $pos->salario ?></strong>
-                                     </p>
+                                        </p>
+                                        Fecha de postulación: <strong class="fecha"><?php echo $pos->fecha ?></strong>
+                                        <p class="list-group-item-text">
+                                        Jornada: <strong class="jornada"><?php echo $pos->jornada ?></strong>
+                                        </p>
+                                        <p class="list-group-item-text">
+                                            Salario: <strong class="salario"><?php echo $pos->salario ?></strong>
+                                        </p>
+                                    </p>
                                      
                                   
                                    </a>

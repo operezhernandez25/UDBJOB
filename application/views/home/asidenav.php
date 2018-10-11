@@ -91,6 +91,7 @@
               <i class="fa fa-newspaper-o"></i> <span>Propuestas de la empresa</span>
             </a>
         </li>
+<<<<<<< HEAD
         <li >
             <a href="<?php echo base_url(); ?>usuarioEmpresa">
               <i class="fa fa-user-circle"></i> <span>Ver Perfil</span>
@@ -101,6 +102,9 @@
               <i class="glyphicon glyphicon-list-alt"></i> <span>Verificar conocimientos</span>
             </a>
         </li>
+=======
+
+>>>>>>> fd2aa1fc50843c2a296ca84aec070968614bcb05
         <li >
             <a href="<?php echo base_url(); ?>usuarioEmpresa">
               <i class="fa fa-users"></i> <span>Usuarios</span>

@@ -32,7 +32,7 @@
 
     public function ingresar(){
       $email=$this->input->post('txtemail');
-      $pass=sha1(md5($this->input->post('txtPass')));
+      $pass=sha1($this->input->post('txtPass'));
 
       $res=$this->MLogin->ingresar($email,$pass);
 

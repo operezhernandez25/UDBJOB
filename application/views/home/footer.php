@@ -267,6 +267,12 @@ $(document).ready(function() {
   <script src="<?php echo base_url(); ?>public/dist/js/usere.js"></script>
 <?php } ?>
 
+<!-- Script para verPerfilUsuario -->
+<?php if ($this->uri->segment(1)=='perfil') {?>
+  <script src="<?php echo base_url(); ?>public/dist/js/perfil.js"></script>
+<?php } ?>
+
+
 
 <!-- SCRIPT para el chat -->
 <?php if($this->uri->segment(1)=='CEmpresa' && $this->uri->segment(2)=='perfilPostulante') { ?>
