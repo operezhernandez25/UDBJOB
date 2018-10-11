@@ -239,29 +239,50 @@
                   <div class="form-group">
                     <label for="inputSkills" class="col-sm-2 control-label"><i class="fa fa-user margin-r-5"></i> Nombres</label>
                     <div class="col-sm-8 input-group">
-                        <input type="text" class="form-control" id="nombreModificar" value="<?php echo $usu->nombres ?>" name="Modificar" placeholder="Nombres" required>
+                        <input type="text" class="form-control" id="nombreModificar" value="<?php echo $usu->nombres ?>" name="nombreModificar" placeholder="Nombres" required>
                     </div>
                   </div>
 
                   <div class="form-group">
                     <label for="inputSkills" class="col-sm-2 control-label"><i class="fa fa-user margin-r-5"></i> Apellidos</label>
                     <div class="col-sm-8 input-group">
-                        <input type="text" class="form-control" id="nombreModificar" value="<?php echo $usu->apellidos ?>" name="Modificar" placeholder="Apellidos" required>
+                        <input type="text" class="form-control" id="apellidoModificar" value="<?php echo $usu->apellidos ?>" name="apellidoModificar" placeholder="Apellidos" required>
                     </div>
                   </div>
 
                   <div class="form-group">
                     <label for="inputSkills" class="col-sm-2 control-label"><i class="fa fa-calendar margin-r-5"></i> Fecha nacimiento</label>
                     <div class="col-sm-8 input-group">
-                        <input type="date" class="form-control" id="nombreModificar" value="<?php echo $usu->fechaNacimiento ?>" name="Modificar" placeholder="Fecha nacimiento" required>
+                        <input type="date" class="form-control" id="fechanacModificar" value="<?php echo $usu->fechaNacimiento ?>" name="fechanacModificar" placeholder="Fecha nacimiento" required>
                     </div>
                   </div>
 
                   <div class="form-group">
-                    <label for="inputSkills" class="col-sm-2 control-label"><i class="fa fa-calendar margin-r-5"></i> Genero</label>
+                    <label for="inputSkills" class="col-sm-2 control-label"> Genero</label>
+                    <div class="col-sm-8 input-group">
+                      <select id="cmbGenero" name="cmbGenero" class="form-control selectpicker" data-live-search="true" required>
+                        <option value="Masculino">Masculino</option>
+                        <option value="Femenino">Femenino</option>
+                        <option value="Otro">Otro</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="inputSkills" class="col-sm-2 control-label"> Estado civil</label>
+                    <div class="col-sm-8 input-group">
+                      <select id="cmbEstado" name="cmbEstado" class="form-control selectpicker" data-live-search="true" required>
+                        <option value="Soltero">Soltero/a</option>
+                        <option value="Casado">Casado/a</option>
+                        <option value="Otro">Otro</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="inputSkills" class="col-sm-2 control-label"> Pais</label>
                     <div class="col-sm-8 input-group">
                       <select id="cmbNacionalidad" name="cmbNacionalidad" class="form-control selectpicker" data-live-search="true" required>
-                        <option value="" selected>Seleccione su Pais</option>
                         <option value="Albania">Albania</option>
                         <option value="Alemania">Alemania</option>
                         <option value="Andorra">Andorra</option>
@@ -477,30 +498,25 @@
                     </div>
                   </div>
 
+
                   <div class="form-group">
-                    <label for="inputSkills" class="col-sm-2 control-label"><i class="fa fa-calendar margin-r-5"></i> Estado civil</label>
+                    <label for="inputSkills" class="col-sm-2 control-label"> Departamento</label>
                     <div class="col-sm-8 input-group">
-                      <select class="form-control">
-                        <option>option 1</option>
-                        <option>option 2</option>
-                        <option>option 3</option>
-                        <option>option 4</option>
-                        <option>option 5</option>
-                      </select>
+                        <input type="text" class="form-control" id="departamentoModificar" value="<?php echo $usu->departamento ?>" name="departamentoModificar" placeholder="Departamento" required>
                     </div>
                   </div>
 
                   <div class="form-group">
                     <label for="inputSkills" class="col-sm-2 control-label"><i class="fa fa-map-pin margin margin-r-5"></i> Ciudad</label>
                     <div class="col-sm-8 input-group">
-                        <input type="text" class="form-control" id="nombreModificar" value="<?php echo $usu->ciudad ?>" name="Modificar" placeholder="Ciudad" required>
+                        <input type="text" class="form-control" id="ciudadModificar" value="<?php echo $usu->ciudad ?>" name="ciudadModificar" placeholder="Ciudad" required>
                     </div>
                   </div>
 
                   <div class="form-group">
                     <label for="inputSkills" class="col-sm-2 control-label"><i class="fa fa-map-marker margin-r-5"></i> Dirección</label>
                     <div class="col-sm-8 input-group">
-                        <input type="text" class="form-control" id="nombreModificar" value="<?php echo $usu->direccion ?>" name="Modificar" placeholder="Dirección" required>
+                        <input type="text" class="form-control" id="direccionModificar" value="<?php echo $usu->direccion ?>" name="direccionModificar" placeholder="Dirección" required>
                     </div>
                   </div>
 
@@ -508,14 +524,14 @@
                   <div class="form-group">
                     <label for="inputSkills" class="col-sm-2 control-label"><i class="fa fa-skype margin-r-5"></i> Skype</label>
                     <div class="col-sm-8 input-group">
-                        <input type="text" class="form-control" id="nombreModificar" value="<?php echo $usu->skype ?>" name="Modificar" placeholder="Skype" required>
+                        <input type="text" class="form-control" id="skypeModificar" value="<?php echo $usu->skype ?>" name="skypeModificar" placeholder="Skype" required>
                     </div>
                   </div>
 
                   <div class="form-group">
                     <label for="inputSkills" class="col-sm-2 control-label"><i class="fa fa-at margin-r-5"></i> E-mail</label>
                     <div class="col-sm-8 input-group">
-                        <input type="email" class="form-control" id="nombreModificar" value="<?php echo $usu->email ?>" name="Modificar" placeholder="E-mail" required>
+                        <input type="email" class="form-control" id="emailModificar" value="<?php echo $usu->email ?>" name="emailModificar" placeholder="E-mail" required>
                     </div>
                   </div>
 
