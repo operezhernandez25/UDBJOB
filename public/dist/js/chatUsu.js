@@ -89,7 +89,8 @@ $(document).ready(function()
                         );
                         $('#caja-chat').scrollTop($('#caja-chat')[0].scrollHeight);   
                     });
-                
+                    var audio = new Audio('audio_file.mp3');
+                    audio.play();
                     
                 
                 }else
