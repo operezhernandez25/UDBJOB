@@ -56,6 +56,8 @@ class CUsuario extends CI_Controller
             $this->db->select("count(*) cont");
             $this->db->from("mensajes");
             $this->db->where("idPostulacion",$pos->idPostulacion);
+            $this->db->where("visto",0);
+            $this->db->where("remitente",0);
             $pos->cont=$this->db->get()->result()[0]->cont;
         }
 
@@ -78,6 +80,8 @@ class CUsuario extends CI_Controller
         $this->db->where("postulaciones.idPropuesta",$id);
         $data["postulacion"]=$this->db->get()->result()[0];
 
+
+
         //Conocimientos de la propuesta
         //CONOCIMIENTOS
         $this->db->select("conocimientos.idConocimiento, conocimientos.conocimientos");
@@ -97,8 +101,10 @@ class CUsuario extends CI_Controller
         $this->db->where("postulaciones.idPostulacion",$data["postulacion"]->idPostulacion);
 
         $data["mensajes"]=$this->db->get()->result();
-
-
+        //modificando a visto el estado de todos los mensajes
+        $this->db->where("idPostulacion",$data["postulacion"]->idPostulacion);
+        $this->db->where("remitente",0);
+        $this->db->update("mensajes",array("visto"=>1));
         $this->load->view('home/header');
         $this->load->view('home/asidenav');
         $this->load->view('usuario/verpostulacion',$data);
@@ -169,55 +175,71 @@ class CUsuario extends CI_Controller
     $this->load->view('home/footer');
    }
 
-   //informacion del usuario a la vista Perfil
-   public function infoUsuario()
-   {
-     //INFO USUARIO
-     $this->db->select("usuario.nombres, usuario.apellidos, usuario.fechaNacimiento, usuario.genero, usuario.estadoCivil, usuario.email, usuario.pais, usuario.direccion, usuario.departamento, usuario.ciudad, usuario.foto, telefonos.numero, usuario.skype");
-     $this->db->from("usuario");
-     $this->db->join("telefonos","telefonos.idTelefono=usuario.idTelefono");
-     $this->db->where("idUsuario",$this->session->userdata('s_idusuario'));
-     echo json_encode($this->db->get()->result());
-   }
+   function buscarMensajesSinVisto()
+    {
+        $idPostulacion=$this->input->post("idPostulacion");
+        $this->db->select("remitente,mensaje,fecha,idmensaje");
+        $this->db->from("mensajes");
+        $this->db->where("idPostulacion",$idPostulacion);
+        $this->db->where("visto",0);
+        $this->db->where("remitente",0);
+        $mensajes=$this->db->get()->result();
+        foreach($mensajes as $men)
+        {
+           $this->db->where("idmensaje",$men->idmensaje);
+           $this->db->update("mensajes",array("visto"=>1));
+        }
+        $respuesta=array("error"=>false,'mensajes'=>$mensajes);
+        echo json_encode($respuesta);
+    }
 
-   //funcion para modificar el perfil del Usuario
-   public function UpdateUser()
-   {
-    //variables
-    $id=$this->session->userdata('s_idusuario');
-    $nombres=$this->input->post("nombreModificar");
-    $apellidos=$this->input->post("apellidoModificar");
-    $fechanac=$this->input->post("fechanacModificar");
-    $genero=$this->input->post("cmbGenero");
-    $estadoc=$this->input->post("cmbEstado");
-    $correo=$this->input->post("emailModificar");
-    $pais=$this->input->post("cmbNacionalidad");
-    $departamento=$this->input->post("departamentoModificar");
-    $ciudad=$this->input->post("ciudadModificar");
-    $direccion=$this->input->post("direccionModificar");
-    $skype=$this->input->post("skypeModificar");
+    //informacion del usuario a la vista Perfil
+    public function infoUsuario()
+    {
+      //INFO USUARIO
+      $this->db->select("usuario.nombres, usuario.apellidos, usuario.fechaNacimiento, usuario.genero, usuario.estadoCivil, usuario.email, usuario.pais, usuario.direccion, usuario.departamento, usuario.ciudad, usuario.foto, telefonos.numero, usuario.skype");
+      $this->db->from("usuario");
+      $this->db->join("telefonos","telefonos.idTelefono=usuario.idTelefono");
+      $this->db->where("idUsuario",$this->session->userdata('s_idusuario'));
+      echo json_encode($this->db->get()->result());
+    }
 
-    //enviar en un array
-    $campos=array( 'nombres'=>$nombres,
-                  'apellidos'=>$apellidos,
-                  'fechaNacimiento'=>$fechanac,
-                  'genero'=>$genero,
-                  'estadoCivil'=>$estadoc,
-                  'email'=>$correo,
-                  'pais'=>$pais,
-                  'departamento'=>$departamento,
-                  'ciudad'=>$ciudad,
-                  'direccion'=>$direccion,
-                  'skype'=>$skype
-                );
+    //funcion para modificar el perfil del Usuario
+    public function UpdateUser()
+    {
+     //variables
+     $id=$this->session->userdata('s_idusuario');
+     $nombres=$this->input->post("nombreModificar");
+     $apellidos=$this->input->post("apellidoModificar");
+     $fechanac=$this->input->post("fechanacModificar");
+     $genero=$this->input->post("cmbGenero");
+     $estadoc=$this->input->post("cmbEstado");
+     $correo=$this->input->post("emailModificar");
+     $pais=$this->input->post("cmbNacionalidad");
+     $departamento=$this->input->post("departamentoModificar");
+     $ciudad=$this->input->post("ciudadModificar");
+     $direccion=$this->input->post("direccionModificar");
+     $skype=$this->input->post("skypeModificar");
 
-    $data=$this->MUsuario->UpdateUser($campos,$id);
-    $this->session->set_flashdata('mensaje',$data["mensaje"]);
-    $this->session->set_flashdata('error',$data["error"]);
-    redirect('perfil','refresh');
-   }
+     //enviar en un array
+     $campos=array( 'nombres'=>$nombres,
+                   'apellidos'=>$apellidos,
+                   'fechaNacimiento'=>$fechanac,
+                   'genero'=>$genero,
+                   'estadoCivil'=>$estadoc,
+                   'email'=>$correo,
+                   'pais'=>$pais,
+                   'departamento'=>$departamento,
+                   'ciudad'=>$ciudad,
+                   'direccion'=>$direccion,
+                   'skype'=>$skype
+                 );
+
+     $data=$this->MUsuario->UpdateUser($campos,$id);
+     $this->session->set_flashdata('mensaje',$data["mensaje"]);
+     $this->session->set_flashdata('error',$data["error"]);
+     redirect('perfil','refresh');
+    }
 
 }
-
-
 ?>
