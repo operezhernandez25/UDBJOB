@@ -16,7 +16,6 @@
                                   <h3 class="box-title">Chat Directo</h3>
                 
                                   <div class="box-tools pull-right">
-                                    <span data-toggle="tooltip" title="" class="badge bg-yellow" data-original-title="3 New Messages">3</span>
                                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                                     </button>
                                     
@@ -88,9 +87,7 @@
                                   
                                     <div class="input-group">
                                       <input type="text" autocomplete="off" name="message" id="MensajeEnviar" placeholder="Escribe un mensaje ..." class="form-control">
-                                      <span class="input-group-btn">
-                                            <button type="button" class="btn btn-warning btn-flat">Enviar</button>
-                                          </span>
+                                      <span class="input-group-addon bg-green">Enter</span>
                                     </div>
                                  
                                 </div>

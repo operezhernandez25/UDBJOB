@@ -23,13 +23,13 @@ class CEmpresa extends CI_Controller
 
     function verMisPropuestas()
     {
-        $this->db->select("idPropuesta,titulo,fecha,estado,jornada,salario");
+       $this->db->select("idPropuesta,titulo,fecha,estado,jornada,salario");
         $this->db->from("propuesta");
         $data["propuestas"]=$this->db->get()->result();
         $this->load->view('home/header');
         $this->load->view('home/asidenav');
-        $this->load->view('empresa/vvermisPropuestas',$data);
-        $this->load->view('home/footer');
+       $this->load->view('empresa/vvermisPropuestas',$data);
+       $this->load->view('home/footer');
     }
 
     function verPropuesta($id)
@@ -163,13 +163,19 @@ class CEmpresa extends CI_Controller
         $this->db->join("usuario","usuario.idUsuario=postulaciones.idUsuario");
         $this->db->where("postulaciones.idPostulacion",$data["estadoPostulacion"]->idPostulacion);
         $data["mensajes"]=$this->db->get()->result();
-        
+        if($data["estadoPostulacion"]->estado>1)
+        {
+            //modificando a visto el estado de todos los mensajes
+            $this->db->where("idPostulacion",$data["estadoPostulacion"]->idPostulacion);
+            $this->db->where("remitente",1);
+            $this->db->update("mensajes",array("visto"=>1));
+        }
                 
         //Poniendo en visto todos los mensajes
-        $this->db-> 
+      //  $this->db-> 
 
         echo '<script> var idPostulacion="'.$data["estadoPostulacion"]->idPostulacion.'"</script>';
-
+        
         $this->load->view('home/header');
         $this->load->view('home/asidenav');
         $this->load->view("empresa/verPerfilPostulante",$data);
@@ -228,9 +234,22 @@ class CEmpresa extends CI_Controller
 
     function buscarMensajesSinVisto()
     {
-        echo 'hola';
+        $idPostulacion=$this->input->post("idPostulacion");
+        $this->db->select("remitente,mensaje,fecha,idmensaje");
+        $this->db->from("mensajes");
+        $this->db->where("idPostulacion",$idPostulacion);
+        $this->db->where("visto",0);
+        $this->db->where("remitente",1);
+        $mensajes=$this->db->get()->result();
+        foreach($mensajes as $men)
+        {
+           $this->db->where("idmensaje",$men->idmensaje);
+           $this->db->update("mensajes",array("visto"=>1));
+        }
+        $respuesta=array("error"=>false,'mensajes'=>$mensajes);
+        echo json_encode($respuesta);
     }
-
+ 
 
 }
 
