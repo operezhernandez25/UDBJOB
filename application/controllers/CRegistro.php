@@ -33,92 +33,11 @@ class CRegistro extends CI_Controller
 
      //$error = true;
      $errores = array();
-     //Para el DUI
-     $this->load->library('upload');
-     if (!empty($_FILES['dui']['name']))
-     {
-         $config['upload_path'] = 'public/files/';
-         $config['allowed_types'] = 'pdf|jpg|jpeg|png';
-
-         $this->upload->initialize($config);
-
-         if ($this->upload->do_upload('dui'))
-         {
-             $data = $this->upload->data();
-             $dui = $data['file_name'];
-             $errores['error'] = false;
-         }
-         else
-         {
-             //echo $this->upload->display_errors();
-             $errorers['error'] = true;
-             $errores['error_archivo'] = "No se ha podido subir el arcivo. Revise si la extensión es la correcta.";
-         }
-     }
-     else
-     {
-       $errores['error'] = true;
-       $errores['error_archivo'] = "No se ha podido subir el arcivo. Revise si la extensión es la correcta.";
-     }
-     //Para el NIT
-     $this->load->library('upload');
-     if (!empty($_FILES['nit']['name']))
-     {
-         $config['upload_path'] = 'public/files/';
-         $config['allowed_types'] = 'pdf|jpg|jpeg|png';
-
-         $this->upload->initialize($config);
-
-         if ($this->upload->do_upload('nit'))
-         {
-             $data = $this->upload->data();
-             $nit = $data['file_name'];
-             $errores['error'] = false;
-         }
-         else
-         {
-             //echo $this->upload->display_errors();
-             $errorers['error'] = true;
-             $errores['error_archivo'] = "No se ha podido subir el arcivo. Revise si la extensión es la correcta.";
-         }
-     }
-     else
-     {
-       $errores['error'] = true;
-       $errores['error_archivo'] = "No se ha podido subir el arcivo. Revise si la extensión es la correcta.";
-     }
-     //Para la solvencia
-     $this->load->library('upload');
-     if (!empty($_FILES['solvencia']['name']))
-     {
-         $config['upload_path'] = 'public/files/';
-         $config['allowed_types'] = 'pdf|jpg|jpeg|png';
-
-         $this->upload->initialize($config);
-
-         if ($this->upload->do_upload('solvencia'))
-         {
-             $data = $this->upload->data();
-             $solvencia = $data['file_name'];
-             $errores['error'] = false;
-         }
-         else
-         {
-             //echo $this->upload->display_errors();
-             $errorers['error'] = true;
-             $errores['error_archivo'] = "No se ha podido subir el arcivo. Revise si la extensión es la correcta.";
-         }
-     }
-     else
-     {
-       $errores['error'] = true;
-       $errores['error_archivo'] = "No se ha podido subir el arcivo. Revise si la extensión es la correcta.";
-     }
      //Para el Curriculum
         $this->load->library('upload');
         if (!empty($_FILES['curriculum']['name']))
         {
-            $config['upload_path'] = 'public/files/';
+            $config['upload_path'] = 'public/files/curriculum/';
             $config['allowed_types'] = 'pdf|doc|docx';
 
             $this->upload->initialize($config);
@@ -139,7 +58,7 @@ class CRegistro extends CI_Controller
         else
         {
           $errores['error'] = true;
-          $errores['error_archivo'] = "No se ha podido subir el arcivo. Revise si la extensión es la correcta.";
+          $errores['error_archivo'] = "Debes subir los archivos necesarios.";
         }
      //Para la Foto
      $this->load->library('upload');
@@ -169,7 +88,88 @@ class CRegistro extends CI_Controller
      else
      {
        $errores['error'] = true;
-       $errores['error_archivo'] = "No se ha podido subir el arcivo. Revise si la extensión es la correcta.";
+       $errores['error_archivo'] = "Debes subir los archivos necesarios.";
+     }
+     //Para el DUI
+     $this->load->library('upload');
+     if (!empty($_FILES['dui']['name']))
+     {
+         $config['upload_path'] = 'public/files/dui/';
+         $config['allowed_types'] = 'pdf|jpg|jpeg|png';
+
+         $this->upload->initialize($config);
+
+         if ($this->upload->do_upload('dui'))
+         {
+             $data = $this->upload->data();
+             $dui = $data['file_name'];
+             $errores['error'] = false;
+         }
+         else
+         {
+             //echo $this->upload->display_errors();
+             $errorers['error'] = true;
+             $errores['error_archivo'] = "No se ha podido subir el arcivo. Revise si la extensión es la correcta.";
+         }
+     }
+     else
+     {
+       $errores['error'] = true;
+       $errores['error_archivo'] = "Debes subir los archivos necesarios.";
+     }
+     //Para el NIT
+     $this->load->library('upload');
+     if (!empty($_FILES['nit']['name']))
+     {
+         $config['upload_path'] = 'public/files/nit/';
+         $config['allowed_types'] = 'pdf|jpg|jpeg|png';
+
+         $this->upload->initialize($config);
+
+         if ($this->upload->do_upload('nit'))
+         {
+             $data = $this->upload->data();
+             $nit = $data['file_name'];
+             $errores['error'] = false;
+         }
+         else
+         {
+             //echo $this->upload->display_errors();
+             $errorers['error'] = true;
+             $errores['error_archivo'] = "No se ha podido subir el arcivo. Revise si la extensión es la correcta.";
+         }
+     }
+     else
+     {
+       $errores['error'] = true;
+       $errores['error_archivo'] = "Debes subir los archivos necesarios.";
+     }
+     //Para la solvencia
+     $this->load->library('upload');
+     if (!empty($_FILES['solvencia']['name']))
+     {
+         $config['upload_path'] = 'public/files/solvencia/';
+         $config['allowed_types'] = 'pdf|jpg|jpeg|png';
+
+         $this->upload->initialize($config);
+
+         if ($this->upload->do_upload('solvencia'))
+         {
+             $data = $this->upload->data();
+             $solvencia = $data['file_name'];
+             $errores['error'] = false;
+         }
+         else
+         {
+             //echo $this->upload->display_errors();
+             $errorers['error'] = true;
+             $errores['error_archivo'] = "No se ha podido subir el arcivo. Revise si la extensión es la correcta.";
+         }
+     }
+     else
+     {
+       $errores['error'] = true;
+       $errores['error_archivo'] = "Debes subir los archivos necesarios.";
      }
 
      $this->form_validation->set_rules('password', 'Password', 'required');
@@ -222,13 +222,12 @@ class CRegistro extends CI_Controller
        }
        else
        {
-         $this->session->set_flashdata("error","Error al ingresar la información.");
-         redirect("registrar");
+         $this->load->view('registro/Registro',$errores);
        }
      }
      else
      {
-       $this->load->view('Registro',$errores);
+       $this->load->view('registro/Registro',$errores);
      }
 
    }

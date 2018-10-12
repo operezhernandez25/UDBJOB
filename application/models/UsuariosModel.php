@@ -22,4 +22,5 @@ class UsuariosModel extends CI_Model {
 		$query = $this->db->get("telefonos");
 		return $query->result();
 	}
+
 }

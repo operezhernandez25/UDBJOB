@@ -35,7 +35,12 @@
 
   <div class="register-box-body">
     <p class="login-box-msg">Complete el formulario para registrarse!</p>
-    <!--<form action="<?php echo base_url()."CRegistro/registrar" ?>" method="post" enctype="multipart/form-data" accept-charset="utf-8"> -->
+    <?php if ($error)
+    {
+      echo "<div class='alert alert-danger'>
+            <strong>¡Error!</strong> $error_archivo.
+            </div>";
+    } ?>
     <?php echo form_open_multipart('CRegistro/registrar'); ?>
       <div class="row">
         <div class="col-xs-6">
@@ -391,23 +396,15 @@
         <div class="col-xs-6">
           <div class="form-group">
             <label for="exampleInputFile">Foto</label>
-            <input type="file" id="exampleInputFile" name="foto" required>
+            <input type="file" id="foto" name="foto" required>
             <p class="help-block">Extención del archivo: jpg,png,jpeg.</p>
-            <?php if ($error)
-            {
-              echo "<span class='error'>$error_archivo</span>";
-            } ?>
           </div>
         </div>
         <div class="col-xs-6">
           <div class="form-group">
             <label for="exampleInputFile">Curriculum Vitae</label>
-            <input type="file" id="exampleInputFile" name="curriculum" required>
+            <input type="file" id="curriculum" name="curriculum" required>
             <p class="help-block">Extención del archivo: pdf,doc,docx.</p>
-            <?php if ($error)
-            {
-              echo "<span class='error'>$error_archivo</span>";
-            } ?>
           </div>
         </div>
       </div>
@@ -416,23 +413,15 @@
         <div class="col-xs-6">
           <div class="form-group">
             <label for="exampleInputFile">DUI</label>
-            <input type="file" id="exampleInputFile" name="dui" required>
+            <input type="file" id="dui" name="dui" required>
             <p class="help-block">Extención del archivo: pdf,jpg,png,jpeg.</p>
-            <?php if ($error)
-            {
-              echo "<span class='error'>$error_archivo</span>";
-            } ?>
           </div>
         </div>
         <div class="col-xs-6">
           <div class="form-group">
             <label for="exampleInputFile">NIT</label>
-            <input type="file" id="exampleInputFile" name="nit" required>
+            <input type="file" id="nit" name="nit" required>
             <p class="help-block">Extención del archivo: pdf,jpg,png,jpeg.</p>
-            <?php if ($error)
-            {
-              echo "<span class='error'>$error_archivo</span>";
-            } ?>
           </div>
         </div>
       </div>
@@ -440,12 +429,8 @@
         <div class="col-xs-6">
           <div class="form-group">
             <label for="exampleInputFile">Solvencia policial</label>
-            <input type="file" id="exampleInputFile" name="solvencia" required>
+            <input type="file" id="solvencia" name="solvencia" required>
             <p class="help-block">Extención del archivo: pdf,jpg,png,jpeg.</p>
-            <?php if ($error)
-            {
-              echo "<span class='error'>$error_archivo</span>";
-            } ?>
           </div>
         </div>
       </div>
@@ -459,7 +444,7 @@
       </div>
     </form>
 
-    <a href="login.html" class="text-center">Ya soy miembro. Ingresar con mi cuenta.</a>
+    <a href="<?php echo base_url();?>/CLogin" class="text-center">Ya soy miembro. Ingresar con mi cuenta.</a>
   </div>
   <!-- /.form-box -->
 </div>
@@ -471,5 +456,72 @@
 <script src="<?php echo base_url(); ?>public/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- iCheck -->
 <script src="<?php echo base_url(); ?>public/plugins/iCheck/icheck.min.js"></script>
+
+<script>
+(function($) {
+    $.fn.checkFileType = function(options) {
+        var defaults = {
+            allowedExtensions: [],
+            success: function() {},
+            error: function() {}
+        };
+        options = $.extend(defaults, options);
+
+        return this.each(function() {
+
+            $(this).on('change', function() {
+                var value = $(this).val(),
+                    file = value.toLowerCase(),
+                    extension = file.substring(file.lastIndexOf('.') + 1);
+
+                if ($.inArray(extension, options.allowedExtensions) == -1) {
+                    options.error();
+                    $(this).focus();
+                } else {
+                    options.success();
+
+                }
+
+            });
+
+        });
+    };
+
+})(jQuery);
+
+$(function() {
+    $('#foto').checkFileType({
+        allowedExtensions: ['jpg', 'jpeg', 'png'],
+        error: function() {
+            alert('Error. Extensión del archivo incorrecta, por favor suba el archivo con las extensión indicada.');
+        }
+    });
+    $('#curriculum').checkFileType({
+        allowedExtensions: ['pdf', 'doc', 'docx'],
+        error: function() {
+            alert('Error. Extensión del archivo incorrecta, por favor suba el archivo con las extensión indicada.');
+        }
+    });
+    $('#dui').checkFileType({
+        allowedExtensions: ['jpg', 'jpeg', 'png', 'pdf'],
+        error: function() {
+            alert('Error. Extensión del archivo incorrecta, por favor suba el archivo con las extensión indicada.');
+        }
+    });
+    $('#nit').checkFileType({
+        allowedExtensions: ['jpg', 'jpeg', 'png', 'pdf'],
+        error: function() {
+            alert('Error. Extensión del archivo incorrecta, por favor suba el archivo con las extensión indicada.');
+        }
+    });
+    $('#solvencia').checkFileType({
+        allowedExtensions: ['jpg', 'jpeg', 'png', 'pdf'],
+        error: function() {
+            alert('Error. Extensión del archivo incorrecta, por favor suba el archivo con las extensión indicada.');
+        }
+    });
+
+});
+</script>
 </body>
 </html>
