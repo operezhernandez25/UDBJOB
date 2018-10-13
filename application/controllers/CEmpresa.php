@@ -232,61 +232,84 @@ class CEmpresa extends CI_Controller
         }
     }
 
-    function buscarMensajesSinVisto()
+    function verConocimientos()
     {
-        $idPostulacion=$this->input->post("idPostulacion");
-        $this->db->select("remitente,mensaje,fecha,idmensaje");
-        $this->db->from("mensajes");
-        $this->db->where("idPostulacion",$idPostulacion);
-        $this->db->where("visto",0);
-        $this->db->where("remitente",1);
-        $mensajes=$this->db->get()->result();
-        foreach($mensajes as $men)
-        {
-           $this->db->where("idmensaje",$men->idmensaje);
-           $this->db->update("mensajes",array("visto"=>1));
-        }
-        $respuesta=array("error"=>false,'mensajes'=>$mensajes);
-        echo json_encode($respuesta);
+      $this->db->select("*");
+      $this->db->from("conocimientos");
+      $this->db->where("verificado",0);
+      $data["conocimientos"] = $this->db->get()->result();
+
+      $this->load->view('home/header');
+      $this->load->view('home/asidenav');
+      $this->load->view("empresa/verConocimientos", $data);
+      $this->load->view('home/footer');
     }
 
-
-    function descargarDUI($idUsuario)
+    function aprobarConocimiento()
     {
-        $this->load->helper('download');
-        $this->db->select("dui");
-        $this->db->from("usuario");
-        $this->db->where("idUsuario",$idUsuario);
-        $dui = $this->db->get()->result()[0];
+      $id = $this->uri->segment(3);
+  		$data = array('verificado' => 1);
+      $this->db->where("idConocimiento",$id);
+      $this->db->update("conocimientos",$data);
 
-        force_download('public/files/'.$dui->dui, NULL);
-        redirect('perfil','refresh');
-    }
 
-    function descargarNIT($idUsuario)
-    {
-        $this->load->helper('download');
-        $this->db->select("nit");
-        $this->db->from("usuario");
-        $this->db->where("idUsuario",$idUsuario);
-        $nit = $this->db->get()->result()[0];
+      redirect('conocimientos','refresh');
+	}
 
-        force_download('public/files/'.$nit->nit, NULL);
-        redirect('perfil','refresh');
-    }
+  function buscarMensajesSinVisto()
+  {
+      $idPostulacion=$this->input->post("idPostulacion");
+      $this->db->select("remitente,mensaje,fecha,idmensaje");
+      $this->db->from("mensajes");
+      $this->db->where("idPostulacion",$idPostulacion);
+      $this->db->where("visto",0);
+      $this->db->where("remitente",1);
+      $mensajes=$this->db->get()->result();
+      foreach($mensajes as $men)
+      {
+         $this->db->where("idmensaje",$men->idmensaje);
+         $this->db->update("mensajes",array("visto"=>1));
+      }
+      $respuesta=array("error"=>false,'mensajes'=>$mensajes);
+      echo json_encode($respuesta);
+  }
 
-    function descargarSolvencia($idUsuario)
-    {
-        $this->load->helper('download');
-        $this->db->select("solvencia");
-        $this->db->from("usuario");
-        $this->db->where("idUsuario",$idUsuario);
-        $solvencia = $this->db->get()->result()[0];
 
-        force_download('public/files/'.$solvencia->solvencia, NULL);
-        redirect('perfil','refresh');
-    }
+  function descargarDUI($idUsuario)
+  {
+      $this->load->helper('download');
+      $this->db->select("dui");
+      $this->db->from("usuario");
+      $this->db->where("idUsuario",$idUsuario);
+      $dui = $this->db->get()->result()[0];
 
+      force_download('public/files/'.$dui->dui, NULL);
+      redirect('perfil','refresh');
+  }
+
+  function descargarNIT($idUsuario)
+  {
+      $this->load->helper('download');
+      $this->db->select("nit");
+      $this->db->from("usuario");
+      $this->db->where("idUsuario",$idUsuario);
+      $nit = $this->db->get()->result()[0];
+
+      force_download('public/files/'.$nit->nit, NULL);
+      redirect('perfil','refresh');
+  }
+
+  function descargarSolvencia($idUsuario)
+  {
+      $this->load->helper('download');
+      $this->db->select("solvencia");
+      $this->db->from("usuario");
+      $this->db->where("idUsuario",$idUsuario);
+      $solvencia = $this->db->get()->result()[0];
+
+      force_download('public/files/'.$solvencia->solvencia, NULL);
+      redirect('perfil','refresh');
+  }
 
 }
 

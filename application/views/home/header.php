@@ -42,6 +42,7 @@
 
 <!-- DataTable -->
   <link href="<?php echo base_url(); ?>public/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+  <link href="<?php echo base_url(); ?>public/bower_components/datatables.net/js/jquery.dataTables.min.js" rel="stylesheet">
 
   <!-- Datetime Picker -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>public/bower_components/datetimepicker/bootstrap-datetimepicker.min.css">
