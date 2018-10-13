@@ -204,6 +204,32 @@ class CUsuario extends CI_Controller
       echo json_encode($this->db->get()->result());
     }
 
+    //Todos los conocimientos con verificados
+    public function getConocimientos()
+    {
+      $this->db->select("*");
+      $this->db->from("conocimientos");
+      $this->db->where("verificado",1);
+      echo json_encode($this->db->get()->result());
+    }
+
+    //Todos los conocimientos sin verificados
+    public function getConocimientosVerif()
+    {
+      $this->db->select("*");
+      $this->db->from("conocimientos");
+      echo json_encode($this->db->get()->result());
+    }
+
+    //Conocimientos del usuario
+    public function getConocimientosUser()
+    {
+      $this->db->select("*");
+      $this->db->from("usuarioConocimiento");
+      $this->db->where("idUsuario",$this->session->userdata('s_idusuario'));
+      echo json_encode($this->db->get()->result());
+    }
+
     //funcion para modificar el perfil del Usuario
     public function UpdateUser()
     {
@@ -240,6 +266,54 @@ class CUsuario extends CI_Controller
      $this->session->set_flashdata('error',$data["error"]);
      redirect('perfil','refresh');
     }
+
+    //Agregar un conocimiento al usuario
+    public function ingresarConocimientoUser(){
+     $param['idUsuario']=$this->session->userdata('s_idusuario');
+     $param['mcmbConocimientos']=$this->input->post('mcmbConocimientos');
+     $res["idConocimiento"]= $this->MUsuario->ingresarConocimientoUser($param);
+     echo json_encode($res);
+   }
+
+   //eliminar conocimientos
+   public function eliminarConocimiento(){
+     $idP=$this->input->post('hdnId');
+     $this->MUsuario->eliminarConocimiento($idP);
+  }
+
+  //ingresarConocimientoNew
+  public function ingresarConocimientoNew(){
+    $param['conocimientos']=$this->input->post('newConocimiento');
+    $param['verificado']=0;
+    $res["nuevoId"]= $this->MUsuario->ingresarConocimientoNew($param);
+    echo json_encode($res);
+  }
+
+  //funcion para modificar el pass del Usuario
+  public function updatePass()
+  {
+   //variables
+   $id=$this->session->userdata('s_idusuario');
+   $pass=sha1($this->input->post("modificarContraseña"));
+
+   //enviar en un array
+   $campos=array( 'password'=>$pass
+               );
+
+   $data=$this->MUsuario->updatePass($campos,$id);
+   $this->session->set_flashdata('mensaje',$data["mensaje"]);
+   $this->session->set_flashdata('error',$data["error"]);
+   redirect('perfil','refresh');
+  }
+
+  //Contando conocimientos
+  public function countConocimiento()
+  {
+    $this->db->select("count(idConocimiento) numconocimiento");
+    $this->db->from("usuarioConocimiento");
+    $this->db->where("idUsuario",$this->session->userdata('s_idusuario'));
+    echo json_encode($this->db->get()->result());
+  }
 
 }
 ?>

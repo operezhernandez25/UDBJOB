@@ -112,3 +112,15 @@ create table propuestaConocimiento(
 
 alter table usuario add password varchar(500);
 select * from usuario
+update usuario set password='7c4a8d09ca3762af61e59520943dc26494f8941b' where idusuario=10
+select sha1('123456');
+select * from usuarioEmpresa
+alter table usuarioEmpresa add img varchar(500);
+alter table usuarioEmpresa add estado bit;
+update usuarioEmpresa set estado=1 where idEmpresa=1
+
+select * from conocimientos
+select * from usuarioConocimiento
+insert into usuarioConocimiento values(16,11,1)
+
+delete from conocimientos where idConocimiento=15

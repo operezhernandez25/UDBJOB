@@ -19,13 +19,13 @@
         <ul class="nav navbar-nav">
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" class="user-image" alt="User Image">
+              <img src="<?php echo base_url(); ?>/public/photos/<?php echo $this->session->userdata("s_Foto"); ?>" class="user-image" alt="User Image">
               <span class="hidden-xs"><?php echo $this->session->userdata('s_usuario'); ?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" class="img-circle" alt="User Image">
+                <img src="<?php echo base_url(); ?>/public/photos/<?php echo $this->session->userdata("s_Foto"); ?>" class="img-circle" alt="User Image">
 
                 <p>
                   <?php echo $this->session->userdata('s_usuario'); ?>
@@ -56,6 +56,21 @@
 <aside class="main-sidebar" >
     <section class="sidebar" style="height: auto;">
 
+      <div class="user-panel">
+        <div class="pull-left image">
+          <img src="<?php echo base_url(); ?>/public/photos/<?php echo $this->session->userdata("s_Foto"); ?>" class="img-circle" alt="User Image">
+        </div>
+        <div class="pull-left info">
+          <p><?php echo $this->session->userdata("s_usuario"); ?></p>
+          <a><i class="fa fa-circle text-success"></i> Online</a>
+        </div>
+      </div>
+
+      <form class="sidebar-form">
+        <div class="input-group">
+        </div>
+      </form>
+
       <ul class="sidebar-menu" data-widget="tree">
       <?php
         if($this->session->userdata("s_tipo")==1)  { ?>
@@ -70,7 +85,7 @@
               <i class="fa fa-cubes"></i> <span>Ver mis postulaciones</span>
             </a>
         </li>
-        
+
 
         <?php } ?>
         <!--EMPRESA -->

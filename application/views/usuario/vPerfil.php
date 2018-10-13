@@ -180,7 +180,7 @@
                                 <div class="box-body">
                                   <div class="row">
                                   <div class="col-sm-12">
-                                  <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#modal-success" id="btnAddSubServicio">
+                                  <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#modal-success" id="btnAddConocimiento">
                                     Agregar conocimiento <span class="fa fa-plus-circle" aria-hidden="true"></span>
                                   </button>
                                   </div>
@@ -192,10 +192,6 @@
                                     <div class="col-md-12">
 
                                       <ul class="todo-list ui-sortable" id="ListarSub" style="overflow-y: hidden;">
-
-                                        <li id="Lista13"><small class="label label-info" style="font-size: 13px">PHP</small>
-                                          <div class="tools"><i class="fa fa-trash-o eliminarRequerimientos" onclick="" id="" name="" data-toggle="modal"></i></div>
-                                        </li>
 
                                       </ul>
 
@@ -285,6 +281,7 @@
                         </div>
                         <div class="timeline-footer">
                           <button type="button" id="actualizarImagen" class="btn btn bg-aqua color-palette">Actualizar</button>
+                          <a href="<?php echo base_url(); ?>CEmpresa/descargarCurriculum/<?php echo $this->session->userdata('s_idusuario') ?>" class="btn btn-danger pull-right"><i class="fa fa-download margin-r-5"></i> Descargar</a>
                         </div>
                       </div>
 
@@ -306,24 +303,24 @@
 
                       <h3 class="timeline-header"><a>Cambiar contraseña</a></h3>
                       <div class="timeline-body">
-
+                        <form class="" action="<?php echo base_url(); ?>index.php/CUsuario/updatePass" method="post">
                         <div class="form-group">
                           <label for="inputSkills" class="col-sm-5 control-label"><i class="fa fa-calendar margin-r-5"></i> Contraseña</label>
                           <div class="col-sm-8 input-group">
-                              <input type="text" class="form-control" id="" value="" name="" placeholder="Contraseña" required>
+                              <input type="password" class="form-control" id="modificarContraseña" value="" name="modificarContraseña" placeholder="Contraseña" required>
                           </div>
                         </div>
 
                         <div class="form-group">
                           <label for="inputSkills" class="col-sm-5 control-label"><i class="fa fa-calendar margin-r-5"></i> Verificar contraseña</label>
                           <div class="col-sm-8 input-group">
-                              <input type="text" class="form-control" id="" value="" name="" placeholder="Verificar contraseña" required>
+                              <input type="password" class="form-control" id="modificarContraseñaVerif" value="" name="modificarContraseñaVerif" placeholder="Verificar contraseña" required>
                           </div>
                           <div class="timeline-footer">
-                            <button type="button" id="actualizarImagen" class="btn btn bg-aqua color-palette">Actualizar</button>
+                            <button type="submit" id="actualizarPass" class="btn btn bg-aqua color-palette">Actualizar</button>
                           </div>
                         </div>
-
+                        </form>
                       </div>
                     </div>
 
@@ -344,10 +341,35 @@
                       <h3 class="timeline-header"><a>Documentos del usuario</a></h3>
 
                       <div class="timeline-body">
-                        <img src="http://placehold.it/150x100" alt="..." class="margin">
-                        <img src="http://placehold.it/150x100" alt="..." class="margin">
-                        <img src="http://placehold.it/150x100" alt="..." class="margin">
-                        <img src="http://placehold.it/150x100" alt="..." class="margin">
+                        <div class="form-group">
+                          <label for="inputSkills" class="">DUI</label>
+                          <input type="file" id="exampleInputFile" name="curriculum" required>
+                          <p class="help-block">Extención del archivo: pdf,doc,docx.</p>
+                        </div>
+                        <div class="timeline-footer">
+                          <button type="button" id="actualizarImagen" class="btn btn bg-aqua color-palette">Actualizar</button>
+                          <a href="<?php echo base_url(); ?>CEmpresa/descargarDUI/<?php echo $this->session->userdata('s_idusuario') ?>" class="btn btn-danger pull-right"><i class="fa fa-download margin-r-5"></i> Descargar</a>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                          <label for="inputSkills" class="">NIT</label>
+                          <input type="file" id="exampleInputFile" name="curriculum" required>
+                          <p class="help-block">Extención del archivo: pdf,doc,docx.</p>
+                        </div>
+                        <div class="timeline-footer">
+                          <button type="button" id="actualizarImagen" class="btn btn bg-aqua color-palette">Actualizar</button>
+                          <a href="<?php echo base_url(); ?>CEmpresa/descargarNIT/<?php echo $this->session->userdata('s_idusuario') ?>" class="btn btn-danger pull-right"><i class="fa fa-download margin-r-5"></i> Descargar</a>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                          <label for="inputSkills" class="">Solvencia</label>
+                          <input type="file" id="exampleInputFile" name="curriculum" required>
+                          <p class="help-block">Extención del archivo: pdf,doc,docx.</p>
+                        </div>
+                        <div class="timeline-footer">
+                          <button type="button" id="actualizarImagen" class="btn btn bg-aqua color-palette">Actualizar</button>
+                          <a href="<?php echo base_url(); ?>CEmpresa/descargarSolvencia/<?php echo $this->session->userdata('s_idusuario') ?>" class="btn btn-danger pull-right"><i class="fa fa-download margin-r-5"></i> Descargar</a>
+                        </div>
                       </div>
                     </div>
                   </li>
@@ -708,7 +730,7 @@
             </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Cerrar</button>
-                  <button type="button" class="btn btn-primary"name="mbtnAgregarConocimiento" id="mbtnAgregarConocimiento">Agregar</button>
+                  <button type="button" class="btn btn-primary"name="mbtnAgregarConocimiento" id="mbtnAgregarConocimiento">Agregar conocimiento</button>
                 </div>
           </div>
           <div role="tabpanel" class="tab-pane" id="nuevo">
@@ -720,12 +742,12 @@
                         <div class="box-body">
                           <div class="form-group">
                             <label for="nombreModificar">Nuevo conocimiento</label>
-                            <input type="text" class="form-control" id="emailModificar" value="" name="emailModificar" placeholder="Nuevo conocimiento" >
+                            <input type="text" class="form-control" id="newConocimiento" value="" name="newConocimiento" placeholder="Nuevo conocimiento" >
                           </div><!-- /.form-group -->
 
                         </div><!-- /.box-body -->
                         <div class="box-footer">
-                          <button type="button" class="btn btn-primary" id="btnNuevoServicio">Guardar conocimiento </button>
+                          <button type="button" class="btn btn-primary" id="btnNuevoConocimiento">Guardar conocimiento </button>
                         </div><!--Fin de box-footer-->
                       </form>  <!--Fin Formulario-->
                     </div><!--Fin de columna de 6 de ancho-->
