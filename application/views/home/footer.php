@@ -85,6 +85,9 @@
 <script src="<?php echo base_url(); ?>public/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
 <script src="<?php echo base_url(); ?>public/bower_components/fullcalendar/dist/locale/es.js"></script>
 
+<!-- Push.js -->
+<script src="<?php echo base_url(); ?>public/dist/js/push.min.js"></script>
+
 <script src="<?php echo base_url(); ?>public/dist/js/list.min.js"></script>
 <script>
 var options = {
@@ -251,6 +254,28 @@ $('#archivo').on( 'change', function() {
   });
 </script>
 
+<script>
+$(document).ready(function() {
+    $('#example').DataTable({
+      "language":{
+                "lengthMenu": "Mostrar _MENU_ registros por página.",
+                "zeroRecords": "No se encontraron resultados en su búsqueda.",
+                "searchPlaceholder": "Buscar registros",
+                "info": "Mostrando registros de _START_ al _END_ de un total de _TOTAL_ registros",
+                "infoEmpty": "No existen registros",
+                "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "search": "Buscar",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Último",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                }
+            }
+    });
+} );
+</script>
+
 <?php if ($this->uri->segment(1)=='usuarioEmpresa') {?>
   <script src="<?php echo base_url(); ?>public/dist/js/megapix-image.js"></script>
   <script src="<?php echo base_url(); ?>public/dist/js/usere.js"></script>
@@ -271,6 +296,11 @@ $('#archivo').on( 'change', function() {
 
 <?php if($this->uri->segment(1)=='CUsuario' && $this->uri->segment(2)=='verPostulacion') { ?>
 <script src="<?php echo base_url(); ?>public/dist/js/chatUsu.js"></script>
+
+<?php } ?>
+
+<?php if($this->uri->segment(1)=='CInicio') { ?>
+<script src="<?php echo base_url(); ?>public/dist/js/notificaciones.js"></script>
 
 <?php } ?>
 

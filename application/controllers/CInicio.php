@@ -20,7 +20,7 @@ class cInicio extends CI_Controller
       $this->db->from("usuarioConocimiento");
       $this->db->where("idUsuario",$this->session->userdata('s_idusuario'));
       $data["conocimientosUsuario"]=$this->db->get()->result();
-    
+
       //Filtrando las propuestas que se tenga conocimiento
       $coincidencias=null;
       foreach($data["conocimientosUsuario"] as $conoUsu)
@@ -43,18 +43,18 @@ class cInicio extends CI_Controller
             if($contador==0)
             {
               $coincidencias[]= (object) array('idPropuesta' => $conoPro->idPropuesta,'cont'=>1);
- 
+
             }
             }else
             {
              $coincidencias[]= (object) array('idPropuesta' => $conoPro->idPropuesta,'cont'=>1);
-             
+
             }
           }
         }
       }
 
-    
+
       //Filtrando las propuestas mediante el 70% de parecido
       $this->db->select("count(*) contador,propuestaConocimiento.idPropuesta");
       $this->db->from("propuestaConocimiento");
@@ -102,7 +102,7 @@ class cInicio extends CI_Controller
           if($pos->idPropuesta==$pro->idPropuesta)
           {
             $pro->realizado=1;
-            
+
           }
         }
       }
@@ -115,7 +115,7 @@ class cInicio extends CI_Controller
     }
     public function inicioUsuario()
     {
-      
+
     }
 
 }

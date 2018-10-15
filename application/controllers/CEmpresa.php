@@ -5,10 +5,16 @@ class CEmpresa extends CI_Controller
    public function  __construct()
    {
     parent::__construct();
+
     $this->load->model("MMensajes");
+
+    if (!$this->session->userdata('s_idusuario')) {
+      redirect('login');
+    }
+
    }
 
-   
+
 
 
     function nuevaPropuesta()
@@ -52,7 +58,7 @@ class CEmpresa extends CI_Controller
         $this->db->from("propuesta");
         $this->db->where("idPropuesta",$id);
 
-        
+
         if($this->db->get()->result()[0]->cont==0)
         {
             redirect('/CEmpresa/verMisPropuestas','refresh');
@@ -70,7 +76,7 @@ class CEmpresa extends CI_Controller
         $this->db->from("propuesta p");
         $this->db->where("p.idPropuesta",$id);
         $data["datosPropuesta"]=$this->db->get()->result()[0];
-        
+
         //Usuarios Postulados
         $this->db->select("postulaciones.idPostulacion,postulaciones.idUsuario,postulaciones.fecha, postulaciones.estado,concat(usuario.nombres,' ',usuario.apellidos) nombreUsuario");
         $this->db->from("postulaciones");
@@ -98,9 +104,9 @@ class CEmpresa extends CI_Controller
 
     function guardarPropuesta()
     {
-       $this->input->post("titulo"); 
+       $this->input->post("titulo");
        $conocimientos =$this->input->post("conocimientos");
-      
+
        $this->input->post("descripcion");
         $idUsuario=$this->session->userdata('s_idusuario');
         $datos = array(
@@ -158,7 +164,7 @@ class CEmpresa extends CI_Controller
           //  echo json_encode($data["estadoPostulacion"]);
             $datos=array('idpostulacion'=>$data["estadoPostulacion"]->idPostulacion,'texto'=>'Perfil Visto','fecha'=>date('Y-m-d h:i:s'));
             $this->db->insert("postulacionEventos",$datos);
-        }    
+        }
 
 
         $data["idPropuesta"]=$idPropuesta;
@@ -195,9 +201,9 @@ class CEmpresa extends CI_Controller
             $this->db->where("remitente",1);
             $this->db->update("mensajes",array("visto"=>1));
         }
-                
+
         //Poniendo en visto todos los mensajes
-      //  $this->db-> 
+      //  $this->db->
 
         echo '<script> var idPostulacion="'.$data["estadoPostulacion"]->idPostulacion.'"</script>';
         
@@ -217,7 +223,7 @@ class CEmpresa extends CI_Controller
         $this->db->where("idUsuario",$idUsuario);
         $curriculum = $this->db->get()->result()[0];
 
-        force_download('public/files/'.$curriculum->curriculum, NULL);
+        force_download('public/files/curriculum'.$curriculum->curriculum, NULL);
         redirect('/CEmpresa/verPerfulilPostulante'.$idUsuario,'refresh');
     }
 
@@ -234,7 +240,7 @@ class CEmpresa extends CI_Controller
         $this->db->where("idUsuario",$idUsuario);
         $this->db->where("idPropuesta",$idPropuesta);
         $this->db->update("postulaciones",array('estado'=>2));
-        
+
         $data=array('idpostulacion'=>$data["idPostulacion"]->idPostulacion,'texto'=>'Contactar mediante chat','fecha'=>date('Y-m-d h:i:s'));
         $this->db->insert("postulacionEventos",$data);
         redirect('/CEmpresa/perfilPostulante/'.$idUsuario.'/'.$idPropuesta,'refresh');
@@ -277,24 +283,84 @@ class CEmpresa extends CI_Controller
         }
     }
 
-    function buscarMensajesSinVisto()
+    function verConocimientos()
     {
-        $idPostulacion=$this->input->post("idPostulacion");
-        $this->db->select("remitente,mensaje,fecha,idmensaje");
-        $this->db->from("mensajes");
-        $this->db->where("idPostulacion",$idPostulacion);
-        $this->db->where("visto",0);
-        $this->db->where("remitente",1);
-        $mensajes=$this->db->get()->result();
-        foreach($mensajes as $men)
-        {
-           $this->db->where("idmensaje",$men->idmensaje);
-           $this->db->update("mensajes",array("visto"=>1));
-        }
-        $respuesta=array("error"=>false,'mensajes'=>$mensajes);
-        echo json_encode($respuesta);
+      $this->db->select("*");
+      $this->db->from("conocimientos");
+      $this->db->where("verificado",0);
+      $data["conocimientos"] = $this->db->get()->result();
+
+      $this->load->view('home/header');
+      $this->load->view('home/asidenav');
+      $this->load->view("empresa/verConocimientos", $data);
+      $this->load->view('home/footer');
     }
- 
+
+    function aprobarConocimiento()
+    {
+      $id = $this->uri->segment(3);
+  		$data = array('verificado' => 1);
+      $this->db->where("idConocimiento",$id);
+      $this->db->update("conocimientos",$data);
+
+
+      redirect('conocimientos','refresh');
+	}
+
+  function buscarMensajesSinVisto()
+  {
+      $idPostulacion=$this->input->post("idPostulacion");
+      $this->db->select("remitente,mensaje,fecha,idmensaje");
+      $this->db->from("mensajes");
+      $this->db->where("idPostulacion",$idPostulacion);
+      $this->db->where("visto",0);
+      $this->db->where("remitente",1);
+      $mensajes=$this->db->get()->result();
+      foreach($mensajes as $men)
+      {
+         $this->db->where("idmensaje",$men->idmensaje);
+         $this->db->update("mensajes",array("visto"=>1));
+      }
+      $respuesta=array("error"=>false,'mensajes'=>$mensajes);
+      echo json_encode($respuesta);
+  }
+
+
+  function descargarDUI($idUsuario)
+  {
+      $this->load->helper('download');
+      $this->db->select("dui");
+      $this->db->from("usuario");
+      $this->db->where("idUsuario",$idUsuario);
+      $dui = $this->db->get()->result()[0];
+
+      force_download('public/files/dui'.$dui->dui, NULL);
+      redirect('perfil','refresh');
+  }
+
+  function descargarNIT($idUsuario)
+  {
+      $this->load->helper('download');
+      $this->db->select("nit");
+      $this->db->from("usuario");
+      $this->db->where("idUsuario",$idUsuario);
+      $nit = $this->db->get()->result()[0];
+
+      force_download('public/files/nit'.$nit->nit, NULL);
+      redirect('perfil','refresh');
+  }
+
+  function descargarSolvencia($idUsuario)
+  {
+      $this->load->helper('download');
+      $this->db->select("solvencia");
+      $this->db->from("usuario");
+      $this->db->where("idUsuario",$idUsuario);
+      $solvencia = $this->db->get()->result()[0];
+
+      force_download('public/files/solvencia'.$solvencia->solvencia, NULL);
+      redirect('perfil','refresh');
+  }
 
 }
 

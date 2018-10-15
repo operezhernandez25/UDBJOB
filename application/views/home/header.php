@@ -42,6 +42,7 @@
 
 <!-- DataTable -->
   <link href="<?php echo base_url(); ?>public/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+  <link href="<?php echo base_url(); ?>public/bower_components/datatables.net/js/jquery.dataTables.min.js" rel="stylesheet">
 
   <!-- Datetime Picker -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>public/bower_components/datetimepicker/bootstrap-datetimepicker.min.css">
@@ -57,7 +58,11 @@
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
-
+<?php
+  if (!$this->session->userdata('s_idusuario')) {
+    redirect('login');
+  }
+ ?>
 
 </head>
 <body class="hold-transition skin-green layout-boxed sidebar-mini">

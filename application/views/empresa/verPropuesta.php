@@ -4,11 +4,11 @@
            Propuesta
         </h1>
 
-        
+
     </section>
     <section class="content">
         <div class="row">
-            
+
                 <div class="col-md-6">
                     <div class="box box-success">
                         <div class="box-header">
@@ -58,7 +58,7 @@
                                         Nombre Postulante: <strong><?php echo $pos->nombreUsuario ?></strong><?php if($pos->contador>0){ ?> - <span class="label label-primary "><?php echo $pos->contador ?> </span> <?php } ?><br>
                                        Fecha Postulación: <strong><?php echo $pos->fecha ?></strong><br>
                                         Estado: <strong>
-                                                <?php 
+                                                <?php
                                                     switch($pos->estado)
                                                     {
                                                         case 0: 
@@ -78,7 +78,7 @@
                                                             break;        
                                                     }
                                                 ?>
-                                                </strong>    
+                                                </strong>
                                     </p>
                                 </li>
                                             <?php
@@ -90,6 +90,6 @@
                         </div>
                     </div>
                 </div>
-            
+            </div>
         </div>
-    </section>  
+    </section>
