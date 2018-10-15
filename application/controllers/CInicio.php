@@ -5,6 +5,7 @@ class cInicio extends CI_Controller
    public function  __construct()
    {
     parent::__construct();
+    $this->load->model("MMensajes");
    }
 
    public function index()
@@ -106,8 +107,9 @@ class cInicio extends CI_Controller
         }
       }
 
+      $dataNav["mensajesPendientes"]=$this->MMensajes->obtenerMensajesUsuario();
       $this->load->view('home/header');
-      $this->load->view('home/asidenav');
+      $this->load->view('home/asidenav',$dataNav);
       $this->load->view('vInicio',$data);
       $this->load->view('home/footer');
     }

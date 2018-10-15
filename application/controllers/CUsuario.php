@@ -6,6 +6,7 @@ class CUsuario extends CI_Controller
    {
     parent::__construct();
     $this->load->model('MUsuario');
+    $this->load->model("MMensajes");
    }
 
    public function verPropuesta($id)
@@ -33,8 +34,9 @@ class CUsuario extends CI_Controller
     $data["comprobador"]=$this->db->get()->result()[0];
 
 
+    $dataNav["mensajesPendientes"]=$this->MMensajes->obtenerMensajesUsuario();
     $this->load->view('home/header');
-    $this->load->view('home/asidenav');
+    $this->load->view('home/asidenav',$dataNav);
     $this->load->view('usuario/verpropuesta',$data);
     $this->load->view('home/footer');
 
@@ -62,8 +64,9 @@ class CUsuario extends CI_Controller
         }
 
 
+        $dataNav["mensajesPendientes"]=$this->MMensajes->obtenerMensajesUsuario();
         $this->load->view('home/header');
-        $this->load->view('home/asidenav');
+        $this->load->view('home/asidenav',$dataNav);
         $this->load->view('usuario/verpostulaciones',$data);
         $this->load->view('home/footer');
    }
@@ -105,8 +108,11 @@ class CUsuario extends CI_Controller
         $this->db->where("idPostulacion",$data["postulacion"]->idPostulacion);
         $this->db->where("remitente",0);
         $this->db->update("mensajes",array("visto"=>1));
+        
+        
+        $dataNav["mensajesPendientes"]=$this->MMensajes->obtenerMensajesUsuario();
         $this->load->view('home/header');
-        $this->load->view('home/asidenav');
+        $this->load->view('home/asidenav',$dataNav);
         $this->load->view('usuario/verpostulacion',$data);
         $this->load->view('home/footer');
    }
@@ -169,8 +175,9 @@ class CUsuario extends CI_Controller
     $this->db->where("idUsuario",$this->session->userdata('s_idusuario'));
     $data["conocimientos"]=$this->db->get()->result();
 
+    $dataNav["mensajesPendientes"]=$this->MMensajes->obtenerMensajesUsuario();
     $this->load->view('home/header');
-    $this->load->view('home/asidenav');
+    $this->load->view('home/asidenav',$dataNav);
     $this->load->view('usuario/vPerfil',$data);
     $this->load->view('home/footer');
    }

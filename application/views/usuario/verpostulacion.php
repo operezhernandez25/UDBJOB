@@ -8,94 +8,101 @@
     </section>
     <section class="content">
         <div class="row">
-             <div class="row fixed-row-bottom" >
-                 
-             <div class="col-md-4 col-sm-6 chat-caja" >
-                        <div class="box box-warning direct-chat direct-chat-warning ">
-                                <div class="box-header with-border">
-                                  <h3 class="box-title">Chat Directo</h3>
-                
-                                  <div class="box-tools pull-right">
-                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                                    </button>
-                                    
-                                  </div>
-                                </div>
-                                <!-- /.box-header -->
-                                <div class="box-body"  >
-                                  <!-- Conversations are loaded here -->
-                                  <div class="direct-chat-messages" id="caja-chat" >
-                                    <?php
-                                        if(isset($mensajes))
-                                        {
-                                            foreach($mensajes as $men)
+            <div class="row fixed-row-bottom" >
+                <?php if($postulacion->estado>1)
+                {
+
+                ?>  
+                <div class="col-md-4 col-sm-6  chat-caja" >
+                            <div class="box box-warning direct-chat direct-chat-warning ">
+                                    <div class="box-header with-border">
+                                    <h3 class="box-title">Chat Directo</h3>
+                    
+                                    <div class="box-tools pull-right">
+                                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                        </button>
+                                        
+                                    </div>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body"  >
+                                    <!-- Conversations are loaded here -->
+                                    <div class="direct-chat-messages" id="caja-chat" >
+                                            <?php
+                                            if(isset($mensajes))
                                             {
-                                                if($men->remitente==1)
+                                                foreach($mensajes as $men)
                                                 {
-                                                    ?>
-                                    <!-- Message to the right -->
-                                    <div class="direct-chat-msg right">
-                                      <div class="direct-chat-info clearfix">
-                                        <span class="direct-chat-name pull-right">Yo</span>
-                                        <span class="direct-chat-timestamp pull-left"><?php echo $men->fecha ?></span>
-                                      </div>
-                                      <!-- /.direct-chat-info -->
-                                      <img class="direct-chat-img" src="http://pngimage.net/wp-content/uploads/2018/06/usuario-icono-png.png" alt="message user image">
-                                      <!-- /.direct-chat-img -->
-                                      <div class="direct-chat-text">
-                                        <?php echo $men->mensaje ?>
-                                      </div>
-                                      <!-- /.direct-chat-text -->
-                                    </div>
-                                    <!-- /.direct-chat-msg -->
-                                                    <?php
-                                                }else if($men->remitente==0)
-                                                {
-                                                    ?>
-                                    <!-- Message. Default to the left -->
-                                    <div class="direct-chat-msg">
-                                      <div class="direct-chat-info clearfix">
-                                        <span class="direct-chat-name pull-left"><?php echo $men->nombre ?></span>
-                                        <span class="direct-chat-timestamp pull-right"><?php echo $men->fecha ?></span>
-                                      </div>
-                                      <!-- /.direct-chat-info -->
-                                      <img class="direct-chat-img" src="http://pngimage.net/wp-content/uploads/2018/06/usuario-icono-png.png" alt="message user image">
-                                      <!-- /.direct-chat-img -->
-                                      <div class="direct-chat-text">
-                                      <?php echo $men->mensaje ?>
-                                      </div>
-                                      <!-- /.direct-chat-text -->
-                                    </div>
-                                    <!-- /.direct-chat-msg -->                    
-                                                    <?php
+                                                    if($men->remitente==1)
+                                                    {
+                                                        ?>
+                                        <!-- Message to the right -->
+                                        <div class="direct-chat-msg right">
+                                          <div class="direct-chat-info clearfix">
+                                            <span class="direct-chat-name pull-right">Yo</span>
+                                            <span class="direct-chat-timestamp pull-left"><?php echo $men->fecha ?></span>
+                                          </div>
+                                          <!-- /.direct-chat-info -->
+                                          <img class="direct-chat-img" src="http://pngimage.net/wp-content/uploads/2018/06/usuario-icono-png.png" alt="message user image">
+                                          <!-- /.direct-chat-img -->
+                                          <div class="direct-chat-text">
+                                            <?php echo $men->mensaje ?>
+                                          </div>
+                                          <!-- /.direct-chat-text -->
+                                        </div>
+                                        <!-- /.direct-chat-msg -->
+                                                        <?php
+                                                    }else if($men->remitente==0)
+                                                    {
+                                                        ?>
+                                        <!-- Message. Default to the left -->
+                                        <div class="direct-chat-msg">
+                                          <div class="direct-chat-info clearfix">
+                                            <span class="direct-chat-name pull-left"><?php echo $men->nombre ?></span>
+                                            <span class="direct-chat-timestamp pull-right"><?php echo $men->fecha ?></span>
+                                          </div>
+                                          <!-- /.direct-chat-info -->
+                                          <img class="direct-chat-img" src="http://pngimage.net/wp-content/uploads/2018/06/usuario-icono-png.png" alt="message user image">
+                                          <!-- /.direct-chat-img -->
+                                          <div class="direct-chat-text">
+                                          <?php echo $men->mensaje ?>
+                                          </div>
+                                          <!-- /.direct-chat-text -->
+                                        </div>
+                                        <!-- /.direct-chat-msg -->                    
+                                                        <?php
+                                                    }
                                                 }
                                             }
-                                        }
-                                    ?>
-                
+                                        ?>
+                    
+                                        
+                    
                                     
-                
-                                   
-                
-                                  </div>
-                                  <!--/.direct-chat-messages-->
-                
-                                  
-                                </div>
-                                <!-- /.box-body -->
-                                <div class="box-footer" >
-                                  
-                                    <div class="input-group">
-                                      <input type="text" autocomplete="off" name="message" id="MensajeEnviar" placeholder="Escribe un mensaje ..." class="form-control">
-                                      <span class="input-group-addon bg-green">Enter</span>
+                    
                                     </div>
-                                 
+                                    <!--/.direct-chat-messages-->
+                    
+                                    
+                                    </div>
+                                    <!-- /.box-body -->
+                                    <div class="box-footer" >
+                                    
+                                        <div class="input-group">
+                                        <input type="text" autocomplete="off" name="message" id="MensajeEnviar" placeholder="Escribe un mensaje ..." class="form-control">
+                                        <span class="input-group-addon bg-green">Enter</span>
+                                        </div>
+                                    
+                                    </div>
+                                    <!-- /.box-footer-->
                                 </div>
-                                <!-- /.box-footer-->
-                              </div>
                 </div>
-        </div>
-        <div class="row">
+                <?php
+                }
+                ?>
+            </div>
+        </div>    
+        <div class="row" id="row-principal">
             <div class="col-md-9">
                 <div class="box box-primary">
                     <div class="box-header " >
@@ -130,15 +137,25 @@
             <div class="col-md-3">
                 <div class="box box-success">
                     <div class="box-header">
-                    <h4 class="box-title">{Estado de postulación}</h4>
+                    <h4 class="box-title">
+                        <?php 
+                            switch($postulacion->estado)
+                            {
+                                case 0:echo 'Postulación enviada'; break;
+                                case 1: echo 'Perfil Visto'; break;
+                                case 2: echo 'Chat habilitado'; break;
+                                case 3: echo 'Entrevista por Skype Realizada'; break;
+                            }
+                        ?>
+                    </h4>
                     </div>
                     <div class="box-body">
                         <ul class="timeline">
 
                            <!-- timeline time label -->
                            <li class="time-label">
-                                <span class="bg-blue">
-                                        XX/XX/XXX
+                                <span class="bg-green">
+                                        <?php echo $postulacion->fecha; ?>
                                 </span>
                             </li>
                             <!-- /.timeline-label -->
@@ -148,7 +165,7 @@
                                 <!-- timeline icon -->
                                 <i class="fa fa-check-square bg-green"></i>
                                 <div class="timeline-item">
-                                    <span class="time"><i class="fa fa-clock-o"></i>  XX:XX</span>
+                                    <span class="time"><i class="fa fa-clock-o"></i>  <?php echo $postulacion->fecha; ?></span>
 
                                     <h3 class="timeline-header"><a href="#">Postulación</a></h3>
 
@@ -176,11 +193,10 @@
                                 <div class="timeline-item">
                                     <span class="time"><i class="fa fa-clock-o"></i>  XX:XX</span>
 
-                                    <h3 class="timeline-header"><a href="#">Descarga de prueba</a></h3>
+                                    <h3 class="timeline-header"><a href="#">Perfil Visto</a></h3>
 
                                     <div class="timeline-body">
-                                        ...
-                                        Content goes here
+                                        ¡Tu perfil fue visto por la empresa!
                                     </div>
 
                                     <div class="timeline-footer">
@@ -190,7 +206,7 @@
                             </li>
                             <!-- timeline time label -->
                            <li class="time-label">
-                                <span class="bg-red">
+                                <span class="bg-green">
                                         XX/XX/XXX
                                 </span>
                             </li>
@@ -199,15 +215,14 @@
                             <!-- timeline item -->
                             <li>
                                 <!-- timeline icon -->
-                                <i class="fa fa-envelope bg-blue"></i>
+                                <i class="fa fa-check-square bg-green"></i>
                                 <div class="timeline-item">
                                     <span class="time"><i class="fa fa-clock-o"></i>  XX:XX</span>
 
-                                    <h3 class="timeline-header"><a href="#">Postulación</a></h3>
+                                    <h3 class="timeline-header"><a href="#">Chat Habilitado</a></h3>
 
                                     <div class="timeline-body">
-                                        ...
-                                        Content goes here
+                                        ¡El chat directo fue habilitado!
                                     </div>
 
                                     <div class="timeline-footer">
@@ -233,9 +248,10 @@
     <style>
     .chat-caja {
    position: fixed;
-   z-index:4;
+   z-index:50000;
   
-   right: 0;
+   left: 0;
+   
    bottom: 0;
    padding: 10px;
    margin: 0 auto;

@@ -1,4 +1,7 @@
-
+<style>
+.sort.desc:after { width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-bottom: 4px solid #2e2e2e; content: ""; position: relative; top: -9px; right: -4px; }
+.sort.asc:after { width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 4px solid #2e2e2e; content: ""; position: relative; top: 11px; right: -4px; }
+</style>
 <div class="content-wrapper">
     <section class="content-header">
       <h1>
@@ -8,8 +11,22 @@
 
     </section>
 
-    <section class="content">
-      <ul class="list-group">
+    <section class="content" id="listado-ofertasSugeridas">
+        <div class="form-group">
+          
+            <div class="input-group">
+              <input class="search form-control" placeholder="Fitrar" >
+              <span class="input-group-btn">
+                <button class="sort btn btn-primary" data-sort="titulo">Ordenar por titulo</button>
+              </span>
+              <span class="input-group-btn">
+                <button class="sort btn btn-primary" data-sort="salario">Ordenar por salario</button>
+              </span>
+            </div>
+          
+        </div>
+      <br>
+      <ul class=" list list-group">
       <?php
         foreach($propuestas as $pro)
         {
@@ -19,12 +36,13 @@
               <div class="col-xs-12 col-sm-12 col-md-2">
                 <ul class="meta-search">
                   <li><i class="glyphicon glyphicon-calendar"></i> <span><?php echo $pro->fecha ?></span></li>
-                  <li><i class="glyphicon glyphicon-time"></i> <span><?php echo $pro->jornada ?></span></li>
-
+                  <li><i class="glyphicon glyphicon-time"></i> <span class="jornada"><?php echo $pro->jornada ?></span></li>
+                  <li><i class="glyphicon glyphicon-star"></i> <span class="salario"><?php echo $pro->salario ?></span></li>
+                
                 </ul>
               </div>
               <div class="col-xs-12 col-sm-12 col-md-7 excerpet">
-                <h2><a href="<?php echo base_url(); ?>propuesta/<?php echo $pro->idPropuesta ?>" title=""><?php echo $pro->titulo ?></a><?php if($pro->realizado==1) echo '<span class="label label-danger">Postulado</span>' ?></h2>
+                <h2><a href="<?php echo base_url(); ?>propuesta/<?php echo $pro->idPropuesta ?>" title="" class="titulo"><?php echo $pro->titulo ?></a><?php if($pro->realizado==1) echo '<span class="label label-danger">Postulado</span>' ?></h2>
                 						    
               </div>
               <div class="col-xs-12 col-sm-12 col-md-3">
@@ -32,7 +50,9 @@
                   <li><i class="glyphicon glyphicon-briefcase"></i> <span><?php echo $pro->nombre ?></span></li>
                   <li><i class="glyphicon glyphicon-time"></i> <span><?php echo $pro->pais ?></span></li>
                   <li><i class="glyphicon glyphicon-tags"></i> <span><?php echo $pro->sector ?></span></li>
+                  
                 </ul>
+                
               </div>
               <span class="clearfix borda">  
               </span>
@@ -44,6 +64,7 @@
         
           
       </ul>
+      <ul class="pagination"></ul>
     </section>
 
 

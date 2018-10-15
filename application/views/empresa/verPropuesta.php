@@ -53,15 +53,29 @@
                                         {
                                             ?>
                                 <li class="list-group-item">
+                                
                                     <p>   <a href="<?php echo base_url(); ?>CEmpresa/perfilPostulante/<?php echo $pos->idUsuario.'/'.$datosPropuesta->idPropuesta;?>" class="btn btn-primary btn-sm pull-right">Ver Perfil</a>
-                                        Nombre Postulante: <strong><?php echo $pos->nombreUsuario ?></strong><br>
+                                        Nombre Postulante: <strong><?php echo $pos->nombreUsuario ?></strong><?php if($pos->contador>0){ ?> - <span class="label label-primary "><?php echo $pos->contador ?> </span> <?php } ?><br>
                                        Fecha Postulación: <strong><?php echo $pos->fecha ?></strong><br>
                                         Estado: <strong>
                                                 <?php 
                                                     switch($pos->estado)
                                                     {
-                                                        case 0: echo 'Pendiente de revisión';
-                                                        break;
+                                                        case 0: 
+                                                            echo 'Pendiente de revisión';
+                                                            break;
+                                                        case 1: 
+                                                            echo 'Perfil visto';
+                                                            break;
+                                                        case 2:
+                                                            echo 'Chat Habilitado';
+                                                            break;
+                                                        case 3:
+                                                            echo 'Entrevista por VideoLlamada Realizada';
+                                                            break;
+                                                        case 4:
+                                                            echo 'Proceso finalizado';
+                                                            break;        
                                                     }
                                                 ?>
                                                 </strong>    

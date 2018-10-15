@@ -5,6 +5,7 @@ class CEmpresa extends CI_Controller
    public function  __construct()
    {
     parent::__construct();
+    $this->load->model("MMensajes");
    }
 
    
@@ -14,20 +15,32 @@ class CEmpresa extends CI_Controller
     {
         $this->db->select("*");
         $this->db->from("conocimientos");
+        $this->db->where("verificado",1);
         $data["conocimientos"]=$this->db->get()->result();
+
+        $dataNav["mensajesPendientes"]=$this->MMensajes->obtenerMensajesEmpresa();
         $this->load->view('home/header');
-        $this->load->view('home/asidenav');
+        $this->load->view('home/asidenav',$dataNav);
         $this->load->view('empresa/vnuevapropuesta',$data);
         $this->load->view('home/footer');
     }
 
     function verMisPropuestas()
     {
-       $this->db->select("idPropuesta,titulo,fecha,estado,jornada,salario");
+        $this->db->select("idPropuesta,titulo,fecha,propuesta.estado,jornada,salario");
+        $this->db->join("usuarioEmpresa","usuarioEmpresa.idUsuarioEmpresa=propuesta.idUsuarioEmpresa");
         $this->db->from("propuesta");
+        $this->db->where("usuarioEmpresa.idEmpresa",$this->session->userdata("s_idempresa"));
+        
         $data["propuestas"]=$this->db->get()->result();
+        
+        //Obteniendo los mensajes de cada propuesta
+
+
+
+        $dataNav["mensajesPendientes"]=$this->MMensajes->obtenerMensajesEmpresa();
         $this->load->view('home/header');
-        $this->load->view('home/asidenav');
+        $this->load->view('home/asidenav',$dataNav);
        $this->load->view('empresa/vvermisPropuestas',$data);
        $this->load->view('home/footer');
     }
@@ -59,14 +72,26 @@ class CEmpresa extends CI_Controller
         $data["datosPropuesta"]=$this->db->get()->result()[0];
         
         //Usuarios Postulados
-        $this->db->select("postulaciones.idUsuario,postulaciones.fecha, postulaciones.estado,concat(usuario.nombres,' ',usuario.apellidos) nombreUsuario");
+        $this->db->select("postulaciones.idPostulacion,postulaciones.idUsuario,postulaciones.fecha, postulaciones.estado,concat(usuario.nombres,' ',usuario.apellidos) nombreUsuario");
         $this->db->from("postulaciones");
         $this->db->join("usuario","usuario.idUsuario=postulaciones.idUsuario");
         $this->db->where("postulaciones.idPropuesta",$id);
         $data["postulaciones"]=$this->db->get()->result();
         
+        //Agregando a cada usuario los mensajes pendientes
+        foreach($data["postulaciones"] as $pos)
+        {
+            $this->db->select("count(*) contador");
+            $this->db->from("mensajes");
+            $this->db->where("idPostulacion",$pos->idPostulacion);
+            $this->db->where("visto",0);
+            $this->db->where("remitente",1);
+            $pos->contador=$this->db->get()->result()[0]->contador;
+        }
+
+        $dataNav["mensajesPendientes"]=$this->MMensajes->obtenerMensajesEmpresa();
         $this->load->view('home/header');
-        $this->load->view('home/asidenav');
+        $this->load->view('home/asidenav',$dataNav);
         $this->load->view("empresa/verPropuesta",$data);
         $this->load->view('home/footer');
     }
@@ -106,7 +131,7 @@ class CEmpresa extends CI_Controller
 
     function agregarConocimiento()
     {
-        $this->db->insert("conocimientos",array('conocimientos'=>$this->input->post("conocimiento")));
+        $this->db->insert("conocimientos",array('conocimientos'=>$this->input->post("conocimiento"),'verificado'=>1));
 
         echo json_encode(array('error'=>false,'id'=>$this->db->insert_id()));
     }
@@ -176,8 +201,9 @@ class CEmpresa extends CI_Controller
 
         echo '<script> var idPostulacion="'.$data["estadoPostulacion"]->idPostulacion.'"</script>';
         
+        $dataNav["mensajesPendientes"]=$this->MMensajes->obtenerMensajesEmpresa();
         $this->load->view('home/header');
-        $this->load->view('home/asidenav');
+        $this->load->view('home/asidenav',$dataNav);
         $this->load->view("empresa/verPerfilPostulante",$data);
         $this->load->view('home/footer');
     }
@@ -210,6 +236,25 @@ class CEmpresa extends CI_Controller
         $this->db->update("postulaciones",array('estado'=>2));
         
         $data=array('idpostulacion'=>$data["idPostulacion"]->idPostulacion,'texto'=>'Contactar mediante chat','fecha'=>date('Y-m-d h:i:s'));
+        $this->db->insert("postulacionEventos",$data);
+        redirect('/CEmpresa/perfilPostulante/'.$idUsuario.'/'.$idPropuesta,'refresh');
+    }
+
+
+    function skypeFinalizado($idUsuario,$idPropuesta)
+    {
+        //obtenes el id de la postulacion
+        $this->db->select("idPostulacion");
+        $this->db->from("postulaciones");
+        $this->db->where("idUsuario",$idUsuario);
+        $this->db->where("idPropuesta",$idPropuesta);
+        $data["idPostulacion"]=$this->db->get()->result()[0];
+
+        $this->db->where("idUsuario",$idUsuario);
+        $this->db->where("idPropuesta",$idPropuesta);
+        $this->db->update("postulaciones",array('estado'=>3));
+        
+        $data=array('idpostulacion'=>$data["idPostulacion"]->idPostulacion,'texto'=>'VideoLlamada realizada','fecha'=>date('Y-m-d h:i:s'));
         $this->db->insert("postulacionEventos",$data);
         redirect('/CEmpresa/perfilPostulante/'.$idUsuario.'/'.$idPropuesta,'refresh');
     }
