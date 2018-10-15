@@ -5,6 +5,7 @@ class cInicio extends CI_Controller
    public function  __construct()
    {
     parent::__construct();
+    $this->load->model("MMensajes");
    }
 
    public function index()
@@ -19,7 +20,7 @@ class cInicio extends CI_Controller
       $this->db->from("usuarioConocimiento");
       $this->db->where("idUsuario",$this->session->userdata('s_idusuario'));
       $data["conocimientosUsuario"]=$this->db->get()->result();
-    
+
       //Filtrando las propuestas que se tenga conocimiento
       $coincidencias=null;
       foreach($data["conocimientosUsuario"] as $conoUsu)
@@ -42,18 +43,18 @@ class cInicio extends CI_Controller
             if($contador==0)
             {
               $coincidencias[]= (object) array('idPropuesta' => $conoPro->idPropuesta,'cont'=>1);
- 
+
             }
             }else
             {
              $coincidencias[]= (object) array('idPropuesta' => $conoPro->idPropuesta,'cont'=>1);
-             
+
             }
           }
         }
       }
 
-    
+
       //Filtrando las propuestas mediante el 70% de parecido
       $this->db->select("count(*) contador,propuestaConocimiento.idPropuesta");
       $this->db->from("propuestaConocimiento");
@@ -101,19 +102,20 @@ class cInicio extends CI_Controller
           if($pos->idPropuesta==$pro->idPropuesta)
           {
             $pro->realizado=1;
-            
+
           }
         }
       }
 
+      $dataNav["mensajesPendientes"]=$this->MMensajes->obtenerMensajesUsuario();
       $this->load->view('home/header');
-      $this->load->view('home/asidenav');
+      $this->load->view('home/asidenav',$dataNav);
       $this->load->view('vInicio',$data);
       $this->load->view('home/footer');
     }
     public function inicioUsuario()
     {
-      
+
     }
 
 }

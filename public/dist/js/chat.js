@@ -89,7 +89,12 @@ $(document).ready(function()
                         );
                         $('#caja-chat').scrollTop($('#caja-chat')[0].scrollHeight);   
                     });
-                
+                    if(data.mensajes.length>0)
+                    {
+                        var audio = new Audio(baseurl+'public/sound/notification.mp3');
+                    audio.volume = 0.2;
+                    audio.play();
+                    }
                     
                 
                 }else
@@ -102,7 +107,7 @@ $(document).ready(function()
         
     
     
-    }, 1000);
+    }, 250);
 
     
 

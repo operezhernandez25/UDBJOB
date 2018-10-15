@@ -17,6 +17,80 @@
 
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
+        <li class="dropdown notifications-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+              <i class="fa fa-envelope-o"></i>
+              <?php
+                $cont=0;
+                if(isset($mensajesPendientes))
+                {
+                  foreach($mensajesPendientes as $men)
+                {
+                  $cont+=$men->contador;
+                }
+                }
+              
+              ?>
+              <span class="label label-danger"><?php   if($cont>0)echo $cont; ?></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="header">Tienes  <?php   echo $cont; ?>  mensajes nuevos
+              </li>
+              <li>
+                <!-- inner menu: contains the actual data -->
+                <ul class="menu">
+                  <?php 
+                  if(isset($mensajesPendientes))
+                  foreach($mensajesPendientes as $men)
+                  {
+                    ?>
+                  <li><!-- start message -->
+                    <?php
+                      if($this->session->userdata("s_tipo")==0)
+                      {
+                        ?>
+                        <a href="<?php echo base_url() ?>CEmpresa/perfilPostulante/<?php echo $men->idUsuario; ?>/<?php echo $men->idPropuesta; ?>">
+                        <span class="label label-primary"> <?php echo $men->contador;  ?></span> <?php echo $men->nombres ?> - <?php echo $men->titulo ?> 
+                     
+                        <?php
+                      }else
+                      {
+                        ?>
+                        <a href="<?php echo base_url() ?>CUsuario/verPostulacion/<?php echo $men->idPropuesta; ?>">
+                        <span class="label label-primary"> <?php echo $men->contador;  ?></span> <?php echo $men->titulo ?> 
+                     
+                        <?php
+
+                      }
+                    ?>  
+                    
+                      
+                    
+                     
+                    </a>
+                  </li>    
+                    <?php
+                  }
+
+                  ?>
+                  
+                </ul>
+              </li>
+              <?php
+                if($this->session->userdata("s_tipo")==0)
+                {
+                  ?>
+                  <li class="footer"><a href="<?php echo base_url(); ?>/CEmpresa/verMisPropuestas">Ver mis Propuestas</a></li>
+                  <?php
+                }else
+                {
+                  ?>
+                  <li class="footer"><a href="<?php echo base_url(); ?>/CUsuario/verPostulaciones">Ver mis postulaciones</a></li>
+                  <?php
+                }
+              ?>
+            </ul>
+          </li>
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="<?php echo base_url(); ?>/public/photos/<?php echo $this->session->userdata("s_Foto"); ?>" class="user-image" alt="User Image">
@@ -49,6 +123,8 @@
             <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
           </li>
         </ul>
+
+        
       </div>
     </nav>
 </header>
@@ -90,7 +166,10 @@
               <i class="fa fa-user-circle"></i> <span>Perfil</span>
             </a>
         </li>
+<<<<<<< HEAD
 
+=======
+>>>>>>> d0f399fd6b4c1a38616d3583b6bf0a7781a86d29
 
         <?php } ?>
         <!--EMPRESA -->
@@ -117,7 +196,10 @@
               <i class="glyphicon glyphicon-list-alt"></i> <span>Verificar conocimientos</span>
             </a>
         </li>
+<<<<<<< HEAD
 
+=======
+>>>>>>> d0f399fd6b4c1a38616d3583b6bf0a7781a86d29
         <li >
             <a href="<?php echo base_url(); ?>usuarioEmpresa">
               <i class="fa fa-users"></i> <span>Usuarios</span>

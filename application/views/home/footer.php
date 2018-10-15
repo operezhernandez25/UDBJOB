@@ -7,6 +7,9 @@
     </div>
     <strong>Copyright &copy; 2018 <a href="https://adminlte.io">CompuTrabajo</a>.</strong> Derechos reservados
   </footer>
+  <script type="text/javascript">
+  var baseurl="<?php echo base_url(); ?>";
+</script>
 <!-- jQuery 3 -->
 <script src="<?php echo base_url(); ?>public/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -88,7 +91,7 @@
 <script src="<?php echo base_url(); ?>public/dist/js/list.min.js"></script>
 <script>
 var options = {
-    valueNames: [ 'titulo','jornada','salario','fecha'],page: 3,
+    valueNames: [ 'titulo','jornada','salario','fecha'],page: 5,
   pagination: true
 };
 
@@ -98,6 +101,14 @@ var options2 = {
   pagination: true
 };
 var hackerList2 = new List('listaMisPropuestas', options);
+
+var listaOfertasSugeridas=new List('listado-ofertasSugeridas',{
+  valueNames:['titulo','salario','jornada'],page: 3,pagination: true
+
+});
+
+
+
 </script>
 <!-- Page specific script -->
 <script>
