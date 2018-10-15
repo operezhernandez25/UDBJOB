@@ -90,10 +90,7 @@
               <i class="fa fa-user-circle"></i> <span>Perfil</span>
             </a>
         </li>
-<<<<<<< HEAD
 
-=======
->>>>>>> c90f2f4b56291b008b3fbdd355612f2a1734d1d5
 
         <?php } ?>
         <!--EMPRESA -->
@@ -110,7 +107,6 @@
               <i class="fa fa-newspaper-o"></i> <span>Propuestas de la empresa</span>
             </a>
         </li>
-<<<<<<< HEAD
         <li >
             <a href="<?php echo base_url(); ?>usuarioEmpresa">
               <i class="fa fa-user-circle"></i> <span>Ver Perfil</span>
@@ -121,9 +117,7 @@
               <i class="glyphicon glyphicon-list-alt"></i> <span>Verificar conocimientos</span>
             </a>
         </li>
-=======
 
->>>>>>> fd2aa1fc50843c2a296ca84aec070968614bcb05
         <li >
             <a href="<?php echo base_url(); ?>usuarioEmpresa">
               <i class="fa fa-users"></i> <span>Usuarios</span>

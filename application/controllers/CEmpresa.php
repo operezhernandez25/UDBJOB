@@ -191,7 +191,7 @@ class CEmpresa extends CI_Controller
         $this->db->where("idUsuario",$idUsuario);
         $curriculum = $this->db->get()->result()[0];
 
-        force_download('public/files/'.$curriculum->curriculum, NULL);
+        force_download('public/files/curriculum/'.$curriculum->curriculum, NULL);
         redirect('/CEmpresa/verPerfulilPostulante'.$idUsuario,'refresh');
     }
 
@@ -283,7 +283,7 @@ class CEmpresa extends CI_Controller
       $this->db->where("idUsuario",$idUsuario);
       $dui = $this->db->get()->result()[0];
 
-      force_download('public/files/'.$dui->dui, NULL);
+      force_download('public/files/dui/'.$dui->dui, NULL);
       redirect('perfil','refresh');
   }
 
@@ -295,7 +295,7 @@ class CEmpresa extends CI_Controller
       $this->db->where("idUsuario",$idUsuario);
       $nit = $this->db->get()->result()[0];
 
-      force_download('public/files/'.$nit->nit, NULL);
+      force_download('public/files/nit/'.$nit->nit, NULL);
       redirect('perfil','refresh');
   }
 
@@ -307,7 +307,7 @@ class CEmpresa extends CI_Controller
       $this->db->where("idUsuario",$idUsuario);
       $solvencia = $this->db->get()->result()[0];
 
-      force_download('public/files/'.$solvencia->solvencia, NULL);
+      force_download('public/files/solvencia/'.$solvencia->solvencia, NULL);
       redirect('perfil','refresh');
   }
 
