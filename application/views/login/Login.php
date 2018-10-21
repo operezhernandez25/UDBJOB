@@ -54,8 +54,8 @@
       </div>
     </form>
     <a href="<?php echo base_url(); ?>loginEmpresarial" class="text-center">Ingresar como empresa,</a><br>
-    <a href="<?php echo base_url(); ?>" class="text-center">Registrarte en GuanaJob</a><br>
-    <a href="<?php echo base_url(); ?>" class="text-center">Registrarte como empresa.</a>
+    <a href="<?php echo base_url(); ?>registrar" class="text-center">Registrarte en GuanaJob</a><br>
+    <a href="<?php echo base_url(); ?>registrarEmpresa" class="text-center">Registrarte como empresa.</a>
 
     <?php
     if(isset($mensaje))
