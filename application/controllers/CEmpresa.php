@@ -223,11 +223,7 @@ class CEmpresa extends CI_Controller
         $this->db->where("idUsuario",$idUsuario);
         $curriculum = $this->db->get()->result()[0];
 
-<<<<<<< HEAD
         force_download('public/files/curriculum/'.$curriculum->curriculum, NULL);
-=======
-        force_download('public/files/curriculum'.$curriculum->curriculum, NULL);
->>>>>>> d0f399fd6b4c1a38616d3583b6bf0a7781a86d29
         redirect('/CEmpresa/verPerfulilPostulante'.$idUsuario,'refresh');
     }
 
@@ -266,6 +262,28 @@ class CEmpresa extends CI_Controller
         
         $data=array('idpostulacion'=>$data["idPostulacion"]->idPostulacion,'texto'=>'VideoLlamada realizada','fecha'=>date('Y-m-d h:i:s'));
         $this->db->insert("postulacionEventos",$data);
+        redirect('/CEmpresa/perfilPostulante/'.$idUsuario.'/'.$idPropuesta,'refresh');
+    }
+
+    function aceptado($idUsuario,$idPropuesta)
+    {
+        //obtenes el id de la postulacion
+        $this->db->select("idPostulacion");
+        $this->db->from("postulaciones");
+        $this->db->where("idUsuario",$idUsuario);
+        $this->db->where("idPropuesta",$idPropuesta);
+        $data["idPostulacion"]=$this->db->get()->result()[0];
+
+        $this->db->where("idUsuario",$idUsuario);
+        $this->db->where("idPropuesta",$idPropuesta);
+        $this->db->update("postulaciones",array('estado'=>4));
+        
+        $data=array('idpostulacion'=>$data["idPostulacion"]->idPostulacion,'texto'=>'Trabajo realizado','fecha'=>date('Y-m-d h:i:s'));
+        $this->db->insert("postulacionEventos",$data);
+
+        //Cambiando el estado a la propuesta
+        
+
         redirect('/CEmpresa/perfilPostulante/'.$idUsuario.'/'.$idPropuesta,'refresh');
     }
 
@@ -338,11 +356,7 @@ class CEmpresa extends CI_Controller
       $this->db->where("idUsuario",$idUsuario);
       $dui = $this->db->get()->result()[0];
 
-<<<<<<< HEAD
       force_download('public/files/dui/'.$dui->dui, NULL);
-=======
-      force_download('public/files/dui'.$dui->dui, NULL);
->>>>>>> d0f399fd6b4c1a38616d3583b6bf0a7781a86d29
       redirect('perfil','refresh');
   }
 
@@ -354,11 +368,7 @@ class CEmpresa extends CI_Controller
       $this->db->where("idUsuario",$idUsuario);
       $nit = $this->db->get()->result()[0];
 
-<<<<<<< HEAD
       force_download('public/files/nit/'.$nit->nit, NULL);
-=======
-      force_download('public/files/nit'.$nit->nit, NULL);
->>>>>>> d0f399fd6b4c1a38616d3583b6bf0a7781a86d29
       redirect('perfil','refresh');
   }
 
@@ -370,11 +380,7 @@ class CEmpresa extends CI_Controller
       $this->db->where("idUsuario",$idUsuario);
       $solvencia = $this->db->get()->result()[0];
 
-<<<<<<< HEAD
       force_download('public/files/solvencia/'.$solvencia->solvencia, NULL);
-=======
-      force_download('public/files/solvencia'.$solvencia->solvencia, NULL);
->>>>>>> d0f399fd6b4c1a38616d3583b6bf0a7781a86d29
       redirect('perfil','refresh');
   }
 

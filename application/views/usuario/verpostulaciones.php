@@ -40,7 +40,8 @@
                     case 0:echo 'Postulación enviada'; break;
                     case 1: echo 'Perfil Visto'; break;
                     case 2: echo 'Chat habilitado'; break;
-                    case 3: echo 'Final del seguimiento'; break;
+                    case 3: echo 'VideoLlamada realizada'; break;
+                    case 4: echo 'Seguimiento finalizado'; break;
                     } 
                     
                     ?>

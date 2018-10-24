@@ -178,10 +178,14 @@
                                     </div>
                                 </div>
                             </li>
-                            <!-- timeline time label -->
+                            <?php
+                                if(count($eventos)>0)
+                                {
+                                    ?>
+                                    <!-- timeline time label -->
                             <li class="time-label">
                                 <span class="bg-green">
-                                        XX/XX/XXX
+                                        <?php echo $eventos[0]->fecha; ?>
                                 </span>
                             </li>
                             <!-- /.timeline-label -->
@@ -191,7 +195,7 @@
                                 <!-- timeline icon -->
                                 <i class="fa fa-check-square bg-green"></i>
                                 <div class="timeline-item">
-                                    <span class="time"><i class="fa fa-clock-o"></i>  XX:XX</span>
+                                    <span class="time"><i class="fa fa-clock-o"></i>  <?php echo $eventos[0]->hora; ?></span>
 
                                     <h3 class="timeline-header"><a href="#">Perfil Visto</a></h3>
 
@@ -204,10 +208,16 @@
                                     </div>
                                 </div>
                             </li>
+                                    <?php
+                                }
+                                if(count($eventos)>1)
+                                {
+
+                            ?>
                             <!-- timeline time label -->
                            <li class="time-label">
                                 <span class="bg-green">
-                                        XX/XX/XXX
+                                <?php echo $eventos[1]->fecha; ?>
                                 </span>
                             </li>
                             <!-- /.timeline-label -->
@@ -217,7 +227,7 @@
                                 <!-- timeline icon -->
                                 <i class="fa fa-check-square bg-green"></i>
                                 <div class="timeline-item">
-                                    <span class="time"><i class="fa fa-clock-o"></i>  XX:XX</span>
+                                    <span class="time"><i class="fa fa-clock-o"></i>  <?php echo $eventos[1]->hora; ?></span>
 
                                     <h3 class="timeline-header"><a href="#">Chat Habilitado</a></h3>
 
@@ -230,6 +240,37 @@
                                     </div>
                                 </div>
                             </li>
+                            <?php  }
+                            if(count($eventos)>1)
+                            {
+                            ?>
+                            <!-- timeline time label -->
+                           <li class="time-label">
+                                <span class="bg-green">
+                                <?php echo $eventos[1]->fecha; ?>
+                                </span>
+                            </li>
+                            <!-- /.timeline-label -->
+
+                            <!-- timeline item -->
+                            <li>
+                                <!-- timeline icon -->
+                                <i class="fa fa-check-square bg-green"></i>
+                                <div class="timeline-item">
+                                    <span class="time"><i class="fa fa-clock-o"></i>  <?php echo $eventos[1]->hora; ?></span>
+
+                                    <h3 class="timeline-header"><a href="#">Entrevista virtual Realizada</a></h3>
+
+                                    <div class="timeline-body">
+                                        ¡Entrevista por videoLlamada Realizada!
+                                    </div>
+
+                                    <div class="timeline-footer">
+                                       
+                                    </div>
+                                </div>
+                            </li>
+                            <?php } ?>
                             <li class="time-label">
                                 <span class="bg-red">
                                         Finalización

@@ -82,7 +82,13 @@ class CUsuario extends CI_Controller
         $this->db->where("postulaciones.idUsuario",$this->session->userdata("s_idusuario"));
         $this->db->where("postulaciones.idPropuesta",$id);
         $data["postulacion"]=$this->db->get()->result()[0];
-
+        
+        //Eventos de la postulacion
+        $this->db->select("idevento,texto,cast(fecha as date) fecha, cast(fecha as time) hora");
+        $this->db->from("postulacionEventos");
+        $this->db->where("postulacionEventos.idpostulacion",$data["postulacion"]->idPostulacion);
+        $data["eventos"]=$this->db->get()->result();
+        
 
 
         //Conocimientos de la propuesta

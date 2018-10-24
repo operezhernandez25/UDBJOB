@@ -288,9 +288,9 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-        <a href="<?php echo base_url(); ?>CEmpresa/skypeFinalizado/<?php
+        <a href="<?php echo base_url(); ?>CEmpresa/aceptado/<?php
                             echo $datosUsuario->idUsuario.'/'.$idPropuesta;?>" class="btn btn-primary">Aceptado</a>
-        <a href="<?php echo base_url(); ?>CEmpresa/skypeFinalizado/<?php
+        <a href="<?php echo base_url(); ?>CEmpresa/rechazado/<?php
                             echo $datosUsuario->idUsuario.'/'.$idPropuesta;?>" class="btn btn-primary">Rechazado</a>                    
       </div>
     </div>

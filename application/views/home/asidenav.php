@@ -166,10 +166,6 @@
               <i class="fa fa-user-circle"></i> <span>Perfil</span>
             </a>
         </li>
-<<<<<<< HEAD
-
-=======
->>>>>>> d0f399fd6b4c1a38616d3583b6bf0a7781a86d29
 
         <?php } ?>
         <!--EMPRESA -->
@@ -196,10 +192,6 @@
               <i class="glyphicon glyphicon-list-alt"></i> <span>Verificar conocimientos</span>
             </a>
         </li>
-<<<<<<< HEAD
-
-=======
->>>>>>> d0f399fd6b4c1a38616d3583b6bf0a7781a86d29
         <li >
             <a href="<?php echo base_url(); ?>usuarioEmpresa">
               <i class="fa fa-users"></i> <span>Usuarios</span>
