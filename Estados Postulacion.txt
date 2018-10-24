@@ -6,7 +6,8 @@ notas:
 *1 : Perfil visto
 *2 : Contactar mediante chat
 *3 : Entrevista por videoLlamada Realizada
-*4 : Trabajo conseguido o rechazado
+*4 : Trabajo conseguido
+*5 : Rechazago
 
 
 

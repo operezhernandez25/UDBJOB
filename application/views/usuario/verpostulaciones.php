@@ -42,6 +42,7 @@
                     case 2: echo 'Chat habilitado'; break;
                     case 3: echo 'VideoLlamada realizada'; break;
                     case 4: echo 'Seguimiento finalizado'; break;
+                    case 5: echo 'Seguimiento finalizado'; break;
                     } 
                     
                     ?>

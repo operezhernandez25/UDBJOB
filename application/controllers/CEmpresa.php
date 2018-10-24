@@ -33,7 +33,7 @@ class CEmpresa extends CI_Controller
 
     function verMisPropuestas()
     {
-        $this->db->select("idPropuesta,titulo,fecha,propuesta.estado,jornada,salario");
+        $this->db->select("idPropuesta,titulo,fecha,propuesta.estado,jornada,salario,propuesta.estado");
         $this->db->join("usuarioEmpresa","usuarioEmpresa.idUsuarioEmpresa=propuesta.idUsuarioEmpresa");
         $this->db->from("propuesta");
         $this->db->where("usuarioEmpresa.idEmpresa",$this->session->userdata("s_idempresa"));
@@ -282,7 +282,27 @@ class CEmpresa extends CI_Controller
         $this->db->insert("postulacionEventos",$data);
 
         //Cambiando el estado a la propuesta
+        $this->db->where("idPropuesta",$idPropuesta);
+        $this->db->update("propuesta",array('estado'=>1));
+
+        redirect('/CEmpresa/perfilPostulante/'.$idUsuario.'/'.$idPropuesta,'refresh');
+    }
+
+    function rechazado($idUsuario,$idPropuesta)
+    {
+        //obtenes el id de la postulacion
+        $this->db->select("idPostulacion");
+        $this->db->from("postulaciones");
+        $this->db->where("idUsuario",$idUsuario);
+        $this->db->where("idPropuesta",$idPropuesta);
+        $data["idPostulacion"]=$this->db->get()->result()[0];
+
+        $this->db->where("idUsuario",$idUsuario);
+        $this->db->where("idPropuesta",$idPropuesta);
+        $this->db->update("postulaciones",array('estado'=>5));
         
+        $data=array('idpostulacion'=>$data["idPostulacion"]->idPostulacion,'texto'=>'Trabajo realizado','fecha'=>date('Y-m-d h:i:s'));
+        $this->db->insert("postulacionEventos",$data);
 
         redirect('/CEmpresa/perfilPostulante/'.$idUsuario.'/'.$idPropuesta,'refresh');
     }

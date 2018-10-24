@@ -89,8 +89,14 @@
                                     <div class="box-footer" >
                                     
                                         <div class="input-group">
+                                        <?php 
+                                        if($postulacion->estado<3)
+                                        { ?>
+                                       
                                         <input type="text" autocomplete="off" name="message" id="MensajeEnviar" placeholder="Escribe un mensaje ..." class="form-control">
+                                       
                                         <span class="input-group-addon bg-green">Enter</span>
+                                        <?php } ?>
                                         </div>
                                     
                                     </div>
@@ -270,12 +276,19 @@
                                     </div>
                                 </div>
                             </li>
-                            <?php } ?>
+                            <?php }
+                            if(count($eventos)>3)
+                            {
+                            ?> 
+                            
                             <li class="time-label">
                                 <span class="bg-red">
                                         Finalización
                                 </span>
                             </li>
+                            <?php
+                            }
+                            ?>
                         </ul>
                     </div>
                 </div>
