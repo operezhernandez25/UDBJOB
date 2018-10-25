@@ -225,13 +225,14 @@
                       <div class="timeline-body">
 
                           <div class="form-group">
+                          <?php echo form_open_multipart('CUsuario/modificarFoto'); ?>
                           <div class="row">
                             <div class="col-sm-12 col-md-12">
                               <div class="thumbnail">
                                <div class="row">
                                   <div class="col-md-3"></div>
                                   <div class ="col-md-6">
-                                    <canvas id="modificarCanvas" width="250" height="250" style="border:1px solid #d3d3d3;"></canvas>
+                                    <img src="<?php echo base_url(); ?>public/photos/<?php echo $this->session->userdata("s_Foto"); ?>" alt="Nature" style="width:100%">
                                   </div>
                                   <div class="col-md-3"></div>
                                 </div>
@@ -240,11 +241,11 @@
                                   <div class="form-group">
                                   <div class="input-group">
                                     <label class="btn btn-default">
-                                      <input type="file" id="imagenGuardarMod" name="imagenGuardarMod" onchange="validacionUpdate= validate_fileupload(this);">
+                                      <input type="file" id="modfoto" name="modfoto" required>
                                       </label>
 
                                     <div class="input-group-btn">
-                                      <button type="button" id="actualizarImagen" class="btn btn bg-aqua color-palette">Actualizar</button>
+                                      <button type="submit" id="actualizarImagen" class="btn btn bg-aqua color-palette">Actualizar</button>
                                     </div>
                                   </div>
                                     <p class="help-block">Imagen de perfil.</p>
@@ -253,6 +254,7 @@
                               </div>
                             </div>
                           </div>
+                          </form>
                         </div>
 
                       </div>
@@ -276,11 +278,13 @@
                       <h3 class="timeline-header"><a>Actualizar hoja de vida</a></h3>
                       <div class="timeline-body">
                         <div class="form-group">
-                          <input type="file" id="exampleInputFile" name="curriculum" required>
-                          <p class="help-block">Extención del archivo: pdf,doc,docx.</p>
+                          <?php echo form_open_multipart('CUsuario/modificarCV'); ?>
+                          <input type="file" id="modCV" name="modCV" required>
+                          <p class="help-block">Extención del archivo: pdf, doc, docx.</p>
                         </div>
                         <div class="timeline-footer">
-                          <button type="button" id="actualizarImagen" class="btn btn bg-aqua color-palette">Actualizar</button>
+                            <button type="submit" id="actualizarImagen" class="btn btn bg-aqua color-palette">Actualizar</button>
+                          </form>
                           <a href="<?php echo base_url(); ?>CEmpresa/descargarCurriculum/<?php echo $this->session->userdata('s_idusuario') ?>" class="btn btn-danger pull-right"><i class="fa fa-download margin-r-5"></i> Descargar</a>
                         </div>
                       </div>
@@ -343,32 +347,38 @@
                       <div class="timeline-body">
                         <div class="form-group">
                           <label for="inputSkills" class="">DUI</label>
-                          <input type="file" id="exampleInputFile" name="curriculum" required>
-                          <p class="help-block">Extención del archivo: pdf,doc,docx.</p>
+                          <?php echo form_open_multipart('CUsuario/modificarDUI'); ?>
+                          <input type="file" id="ModDui" name="ModDui" required>
+                          <p class="help-block">Extención del archivo: pdf, jpg, jpeg, png.</p>
                         </div>
                         <div class="timeline-footer">
-                          <button type="button" id="actualizarImagen" class="btn btn bg-aqua color-palette">Actualizar</button>
+                          <button type="submit" id="actualizarImagen" class="btn btn bg-aqua color-palette">Actualizar</button>
                           <a href="<?php echo base_url(); ?>CEmpresa/descargarDUI/<?php echo $this->session->userdata('s_idusuario') ?>" class="btn btn-danger pull-right"><i class="fa fa-download margin-r-5"></i> Descargar</a>
+                          </form>
                         </div>
                         <br>
                         <div class="form-group">
                           <label for="inputSkills" class="">NIT</label>
-                          <input type="file" id="exampleInputFile" name="curriculum" required>
-                          <p class="help-block">Extención del archivo: pdf,doc,docx.</p>
+                          <?php echo form_open_multipart('CUsuario/modificarNIT '); ?>
+                          <input type="file" id="ModNit" name="ModNit" required>
+                          <p class="help-block">Extención del archivo: pdf, jpg, jpeg, png.</p>
                         </div>
                         <div class="timeline-footer">
-                          <button type="button" id="actualizarImagen" class="btn btn bg-aqua color-palette">Actualizar</button>
+                          <button type="submit" id="actualizarImagen" class="btn btn bg-aqua color-palette">Actualizar</button>
                           <a href="<?php echo base_url(); ?>CEmpresa/descargarNIT/<?php echo $this->session->userdata('s_idusuario') ?>" class="btn btn-danger pull-right"><i class="fa fa-download margin-r-5"></i> Descargar</a>
+                          </form>
                         </div>
                         <br>
                         <div class="form-group">
                           <label for="inputSkills" class="">Solvencia</label>
-                          <input type="file" id="exampleInputFile" name="curriculum" required>
-                          <p class="help-block">Extención del archivo: pdf,doc,docx.</p>
+                          <?php echo form_open_multipart('CUsuario/modificarSolvencia '); ?>
+                          <input type="file" id="ModSolv" name="ModSolv" required>
+                          <p class="help-block">Extención del archivo: pdf, jpg, jpeg, png.</p>
                         </div>
                         <div class="timeline-footer">
-                          <button type="button" id="actualizarImagen" class="btn btn bg-aqua color-palette">Actualizar</button>
+                          <button type="submit" id="actualizarImagen" class="btn btn bg-aqua color-palette">Actualizar</button>
                           <a href="<?php echo base_url(); ?>CEmpresa/descargarSolvencia/<?php echo $this->session->userdata('s_idusuario') ?>" class="btn btn-danger pull-right"><i class="fa fa-download margin-r-5"></i> Descargar</a>
+                          </form>
                         </div>
                       </div>
                     </div>
@@ -762,3 +772,47 @@
       <!-- /.modal-dialog -->
       </div>
     </div>
+
+
+    <script>
+    (function($) {
+        $.fn.checkFileType = function(options) {
+            var defaults = {
+                allowedExtensions: [],
+                success: function() {},
+                error: function() {}
+            };
+            options = $.extend(defaults, options);
+
+            return this.each(function() {
+
+                $(this).on('change', function() {
+                    var value = $(this).val(),
+                        file = value.toLowerCase(),
+                        extension = file.substring(file.lastIndexOf('.') + 1);
+
+                    if ($.inArray(extension, options.allowedExtensions) == -1) {
+                        options.error();
+                        $(this).focus();
+                    } else {
+                        options.success();
+
+                    }
+
+                });
+
+            });
+        };
+
+    })(jQuery);
+
+    $(function() {
+        $('#modCV').checkFileType({
+            allowedExtensions: ['doc', 'docx', 'pdf'],
+            error: function() {
+                alert('Error. Extensión del archivo incorrecta, por favor suba el archivo con las extensión indicada.');
+            }
+        });
+
+    });
+    </script>
