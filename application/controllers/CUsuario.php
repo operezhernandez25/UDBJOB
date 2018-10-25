@@ -82,13 +82,13 @@ class CUsuario extends CI_Controller
         $this->db->where("postulaciones.idUsuario",$this->session->userdata("s_idusuario"));
         $this->db->where("postulaciones.idPropuesta",$id);
         $data["postulacion"]=$this->db->get()->result()[0];
-        
+
         //Eventos de la postulacion
         $this->db->select("idevento,texto,cast(fecha as date) fecha, cast(fecha as time) hora");
         $this->db->from("postulacionEventos");
         $this->db->where("postulacionEventos.idpostulacion",$data["postulacion"]->idPostulacion);
         $data["eventos"]=$this->db->get()->result();
-        
+
 
 
         //Conocimientos de la propuesta
@@ -114,8 +114,8 @@ class CUsuario extends CI_Controller
         $this->db->where("idPostulacion",$data["postulacion"]->idPostulacion);
         $this->db->where("remitente",0);
         $this->db->update("mensajes",array("visto"=>1));
-        
-        
+
+
         $dataNav["mensajesPendientes"]=$this->MMensajes->obtenerMensajesUsuario();
         $this->load->view('home/header');
         $this->load->view('home/asidenav',$dataNav);
@@ -277,6 +277,28 @@ class CUsuario extends CI_Controller
      $data=$this->MUsuario->UpdateUser($campos,$id);
      $this->session->set_flashdata('mensaje',$data["mensaje"]);
      $this->session->set_flashdata('error',$data["error"]);
+
+     $this->db->select('idUsuario, nombres, apellidos, email, foto');
+     $this->db->from('usuario');
+     $this->db->where('idUsuario',$id);
+
+     $resultado=$this->db->get();
+
+     if ($resultado->num_rows()==1) {
+       $r=$resultado->row();
+
+       $s_usuario=array(
+         's_idusuario'=>$r->idUsuario,
+         's_usuario'=>$r->apellidos.", ".$r->nombres,
+         's_Correo'=>$r->email,
+         's_Foto'=>$r->foto,
+         's_tipo'=>1
+       );
+
+       $this->session->set_userdata($s_usuario);
+     }
+
+     $this->session->set_userdata($s_usuario);
      redirect('perfil','refresh');
     }
 
@@ -326,6 +348,246 @@ class CUsuario extends CI_Controller
     $this->db->from("usuarioConocimiento");
     $this->db->where("idUsuario",$this->session->userdata('s_idusuario'));
     echo json_encode($this->db->get()->result());
+  }
+
+  public function modificarCV()
+  {
+    //Para el CV
+    $this->load->library('upload');
+    if (!empty($_FILES['modCV']['name']))
+    {
+        // Configuración para el Archivo
+        $config['upload_path'] = 'public/files/curriculum/';
+        $config['allowed_types'] = 'doc|docx|pdf';
+
+        // Cargamos la configuración del Archivo
+        $this->upload->initialize($config);
+
+        // Subimos archivo
+        if ($this->upload->do_upload('modCV'))
+        {
+            $data = $this->upload->data();
+            $cv = $data['file_name'];
+        }
+        else
+        {
+            //echo $this->upload->display_errors();
+            $this->session->set_flashdata('mensaje',"Ocurrio un error, revise si la extension es correcta!");
+        	  $this->session->set_flashdata('error',true);
+        }
+    }
+    else
+    {
+      $this->session->set_flashdata('mensaje',"Debes subir los archivos necesarios!");
+      $this->session->set_flashdata('error',true);
+    }
+
+		  $this->db->where('idUsuario',$this->session->userdata('s_idusuario'));
+		  $this->db->update('usuario',array('curriculum'=>$cv));
+		  if($this->db->affected_rows()>0)
+      {
+        $this->session->set_flashdata('mensaje',"Curriculum Vitae actualizado!");
+    	  $this->session->set_flashdata('error',false);
+      	redirect('perfil','refresh');
+		  }else{
+      	redirect('perfil','refresh');
+		  }
+  }
+
+  public function modificarDUI()
+  {
+    //Para el DUI
+    $this->load->library('upload');
+    if (!empty($_FILES['ModDui']['name']))
+    {
+        // Configuración para el Archivo
+        $config['upload_path'] = 'public/files/dui/';
+        $config['allowed_types'] = 'pdf|jpg|jpeg|png';
+
+        // Cargamos la configuración del Archivo
+        $this->upload->initialize($config);
+
+        // Subimos archivo
+        if ($this->upload->do_upload('ModDui'))
+        {
+            $data = $this->upload->data();
+            $dui = $data['file_name'];
+        }
+        else
+        {
+            //echo $this->upload->display_errors();
+            $this->session->set_flashdata('mensaje',"Ocurrio un error, revise si la extension es correcta!");
+        	  $this->session->set_flashdata('error',true);
+        }
+    }
+    else
+    {
+      $this->session->set_flashdata('mensaje',"Debes subir los archivos necesarios!");
+      $this->session->set_flashdata('error',true);
+    }
+
+		  $this->db->where('idUsuario',$this->session->userdata('s_idusuario'));
+		  $this->db->update('usuario',array('dui'=>$dui));
+		  if($this->db->affected_rows()>0)
+      {
+        $this->session->set_flashdata('mensaje',"DUI actualizado!");
+    	  $this->session->set_flashdata('error',false);
+      	redirect('perfil','refresh');
+		  }else{
+      	redirect('perfil','refresh');
+		  }
+  }
+
+  public function modificarNIT()
+  {
+    //Para el NIT
+    $this->load->library('upload');
+    if (!empty($_FILES['ModNit']['name']))
+    {
+        // Configuración para el Archivo
+        $config['upload_path'] = 'public/files/nit/';
+        $config['allowed_types'] = 'pdf|jpg|jpeg|png';
+
+        // Cargamos la configuración del Archivo
+        $this->upload->initialize($config);
+
+        // Subimos archivo
+        if ($this->upload->do_upload('ModNit'))
+        {
+            $data = $this->upload->data();
+            $nit = $data['file_name'];
+        }
+        else
+        {
+            //echo $this->upload->display_errors();
+            $this->session->set_flashdata('mensaje',"Ocurrio un error, revise si la extension es correcta!");
+        	  $this->session->set_flashdata('error',true);
+        }
+    }
+    else
+    {
+      $this->session->set_flashdata('mensaje',"Debes subir los archivos necesarios!");
+      $this->session->set_flashdata('error',true);
+    }
+
+		  $this->db->where('idUsuario',$this->session->userdata('s_idusuario'));
+		  $this->db->update('usuario',array('nit'=>$nit));
+		  if($this->db->affected_rows()>0)
+      {
+        $this->session->set_flashdata('mensaje',"NIT actualizado!");
+    	  $this->session->set_flashdata('error',false);
+      	redirect('perfil','refresh');
+		  }else{
+      	redirect('perfil','refresh');
+		  }
+  }
+
+  public function modificarSolvencia()
+  {
+    //Para Solvencia
+    $this->load->library('upload');
+    if (!empty($_FILES['ModSolv']['name']))
+    {
+        // Configuración para el Archivo
+        $config['upload_path'] = 'public/files/solvencia/';
+        $config['allowed_types'] = 'pdf|jpg|jpeg|png';
+
+        // Cargamos la configuración del Archivo
+        $this->upload->initialize($config);
+
+        // Subimos archivo
+        if ($this->upload->do_upload('ModSolv'))
+        {
+            $data = $this->upload->data();
+            $solvencia = $data['file_name'];
+        }
+        else
+        {
+            //echo $this->upload->display_errors();
+            $this->session->set_flashdata('mensaje',"Ocurrio un error, revise si la extension es correcta!");
+        	  $this->session->set_flashdata('error',true);
+        }
+    }
+    else
+    {
+      $this->session->set_flashdata('mensaje',"Debes subir los archivos necesarios!");
+      $this->session->set_flashdata('error',true);
+    }
+
+		  $this->db->where('idUsuario',$this->session->userdata('s_idusuario'));
+		  $this->db->update('usuario',array('solvencia'=>$solvencia));
+		  if($this->db->affected_rows()>0)
+      {
+        $this->session->set_flashdata('mensaje',"Solvencia actualizada!");
+    	  $this->session->set_flashdata('error',false);
+      	redirect('perfil','refresh');
+		  }else{
+      	redirect('perfil','refresh');
+		  }
+  }
+
+  public function modificarFoto()
+  {
+    //Para foto
+    $this->load->library('upload');
+    if (!empty($_FILES['modfoto']['name']))
+    {
+        // Configuración para el Archivo
+        $config['upload_path'] = 'public/photos/';
+        $config['allowed_types'] = 'pdf|jpg|jpeg|png';
+
+        // Cargamos la configuración del Archivo
+        $this->upload->initialize($config);
+
+        // Subimos archivo
+        if ($this->upload->do_upload('modfoto'))
+        {
+            $data = $this->upload->data();
+            $foto = $data['file_name'];
+        }
+        else
+        {
+            echo $this->upload->display_errors();
+            $this->session->set_flashdata('mensaje',"Ocurrio un error, revise si la extension es correcta!");
+        	  $this->session->set_flashdata('error',true);
+        }
+    }
+    else
+    {
+      $this->session->set_flashdata('mensaje',"Debes subir los archivos necesarios!");
+      $this->session->set_flashdata('error',true);
+    }
+
+		  $this->db->where('idUsuario',$this->session->userdata('s_idusuario'));
+		  $this->db->update('usuario',array('foto'=>$foto));
+		  if($this->db->affected_rows()>0)
+      {
+        $this->db->select('idUsuario, nombres, apellidos, email, foto');
+        $this->db->from('usuario');
+        $this->db->where('idUsuario',$this->session->userdata('s_idusuario'));
+
+        $resultado=$this->db->get();
+
+        if ($resultado->num_rows()==1) {
+          $r=$resultado->row();
+
+          $s_usuario=array(
+            's_idusuario'=>$r->idUsuario,
+            's_usuario'=>$r->apellidos.", ".$r->nombres,
+            's_Correo'=>$r->email,
+            's_Foto'=>$r->foto,
+            's_tipo'=>1
+          );
+
+          $this->session->set_userdata($s_usuario);
+        }
+
+        $this->session->set_flashdata('mensaje',"Foto de perfil actualizada!");
+    	  $this->session->set_flashdata('error',false);
+      	redirect('perfil','refresh');
+		  }else{
+      	redirect('perfil','refresh');
+		  }
   }
 
 }
