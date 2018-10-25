@@ -161,11 +161,7 @@
               <i class="glyphicon glyphicon-list-alt"></i> <span>Ver mis postulaciones</span>
             </a>
         </li>
-        <li >
-            <a href="#">
-              <i class="fa fa-user-circle"></i> <span>Perfil</span>
-            </a>
-        </li>
+       
 
         <?php } ?>
         <!--EMPRESA -->
