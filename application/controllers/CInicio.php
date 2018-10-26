@@ -10,6 +10,9 @@ class cInicio extends CI_Controller
 
    public function index()
    {
+    if($this->session->userdata("s_tipo")==1)
+    {
+    
       $this->db->select("propuestaConocimiento.idConocimiento,propuestaConocimiento.idPropuesta");
       $this->db->from("propuestaConocimiento");
       $this->db->join("propuesta","propuesta.idPropuesta=propuestaConocimiento.idPropuesta");
@@ -94,6 +97,7 @@ class cInicio extends CI_Controller
       //Buscamos las postulaciones de el usuario
       $this->db->select("idPropuesta");
       $this->db->from("postulaciones");
+      $this->db->where("idUsuario",$this->session->userdata('s_idusuario'));
       $postulaciones=$this->db->get()->result();
       foreach($data["propuestas"] as $pro)
       {
@@ -112,7 +116,23 @@ class cInicio extends CI_Controller
       $this->load->view('home/asidenav',$dataNav);
       $this->load->view('vInicio',$data);
       $this->load->view('home/footer');
+    }else
+    {
+      $data["validador"]=0;
+        //Cantidad de cotizaciones de la empresa
+        $this->db->select("count(idPropuesta) conta");
+        $this->db->join("usuarioEmpresa","usuarioEmpresa.idUsuarioEmpresa=propuesta.idUsuarioEmpresa");
+        $this->db->from("propuesta");
+        $this->db->where("usuarioEmpresa.idEmpresa",$this->session->userdata("s_idempresa"));
+        
+        $data["propuestas"]=$this->db->get()->result()[0];
+      $dataNav["mensajesPendientes"]=$this->MMensajes->obtenerMensajesUsuario();
+      $this->load->view('home/header');
+      $this->load->view('home/asidenav',$dataNav);
+      $this->load->view('vInicioE',$data);
+      $this->load->view('home/footer');
     }
+  }
     public function inicioUsuario()
     {
 

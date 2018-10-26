@@ -133,6 +133,8 @@ class CUsuario extends CI_Controller
             'fecha'=>date('Y-m-d h:i:s')
         );
         $this->db->insert("postulaciones",$datos);
+        redirect('/propuesta/'.$idPropuesta,'refresh');        
+
    }
 
 
