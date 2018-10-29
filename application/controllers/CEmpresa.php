@@ -5,7 +5,7 @@ class CEmpresa extends CI_Controller
    public function  __construct()
    {
     parent::__construct();
-
+   
     $this->load->model("MMensajes");
 
     if (!$this->session->userdata('s_idusuario')) {
@@ -217,14 +217,14 @@ class CEmpresa extends CI_Controller
 
     function descargarCurriculum($idUsuario)
     {
-        $this->load->helper('download');
+       
         $this->db->select("curriculum");
         $this->db->from("usuario");
         $this->db->where("idUsuario",$idUsuario);
         $curriculum = $this->db->get()->result()[0];
 
         force_download('public/files/curriculum/'.$curriculum->curriculum, NULL);
-        redirect('/CEmpresa/verPerfulilPostulante'.$idUsuario,'refresh');
+        //redirect('/','refresh');
     }
 
 
@@ -370,19 +370,19 @@ class CEmpresa extends CI_Controller
 
   function descargarDUI($idUsuario)
   {
-      $this->load->helper('download');
+      
       $this->db->select("dui");
       $this->db->from("usuario");
       $this->db->where("idUsuario",$idUsuario);
       $dui = $this->db->get()->result()[0];
 
       force_download('public/files/dui/'.$dui->dui, NULL);
-      redirect('perfil','refresh');
+      // redirect('/','refresh');
   }
 
   function descargarNIT($idUsuario)
   {
-      $this->load->helper('download');
+      
       $this->db->select("nit");
       $this->db->from("usuario");
       $this->db->where("idUsuario",$idUsuario);
@@ -394,7 +394,7 @@ class CEmpresa extends CI_Controller
 
   function descargarSolvencia($idUsuario)
   {
-      $this->load->helper('download');
+     
       $this->db->select("solvencia");
       $this->db->from("usuario");
       $this->db->where("idUsuario",$idUsuario);
@@ -402,6 +402,48 @@ class CEmpresa extends CI_Controller
 
       force_download('public/files/solvencia/'.$solvencia->solvencia, NULL);
       redirect('perfil','refresh');
+  }
+
+  function usuarioSitio()
+  {
+    $data["dsa"]=0;
+    $this->db->select("idUsuario,concat(nombres,' ',apellidos) nombre,fechaNacimiento,email,pais,departamento,estado");
+    $this->db->from("usuario");
+    $data["usuarios"]=$this->db->get()->result();
+    $this->load->view('home/header');
+    $this->load->view('home/asidenav');
+    $this->load->view("empresa/versuariosSitio", $data);
+    $this->load->view('home/footer');
+  }
+
+  function verPerfilUsuario($id)
+  {
+    //Obteniendo datos del usuario
+    $this->db->select("idUsuario,upper(concat(nombres,' ',apellidos)) nombre, curriculum,fechaNacimiento,genero,estadoCivil,email,pais,departamento,ciudad,direccion,foto,skype,estado");
+    $this->db->from("usuario");
+    $this->db->where("idUsuario",$id);
+    $data["datosUsuario"]=$this->db->get()->result()[0];
+    $this->load->view('home/header');
+    $this->load->view('home/asidenav');
+    $this->load->view("empresa/verPerfilUsuario-Admin", $data);
+    $this->load->view('home/footer');
+  }
+
+  function deshabiltarUsuario($id)
+  {
+        $this->db->where("idUsuario",$id);
+        $this->db->update("usuario",array('estado'=>0));
+        $this->session->set_flashdata('mensaje',"Actualización correcta!");
+        $this->session->set_flashdata('error',true);
+        redirect('verPerfilUsuario/'.$id,'refresh');
+  }
+  function habilitarUsuario($id)
+  {
+        $this->db->where("idUsuario",$id);
+        $this->db->update("usuario",array('estado'=>1));
+        $this->session->set_flashdata('mensaje',"Actualización correcta!");
+        $this->session->set_flashdata('error',true);
+        redirect('verPerfilUsuario/'.$id,'refresh');
   }
 
 }

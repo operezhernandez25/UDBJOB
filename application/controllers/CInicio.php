@@ -123,19 +123,34 @@ class cInicio extends CI_Controller
         $this->db->select("count(idPropuesta) conta");
         $this->db->join("usuarioEmpresa","usuarioEmpresa.idUsuarioEmpresa=propuesta.idUsuarioEmpresa");
         $this->db->from("propuesta");
+        if($this->session->userdata("s_administrador")==0)
         $this->db->where("usuarioEmpresa.idEmpresa",$this->session->userdata("s_idempresa"));
-        
         $data["propuestas"]=$this->db->get()->result()[0];
-      $dataNav["mensajesPendientes"]=$this->MMensajes->obtenerMensajesUsuario();
-      $this->load->view('home/header');
-      $this->load->view('home/asidenav',$dataNav);
-      $this->load->view('vInicioE',$data);
-      $this->load->view('home/footer');
+
+        $query="select avg(conta) promedio from
+        (
+        select count(postulaciones.idPostulacion) conta from postulaciones
+        inner join propuesta on propuesta.idPropuesta=postulaciones.idPropuesta
+        inner join usuarioEmpresa on usuarioEmpresa.idUsuarioEmpresa=propuesta.idUsuarioEmpresa
+       ";
+       if($this->session->userdata("s_administrador")==0){
+       $query.=" where usuarioEmpresa.idEmpresa=".$this->session->userdata("s_idempresa");}
+        $query.=" group by propuesta.idPropuesta ) f";
+       $data["promedio"]= $this->db->query($query)->result();
+        
+       
+        $dataNav["mensajesPendientes"]=$this->MMensajes->obtenerMensajesUsuario();
+        $this->load->view('home/header');
+        $this->load->view('home/asidenav',$dataNav);
+        $this->load->view('vInicioE',$data);
+        $this->load->view('home/footer');
     }
   }
-    public function inicioUsuario()
-    {
 
+
+    public function paginaInicio()
+    {
+      $this->load->view("home/paginaInicio");
     }
 
 }

@@ -178,19 +178,11 @@
               <i class="fa fa-newspaper-o"></i> <span>Propuestas de la empresa</span>
             </a>
         </li>
+       
+        
         <li >
             <a href="<?php echo base_url(); ?>usuarioEmpresa">
-              <i class="fa fa-user-circle"></i> <span>Ver Perfil</span>
-            </a>
-        </li>
-        <li >
-            <a href="<?php echo base_url(); ?>CEmpresa/verConocimientos">
-              <i class="glyphicon glyphicon-list-alt"></i> <span>Verificar conocimientos</span>
-            </a>
-        </li>
-        <li >
-            <a href="<?php echo base_url(); ?>usuarioEmpresa">
-              <i class="fa fa-users"></i> <span>Usuarios</span>
+              <i class="fa fa-users"></i> <span>Usuarios de la empresa</span>
             </a>
         </li>
 
@@ -206,14 +198,20 @@
               <i class="fa fa-newspaper-o"></i> <span>Propuestas de la empresa</span>
             </a>
         </li>
+        
         <li >
-            <a href="<?php echo base_url(); ?>usuarioEmpresa">
-              <i class="fa fa-user-circle"></i> <span>Ver Perfil</span>
+            <a href="<?php echo base_url(); ?>CEmpresa/verConocimientos">
+              <i class="glyphicon glyphicon-list-alt"></i> <span>Verificar conocimientos</span>
             </a>
         </li>
         <li >
             <a href="<?php echo base_url(); ?>usuarioEmpresa">
-              <i class="fa fa-users"></i> <span>Usuarios</span>
+              <i class="fa fa-users"></i> <span>Usuarios de la empresa</span>
+            </a>
+        </li>
+        <li>
+            <a href="<?php echo base_url(); ?>usuarioSitio">
+              <i class="fa fa-users"></i> <span>Usuarios del sitio</span>
             </a>
         </li>
       <?php } }?>

@@ -283,7 +283,7 @@
                           <p class="help-block">Extención del archivo: pdf, doc, docx.</p>
                         </div>
                         <div class="timeline-footer">
-                            <button type="submit" id="actualizarImagen" class="btn btn bg-aqua color-palette">Actualizar</button>
+                            <button type="submit" id="hojadevida" class="btn btn bg-aqua color-palette">Actualizar</button>
                           </form>
                           <a href="<?php echo base_url(); ?>CEmpresa/descargarCurriculum/<?php echo $this->session->userdata('s_idusuario') ?>" class="btn btn-danger pull-right"><i class="fa fa-download margin-r-5"></i> Descargar</a>
                         </div>
@@ -352,7 +352,7 @@
                           <p class="help-block">Extención del archivo: pdf, jpg, jpeg, png.</p>
                         </div>
                         <div class="timeline-footer">
-                          <button type="submit" id="actualizarImagen" class="btn btn bg-aqua color-palette">Actualizar</button>
+                          <button type="submit" id="documentodui" class="btn btn bg-aqua color-palette">Actualizar</button>
                           <a href="<?php echo base_url(); ?>CEmpresa/descargarDUI/<?php echo $this->session->userdata('s_idusuario') ?>" class="btn btn-danger pull-right"><i class="fa fa-download margin-r-5"></i> Descargar</a>
                           </form>
                         </div>
@@ -364,7 +364,7 @@
                           <p class="help-block">Extención del archivo: pdf, jpg, jpeg, png.</p>
                         </div>
                         <div class="timeline-footer">
-                          <button type="submit" id="actualizarImagen" class="btn btn bg-aqua color-palette">Actualizar</button>
+                          <button type="submit" id="documentonit" class="btn btn bg-aqua color-palette">Actualizar</button>
                           <a href="<?php echo base_url(); ?>CEmpresa/descargarNIT/<?php echo $this->session->userdata('s_idusuario') ?>" class="btn btn-danger pull-right"><i class="fa fa-download margin-r-5"></i> Descargar</a>
                           </form>
                         </div>
@@ -376,7 +376,7 @@
                           <p class="help-block">Extención del archivo: pdf, jpg, jpeg, png.</p>
                         </div>
                         <div class="timeline-footer">
-                          <button type="submit" id="actualizarImagen" class="btn btn bg-aqua color-palette">Actualizar</button>
+                          <button type="submit" id="documentosolvencia" class="btn btn bg-aqua color-palette">Actualizar</button>
                           <a href="<?php echo base_url(); ?>CEmpresa/descargarSolvencia/<?php echo $this->session->userdata('s_idusuario') ?>" class="btn btn-danger pull-right"><i class="fa fa-download margin-r-5"></i> Descargar</a>
                           </form>
                         </div>

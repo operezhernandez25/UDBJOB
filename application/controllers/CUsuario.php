@@ -355,7 +355,7 @@ class CUsuario extends CI_Controller
   public function modificarCV()
   {
     //Para el CV
-    $this->load->library('upload');
+  //  $this->load->library('upload');
     if (!empty($_FILES['modCV']['name']))
     {
         // Configuración para el Archivo
@@ -370,6 +370,13 @@ class CUsuario extends CI_Controller
         {
             $data = $this->upload->data();
             $cv = $data['file_name'];
+            $this->db->where('idUsuario',$this->session->userdata('s_idusuario'));
+            $this->db->update('usuario',array('curriculum'=>$cv));
+            if($this->db->affected_rows()>0)
+            {
+              $this->session->set_flashdata('mensaje',"Curriculum Vitae actualizado!");
+              $this->session->set_flashdata('error',false);
+            }
         }
         else
         {
@@ -384,16 +391,9 @@ class CUsuario extends CI_Controller
       $this->session->set_flashdata('error',true);
     }
 
-		  $this->db->where('idUsuario',$this->session->userdata('s_idusuario'));
-		  $this->db->update('usuario',array('curriculum'=>$cv));
-		  if($this->db->affected_rows()>0)
-      {
-        $this->session->set_flashdata('mensaje',"Curriculum Vitae actualizado!");
-    	  $this->session->set_flashdata('error',false);
+		  
       	redirect('perfil','refresh');
-		  }else{
-      	redirect('perfil','refresh');
-		  }
+		 
   }
 
   public function modificarDUI()

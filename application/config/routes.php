@@ -72,3 +72,5 @@ $route["propuesta/(:num)"]='CUsuario/verPropuesta/$1';
 $route["postularme/(:num)"]='CUsuario/postularUsuario/$1';
 //Empresas
 $route['conocimientos'] = 'CEmpresa/verConocimientos';
+$route["usuarioSitio"]="CEmpresa/usuarioSitio";
+$route["verPerfilUsuario/(:num)"]="CEmpresa/verPerfilUsuario/$1";
