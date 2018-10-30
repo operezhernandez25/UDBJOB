@@ -5,7 +5,7 @@
     <div class="pull-right hidden-xs">
       <b>Versión</b> 1.0.0
     </div>
-    <strong>Copyright &copy; 2018 <a href="https://adminlte.io">CompuTrabajo</a>.</strong> Derechos reservados
+    <strong>Copyright &copy; 2018 <a href="https://adminlte.io">Empleo<strong>SV</strong></a>.</strong> Derechos reservados
   </footer>
   <script type="text/javascript">
   var baseurl="<?php echo base_url(); ?>";

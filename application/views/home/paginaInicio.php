@@ -12,7 +12,7 @@
   <!-- Ionicons -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>public/bower_components/Ionicons/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="<?php echo base_url(); ?>public/dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>public/dist/css/AdminLTE.css">
   <!-- iCheck -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>public/plugins/iCheck/square/blue.css">
 
@@ -29,11 +29,41 @@
 <body  style="background-image: url('<?php echo base_url(); ?>public/img/login1.png'); background-repeat: no-repeat;background-size: cover;">
 
 <div class="container">
-  <div class="row"><br><br><br>
+  <div class="row"><br><br><br><br><br><br><br><br>
     <div class="col-md-2">
     </div>
-    <div class="col-md-8" style="background-color: aliceblue">
-      das
+    <div class="col-md-8" >
+      <div class="box box-primary">
+        <div class="box-header">
+
+        </div>
+        <div class="box-body">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="thumbnail">
+                  <center><i class="fa fa-fw fa-users text-green"></i></center>
+                <div class="caption">
+                  <center><h3>LOGIN EMPRESA</h3></center>
+                  
+                  <p><a href="<?php echo base_url(); ?>loginEmpresarial" class="btn btn-primary btn-block" role="button">Entrar</a> </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="thumbnail">
+                  
+                  <center><i class="fa fa-fw fa-user text-orange"></i></center>
+                <div class="caption">
+                  <center><h3>LOGIN USUARIOS</h3></center>
+                  
+                  <p><a href="<?php echo base_url(); ?>login" class="btn btn-primary btn-block" role="button">Entrar</a> </p>
+                </div>
+              </div>
+            </div>
+           
+          </div>
+        </div>
+      </div>
     </div>
     <div class="col-md-2">
     </div>
@@ -47,3 +77,10 @@
 <script src="<?php echo base_url(); ?>public/plugins/iCheck/icheck.min.js"></script>
 </body>
 </html>
+
+
+<style>
+  .fa {
+    font-size: 90px;
+}
+</style>
