@@ -65,17 +65,23 @@
                                                             echo 'Pendiente de revisión';
                                                             break;
                                                         case 1: 
-                                                            echo 'Perfil visto';
+                                                            echo 'Preseleccionado';
                                                             break;
                                                         case 2:
-                                                            echo 'Chat Habilitado';
+                                                            echo 'Pruebas Realizadas';
                                                             break;
                                                         case 3:
-                                                            echo 'Entrevista por VideoLlamada Realizada';
+                                                            echo 'Entrevista Realizada';
                                                             break;
                                                         case 4:
-                                                            echo 'Proceso finalizado';
-                                                            break;        
+                                                            echo 'Valoración y decisión';
+                                                            break;  
+                                                        case 5:
+                                                            echo 'Contratado';
+                                                            break;
+                                                        case 6  :
+                                                            echo 'Contratado';
+                                                            break;             
                                                     }
                                                 ?>
                                                 </strong>

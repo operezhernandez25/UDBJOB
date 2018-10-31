@@ -37,11 +37,11 @@
 
                     ?>
                  <span class="badge bg-blue"><?php switch($pos->estado){
-                    case 0:echo 'Postulación enviada'; break;
-                    case 1: echo 'Perfil Visto'; break;
-                    case 2: echo 'Chat habilitado'; break;
-                    case 3: echo 'VideoLlamada realizada'; break;
-                    case 4: echo 'Seguimiento finalizado'; break;
+                    case 0:echo 'Postulación'; break;
+                    case 1: echo 'Preselección'; break;
+                    case 2: echo 'Pruebas'; break;
+                    case 3: echo 'Entrevista'; break;
+                    case 4: echo 'Valoración y decisión'; break;
                     case 5: echo 'Seguimiento finalizado'; break;
                     } 
                     

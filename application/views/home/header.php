@@ -65,7 +65,7 @@
  ?>
 
 </head>
-<body class="hold-transition skin-green layout-boxed sidebar-mini">
+<body class="hold-transition skin-purple layout-boxed sidebar-mini">
 <script type="text/javascript">
           var baseurl="<?php echo base_url(); ?>";
 

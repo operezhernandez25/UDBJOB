@@ -84,7 +84,7 @@
                            ?>
                             <a href="<?php echo base_url(); ?>CEmpresa/contactarPostulante/<?php
                             echo $datosUsuario->idUsuario.'/'.$idPropuesta;?>"
-                             class="btn btn-primary btn-block">Contactar</a>
+                             class="btn btn-primary btn-block">Preselección</a>
                              <?php
                             }
                              ?>
@@ -92,12 +92,20 @@
                             if($estadoPostulacion->estado==2){
                            ?>
                             <button  data-toggle="modal" data-target="#modalSkype"
-                             class="btn btn-warning btn-block">Entrevistar por Skype realizada</button>
+                             class="btn btn-warning btn-block">Pruebas Finalizadas</button>
                              <?php
                             }
                              ?>
                              <?php
                             if($estadoPostulacion->estado==3){
+                           ?>
+                            <button  data-toggle="modal" data-target="#modalSkype"
+                             class="btn btn-warning btn-block">Entrevista Realizada</button>
+                             <?php
+                            }
+                             ?>
+                             <?php
+                            if($estadoPostulacion->estado==4){
                            ?>
                             <button  data-toggle="modal" data-target="#modalFinal"
                              class="btn btn-danger btn-block">Finalizar Proceso</button>
@@ -274,8 +282,27 @@
   </div>
 </div>
 
+<!-- Modal Entrevista realizada-->
+<div class="modal fade" id="modalSkype" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Mensaje de confirmación</h4>
+      </div>
+      <div class="modal-body">
+        Al dar click en aceptar se dará por concluida la etapa
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <a href="<?php echo base_url(); ?>CEmpresa/skypeFinalizado/<?php
+                            echo $datosUsuario->idUsuario.'/'.$idPropuesta;?>" class="btn btn-primary">Aceptar</a>
+      </div>
+    </div>
+  </div>
+</div>
 
-<!-- Modal -->
+<!-- Modal final-->
 <div class="modal fade" id="modalFinal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">

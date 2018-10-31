@@ -3,11 +3,12 @@ notas:
 *En una postulacion estos son los estados
 
 *0 : Postulado
-*1 : Perfil visto
-*2 : Contactar mediante chat
-*3 : Entrevista por videoLlamada Realizada
-*4 : Trabajo conseguido
-*5 : Rechazago
+*1 : Preselección
+*2 : Pruebas
+*3 : Entrevista
+*4 : Valoración y decisión
+*5 : Contratación	
+*6 : Rechazago
 
 
 
