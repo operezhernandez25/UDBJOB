@@ -6,6 +6,7 @@ class CUsuarioE extends CI_Controller
    {
     parent::__construct();
     $this->load->model('MUsuarioE');
+    $this->load->model('MMensajes');
     if (!$this->session->userdata('s_idusuario')) {
       redirect('login');
     }
@@ -25,8 +26,10 @@ class CUsuarioE extends CI_Controller
           $data["error"]=$error;
       }
       $data["usuariose"]=$this->MUsuarioE->getUsuariosE($this->session->userdata('s_idempresa'));
+      $dataNav["mensajesPendientes"]=$this->MMensajes->obtenerMensajesEmpresa();
+        $dataNav["usuarioSinVer"]=$this->MMensajes->obtenerusuariosSinVer();
       $this->load->view('home/header');
-      $this->load->view('home/asidenav');
+      $this->load->view('home/asidenav',$dataNav);
       $this->load->view('empresa/vUsuariosE',$data);
       $this->load->view('home/footer');
    }

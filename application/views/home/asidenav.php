@@ -159,14 +159,33 @@
           ?>
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<?php echo base_url(); ?>/public/photos/<?php echo $this->session->userdata("s_Foto"); ?>" class="user-image" alt="User Image">
+            <?php
+              if($this->session->userdata("s_tipo")==0)
+              {
+                ?>
+              <img src="<?php echo base_url(); ?><?php echo $this->session->userdata("s_Foto"); ?>" class="user-image" alt="User Image">
+                <?php
+              }else{ ?>
+                <img src="<?php echo base_url(); ?>/public/photos/<?php echo $this->session->userdata("s_Foto"); ?>" class="user-image" alt="User Image">
+              <?php
+              }
+              ?>
               <span class="hidden-xs"><?php echo $this->session->userdata('s_usuario'); ?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="<?php echo base_url(); ?>/public/photos/<?php echo $this->session->userdata("s_Foto"); ?>" class="img-circle" alt="User Image">
-
+              <?php
+              if($this->session->userdata("s_tipo")==0)
+              {
+                ?>
+              <img src="<?php echo base_url(); ?><?php echo $this->session->userdata("s_Foto"); ?>" class="user-image" alt="User Image">
+                <?php
+              }else{ ?>
+                <img src="<?php echo base_url(); ?>/public/photos/<?php echo $this->session->userdata("s_Foto"); ?>" class="user-image" alt="User Image">
+              <?php
+              }
+              ?>
                 <p>
                   <?php echo $this->session->userdata('s_usuario'); ?>
                   <small><?php echo date('l d - M - Y h:i').'<br>'; ?></small>
@@ -200,8 +219,17 @@
 
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?php echo base_url(); ?>/public/photos/<?php echo $this->session->userdata("s_Foto"); ?>" class="img-circle" alt="User Image">
-        </div>
+        <?php
+              if($this->session->userdata("s_tipo")==0)
+              {
+                ?>
+              <img src="<?php echo base_url(); ?><?php echo $this->session->userdata("s_Foto"); ?>" class="user-image" alt="User Image">
+                <?php
+              }else{ ?>
+                <img src="<?php echo base_url(); ?>/public/photos/<?php echo $this->session->userdata("s_Foto"); ?>" class="user-image" alt="User Image">
+              <?php
+              }
+              ?></div>
         <div class="pull-left info">
           <p><?php echo $this->session->userdata("s_usuario"); ?></p>
           <a><i class="fa fa-circle text-success"></i> Online</a>

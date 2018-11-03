@@ -46,7 +46,7 @@
     }
 
     public function ingresarEmpresa($email,$pass){
-      $this->db->select('idUsuarioEmpresa, nombre, apellido, idEmpresa, tipoUsuario,administrador');
+      $this->db->select('idUsuarioEmpresa, nombre, apellido, idEmpresa, tipoUsuario,administrador,img');
       $this->db->from('usuarioEmpresa');
       $this->db->where('correoElectronico',$email);
       $this->db->where('password',$pass);
@@ -62,6 +62,7 @@
           's_idempresa'=>$r->idEmpresa,
           's_tipo'=> 0,
           's_admin' => $r->tipoUsuario,
+          's_Foto'=>$r->img,
           's_administrador'=>$r->administrador
         );
 
