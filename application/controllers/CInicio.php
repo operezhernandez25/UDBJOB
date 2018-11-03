@@ -147,7 +147,7 @@ class cInicio extends CI_Controller
       
         $this->load->view('home/header');
         $this->load->view('home/asidenav',$dataNav);
-        $this->load->view('vInicioE',$data);
+        $this->load->view('vinicioE',$data);
         $this->load->view('home/footer');
     }
   }
