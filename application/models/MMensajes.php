@@ -37,6 +37,19 @@ class MMensajes extends CI_Model
     }
 
 
+    function obtenerusuariosSinVer()
+    {
+        $this->db->select("propuesta.idPropuesta,propuesta.titulo,propuesta.fecha,count(propuesta.idPropuesta) contador");
+        $this->db->from("postulaciones");
+        $this->db->join("propuesta","propuesta.idPropuesta = postulaciones.idPropuesta");
+        $this->db->join("usuarioEmpresa","usuarioEmpresa.idUsuarioEmpresa = propuesta.idUsuarioEmpresa");
+        $this->db->where("postulaciones.estado",0);
+        $this->db->where("usuarioEmpresa.idEmpresa",$this->session->userdata("s_idempresa"));
+        $this->db->group_by("propuesta.idPropuesta");
+        return $this->db->get()->result();
+    }
+
+
 }
 
 

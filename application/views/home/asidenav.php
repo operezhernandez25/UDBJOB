@@ -90,7 +90,73 @@
                 }
               ?>
             </ul>
+            
           </li>
+
+          <?php 
+            if($this->session->userdata('s_tipo')==0)
+            {
+              ?>
+<li class="dropdown notifications-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+              <i class="fa fa-bell-o"></i>
+              
+                                              <?php 
+                                              if($this->session->userdata("s_tipo")==0)
+                                              echo '<span class="label label-warning">'.
+                                                    count($usuarioSinVer).
+                                                    '</span>';
+                                             ?>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="header">Tienes  <?php 
+                                              if($this->session->userdata("s_tipo")==0)
+                                              echo 
+                                                    count($usuarioSinVer);
+                                              else echo '0';      
+                                             ?>
+                                             Postulaciones Pendientes</li>
+              <li>
+              <li>
+                <!-- inner menu: contains the actual data -->
+                <ul class="menu">
+                  <?php 
+                  if(isset($usuarioSinVer))
+                  foreach($usuarioSinVer as $men)
+                  {
+                    ?>
+                  <li><!-- start message -->
+                    <?php
+                      if($this->session->userdata("s_tipo")==0)
+                      {
+                        ?>
+                        <a href="<?php echo base_url() ?>CEmpresa/verPropuesta/<?php echo $men->idPropuesta; ?>/<?php echo $men->idPropuesta; ?>">
+                        <span class="label label-primary"> <?php echo $men->contador;  ?></span><?php echo $men->titulo ?> 
+                     
+                        <?php
+                      }
+                    ?>  
+                    
+                      
+                    
+                     
+                    </a>
+                  </li>    
+                    <?php
+                  }
+
+                  ?>
+                  
+                </ul>
+              </li>
+              </li>
+              <li class="footer"><a href="<?php echo base_url(); ?>">Ver todas mis propuestas</a></li>
+            </ul>
+          </li>
+              <?php
+            }
+                
+          ?>
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="<?php echo base_url(); ?>/public/photos/<?php echo $this->session->userdata("s_Foto"); ?>" class="user-image" alt="User Image">

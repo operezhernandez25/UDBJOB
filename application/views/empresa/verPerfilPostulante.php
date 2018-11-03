@@ -80,7 +80,7 @@
                             <a href="<?php echo base_url(); ?>CEmpresa/descargarCurriculum/<?php echo $datosUsuario->idUsuario ?>" class="btn btn-success btn-block">Descargar Curriculum</a>
                            
                            <?php
-                            if($estadoPostulacion->estado==1){
+                            if($estadoPostulacion->estado==0){
                            ?>
                             <a href="<?php echo base_url(); ?>CEmpresa/contactarPostulante/<?php
                             echo $datosUsuario->idUsuario.'/'.$idPropuesta;?>"
@@ -89,18 +89,26 @@
                             }
                              ?>
                              <?php
+                            if($estadoPostulacion->estado==1){
+                           ?>
+                            <button  data-toggle="modal" data-target="#pruebaFinalizadas"
+                             class="btn btn-warning btn-block">Pruebas Finalizadas</button>
+                             <?php
+                            }
+                             ?>
+                             <?php
                             if($estadoPostulacion->estado==2){
                            ?>
                             <button  data-toggle="modal" data-target="#modalSkype"
-                             class="btn btn-warning btn-block">Pruebas Finalizadas</button>
+                             class="btn btn-warning btn-block">Entrevista Realizada</button>
                              <?php
                             }
                              ?>
                              <?php
                             if($estadoPostulacion->estado==3){
                            ?>
-                            <button  data-toggle="modal" data-target="#modalSkype"
-                             class="btn btn-warning btn-block">Entrevista Realizada</button>
+                            <button  data-toggle="modal" data-target="#valoracionyde"
+                             class="btn btn-primary btn-block">Valoración y decisión</button>
                              <?php
                             }
                              ?>
@@ -263,7 +271,7 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="modalSkype" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="pruebaFinalizadas" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -275,7 +283,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-        <a href="<?php echo base_url(); ?>CEmpresa/skypeFinalizado/<?php
+        <a href="<?php echo base_url(); ?>CEmpresa/pruebaFinalizadas/<?php
                             echo $datosUsuario->idUsuario.'/'.$idPropuesta;?>" class="btn btn-primary">Aceptar</a>
       </div>
     </div>
@@ -301,7 +309,27 @@
     </div>
   </div>
 </div>
+valoracionyde
 
+<!-- Modal Entrevista realizada-->
+<div class="modal fade" id="valoracionyde" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Mensaje de confirmación</h4>
+      </div>
+      <div class="modal-body">
+        Al dar click en aceptar se dará por concluida la etapa
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <a href="<?php echo base_url(); ?>CEmpresa/valoracionydeFin/<?php
+                            echo $datosUsuario->idUsuario.'/'.$idPropuesta;?>" class="btn btn-primary">Aceptar</a>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- Modal final-->
 <div class="modal fade" id="modalFinal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">

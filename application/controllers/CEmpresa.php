@@ -25,6 +25,7 @@ class CEmpresa extends CI_Controller
         $data["conocimientos"]=$this->db->get()->result();
 
         $dataNav["mensajesPendientes"]=$this->MMensajes->obtenerMensajesEmpresa();
+        $dataNav["usuarioSinVer"]=$this->MMensajes->obtenerusuariosSinVer();
         $this->load->view('home/header');
         $this->load->view('home/asidenav',$dataNav);
         $this->load->view('empresa/vnuevapropuesta',$data);
@@ -45,6 +46,7 @@ class CEmpresa extends CI_Controller
 
 
         $dataNav["mensajesPendientes"]=$this->MMensajes->obtenerMensajesEmpresa();
+        $dataNav["usuarioSinVer"]=$this->MMensajes->obtenerusuariosSinVer();
         $this->load->view('home/header');
         $this->load->view('home/asidenav',$dataNav);
        $this->load->view('empresa/vvermisPropuestas',$data);
@@ -96,6 +98,7 @@ class CEmpresa extends CI_Controller
         }
 
         $dataNav["mensajesPendientes"]=$this->MMensajes->obtenerMensajesEmpresa();
+        $dataNav["usuarioSinVer"]=$this->MMensajes->obtenerusuariosSinVer();
         $this->load->view('home/header');
         $this->load->view('home/asidenav',$dataNav);
         $this->load->view("empresa/verPropuesta",$data);
@@ -208,6 +211,7 @@ class CEmpresa extends CI_Controller
         echo '<script> var idPostulacion="'.$data["estadoPostulacion"]->idPostulacion.'"</script>';
         
         $dataNav["mensajesPendientes"]=$this->MMensajes->obtenerMensajesEmpresa();
+        $dataNav["usuarioSinVer"]=$this->MMensajes->obtenerusuariosSinVer();
         $this->load->view('home/header');
         $this->load->view('home/asidenav',$dataNav);
         $this->load->view("empresa/verPerfilPostulante",$data);
@@ -246,6 +250,23 @@ class CEmpresa extends CI_Controller
         redirect('/CEmpresa/perfilPostulante/'.$idUsuario.'/'.$idPropuesta,'refresh');
     }
 
+    function pruebaFinalizadas($idUsuario,$idPropuesta)
+    {
+        //obtenes el id de la postulacion
+        $this->db->select("idPostulacion");
+        $this->db->from("postulaciones");
+        $this->db->where("idUsuario",$idUsuario);
+        $this->db->where("idPropuesta",$idPropuesta);
+        $data["idPostulacion"]=$this->db->get()->result()[0];
+
+        $this->db->where("idUsuario",$idUsuario);
+        $this->db->where("idPropuesta",$idPropuesta);
+        $this->db->update("postulaciones",array('estado'=>3));
+
+        $data=array('idpostulacion'=>$data["idPostulacion"]->idPostulacion,'texto'=>'VideoLlamada realizada','fecha'=>date('Y-m-d h:i:s'));
+        $this->db->insert("postulacionEventos",$data);
+        redirect('/CEmpresa/perfilPostulante/'.$idUsuario.'/'.$idPropuesta,'refresh');
+    }
 
     function skypeFinalizado($idUsuario,$idPropuesta)
     {
@@ -258,9 +279,27 @@ class CEmpresa extends CI_Controller
 
         $this->db->where("idUsuario",$idUsuario);
         $this->db->where("idPropuesta",$idPropuesta);
-        $this->db->update("postulaciones",array('estado'=>3));
+        $this->db->update("postulaciones",array('estado'=>4));
         
         $data=array('idpostulacion'=>$data["idPostulacion"]->idPostulacion,'texto'=>'VideoLlamada realizada','fecha'=>date('Y-m-d h:i:s'));
+        $this->db->insert("postulacionEventos",$data);
+        redirect('/CEmpresa/perfilPostulante/'.$idUsuario.'/'.$idPropuesta,'refresh');
+    }
+
+    function valoracionydeFin($idUsuario,$idPropuesta)
+    {
+        //obtenes el id de la postulacion
+        $this->db->select("idPostulacion");
+        $this->db->from("postulaciones");
+        $this->db->where("idUsuario",$idUsuario);
+        $this->db->where("idPropuesta",$idPropuesta);
+        $data["idPostulacion"]=$this->db->get()->result()[0];
+
+        $this->db->where("idUsuario",$idUsuario);
+        $this->db->where("idPropuesta",$idPropuesta);
+        $this->db->update("postulaciones",array('estado'=>5));
+        
+        $data=array('idpostulacion'=>$data["idPostulacion"]->idPostulacion,'texto'=>'Valoracion realizada','fecha'=>date('Y-m-d h:i:s'));
         $this->db->insert("postulacionEventos",$data);
         redirect('/CEmpresa/perfilPostulante/'.$idUsuario.'/'.$idPropuesta,'refresh');
     }
@@ -276,7 +315,7 @@ class CEmpresa extends CI_Controller
 
         $this->db->where("idUsuario",$idUsuario);
         $this->db->where("idPropuesta",$idPropuesta);
-        $this->db->update("postulaciones",array('estado'=>4));
+        $this->db->update("postulaciones",array('estado'=>5));
         
         $data=array('idpostulacion'=>$data["idPostulacion"]->idPostulacion,'texto'=>'Trabajo realizado','fecha'=>date('Y-m-d h:i:s'));
         $this->db->insert("postulacionEventos",$data);
@@ -299,7 +338,7 @@ class CEmpresa extends CI_Controller
 
         $this->db->where("idUsuario",$idUsuario);
         $this->db->where("idPropuesta",$idPropuesta);
-        $this->db->update("postulaciones",array('estado'=>5));
+        $this->db->update("postulaciones",array('estado'=>6));
         
         $data=array('idpostulacion'=>$data["idPostulacion"]->idPostulacion,'texto'=>'Trabajo realizado','fecha'=>date('Y-m-d h:i:s'));
         $this->db->insert("postulacionEventos",$data);
@@ -331,9 +370,10 @@ class CEmpresa extends CI_Controller
       $this->db->from("conocimientos");
       $this->db->where("verificado",0);
       $data["conocimientos"] = $this->db->get()->result();
-
+      $dataNav["mensajesPendientes"]=$this->MMensajes->obtenerMensajesEmpresa();
+        $dataNav["usuarioSinVer"]=$this->MMensajes->obtenerusuariosSinVer(); 
       $this->load->view('home/header');
-      $this->load->view('home/asidenav');
+      $this->load->view('home/asidenav',$dataNav);
       $this->load->view("empresa/verConocimientos", $data);
       $this->load->view('home/footer');
     }
@@ -410,8 +450,11 @@ class CEmpresa extends CI_Controller
     $this->db->select("idUsuario,concat(nombres,' ',apellidos) nombre,fechaNacimiento,email,pais,departamento,estado");
     $this->db->from("usuario");
     $data["usuarios"]=$this->db->get()->result();
+    $dataNav["mensajesPendientes"]=$this->MMensajes->obtenerMensajesEmpresa();
+        $dataNav["usuarioSinVer"]=$this->MMensajes->obtenerusuariosSinVer();
     $this->load->view('home/header');
-    $this->load->view('home/asidenav');
+    $this->load->view('home/asidenav',$dataNav);
+
     $this->load->view("empresa/versuariosSitio", $data);
     $this->load->view('home/footer');
   }
@@ -423,8 +466,10 @@ class CEmpresa extends CI_Controller
     $this->db->from("usuario");
     $this->db->where("idUsuario",$id);
     $data["datosUsuario"]=$this->db->get()->result()[0];
+    $dataNav["mensajesPendientes"]=$this->MMensajes->obtenerMensajesEmpresa();
+        $dataNav["usuarioSinVer"]=$this->MMensajes->obtenerusuariosSinVer();
     $this->load->view('home/header');
-    $this->load->view('home/asidenav');
+    $this->load->view('home/asidenav',$dataNav);
     $this->load->view("empresa/verPerfilUsuario-Admin", $data);
     $this->load->view('home/footer');
   }

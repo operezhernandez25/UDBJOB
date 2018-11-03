@@ -41,7 +41,7 @@
           <div class="row">
             <div class="col-md-6">
               <div class="thumbnail">
-                  <center><i class="fa fa-fw fa-users text-green"></i></center>
+                  <img width="250" height="250" src="<?php echo base_url(); ?>public/img/icono-empresa2.png" alt="">
                 <div class="caption">
                   <center><h3>LOGIN EMPRESA</h3></center>
                   
@@ -52,7 +52,7 @@
             <div class="col-md-6">
               <div class="thumbnail">
                   
-                  <center><i class="fa fa-fw fa-user text-orange"></i></center>
+                <img width="250" height="250" src="<?php echo base_url(); ?>public/img/icono-usuario.png" alt="">
                 <div class="caption">
                   <center><h3>LOGIN USUARIOS</h3></center>
                   

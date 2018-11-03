@@ -112,8 +112,11 @@ class cInicio extends CI_Controller
       }
 
       $dataNav["mensajesPendientes"]=$this->MMensajes->obtenerMensajesUsuario();
+      
+   
       $this->load->view('home/header');
       $this->load->view('home/asidenav',$dataNav);
+      
       $this->load->view('vInicio',$data);
       $this->load->view('home/footer');
     }else
@@ -139,7 +142,9 @@ class cInicio extends CI_Controller
        $data["promedio"]= $this->db->query($query)->result();
         
        
-        $dataNav["mensajesPendientes"]=$this->MMensajes->obtenerMensajesUsuario();
+        $dataNav["mensajesPendientes"]=$this->MMensajes->obtenerMensajesEmpresa();
+        $dataNav["usuarioSinVer"]=$this->MMensajes->obtenerusuariosSinVer();
+      
         $this->load->view('home/header');
         $this->load->view('home/asidenav',$dataNav);
         $this->load->view('vInicioE',$data);

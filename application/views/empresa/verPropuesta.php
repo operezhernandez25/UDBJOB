@@ -80,7 +80,7 @@
                                                             echo 'Contratado';
                                                             break;
                                                         case 6  :
-                                                            echo 'Contratado';
+                                                            echo 'Rechazado';
                                                             break;             
                                                     }
                                                 ?>
