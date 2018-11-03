@@ -123,6 +123,17 @@ class CUsuario extends CI_Controller
         $this->load->view('home/footer');
    }
 
+   public function subirarchivos()
+   {
+    $dataNav["mensajesPendientes"]=$this->MMensajes->obtenerMensajesUsuario();
+    $data["d"]=0;
+    $this->load->view('home/header');
+    $this->load->view('home/asidenav',$dataNav);
+    $this->load->view("usuario/subirArchivo");
+    $this->load->view('home/footer');
+   }
+
+
    public function postularUsuario($idPropuesta)
    {
         $idUsuario= $this->session->userdata("s_idusuario");
@@ -590,6 +601,41 @@ class CUsuario extends CI_Controller
 		  }else{
       	redirect('perfil','refresh');
 		  }
+  }
+
+
+  public function subirarchivo()
+  {
+  
+    $target_dir = "uploads/userfiles/";
+    $nombrearchivo= microtime(true).'.'.pathinfo($_FILES["file"]["name"], PATHINFO_EXTENSION);
+    $nombrereal=$_FILES["file"]["name"];
+    $target_file = $target_dir.$nombrearchivo;
+
+    if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
+      $data=array(
+                  'idusuario'=>$this->session->userdata('s_idusuario'),
+                  'nombrearchivo'=>$nombrearchivo,
+                  'realn'=>$nombrereal
+      );
+      $this->db->insert("archivosUsuarios",$data);
+
+    }
+  }
+  public function mostrararchivosusuario()
+  {
+    $id =$this->session->userdata("s_idusuario");
+    $this->db->select("idarchivo,idusuario,nombrearchivo,realn");
+    $this->db->from("archivosUsuarios");
+    $this->db->where("idusuario",$id);
+    echo json_encode($this->db->get()->result());
+  }
+
+  public function descargarArchivo($id,$realn)
+  {
+    $ext = pathinfo($id, PATHINFO_EXTENSION);
+    force_download($realn,file_get_contents('uploads/userfiles/'.$id), NULL);
+    redirect('CUsuario/subirarchivos','refresh');
   }
 
 }

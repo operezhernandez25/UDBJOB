@@ -259,6 +259,11 @@
               <i class="glyphicon glyphicon-list-alt"></i> <span>Ver mis postulaciones</span>
             </a>
         </li>
+        <li >
+            <a href="<?php echo base_url(); ?>index.php/CUsuario/subirarchivos">
+              <i class="glyphicon glyphicon-list-alt"></i> <span>Agregar Archivos</span>
+            </a>
+        </li>
        
 
         <?php } ?>

@@ -1,0 +1,15 @@
+<!-- Message to the right -->
+                                    <div class="direct-chat-msg right">
+                                      <div class="direct-chat-info clearfix">
+                                        <span class="direct-chat-name pull-right">Sarah Bullock</span>
+                                        <span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
+                                      </div>
+                                      <!-- /.direct-chat-info -->
+                                      <img class="direct-chat-img" src="http://pngimage.net/wp-content/uploads/2018/06/usuario-icono-png.png" alt="message user image">
+                                      <!-- /.direct-chat-img -->
+                                      <div class="direct-chat-text">
+                                        You better believe it!
+                                      </div>
+                                      <!-- /.direct-chat-text -->
+                                    </div>
+                                    <!-- /.direct-chat-msg -->

@@ -89,6 +89,9 @@
 <script src="<?php echo base_url(); ?>public/dist/js/push.min.js"></script>
 
 <script src="<?php echo base_url(); ?>public/dist/js/list.min.js"></script>
+
+
+<script src="<?php echo base_url(); ?>public/dist/js/dropzone.js"></script>
 <script>
 var options = {
     valueNames: [ 'titulo','jornada','salario','fecha'],page: 5,
@@ -318,6 +321,53 @@ $(document).ready(function() {
 
 <?php if($this->uri->segment(1)=='CInicio') { ?>
 <script src="<?php echo base_url(); ?>public/dist/js/notificaciones.js"></script>
+
+<?php } ?>
+
+<?php if($this->uri->segment(1)=='CUsuario' && $this->uri->segment(2)=='subirarchivos') { ?>
+<script >
+
+ let prueba=$("#myAwesomeDropzone");
+ Dropzone.options.myAwesomeDropzone = {
+  paramName: "file", // The name that will be used to transfer the file
+  maxFilesize: 2, // MB
+ 
+  success:function()
+  {
+    cargarListado();
+  }
+  
+};
+cargarListado();
+function cargarListado()
+{
+  $.ajax({
+            url: baseurl+'index.php/CUsuario/mostrararchivosusuario',
+            method: 'post',
+            beforeSend: function(){
+                $("#boxarchivos").append(
+                                '<div class="overlay">'+
+                                  '<i class="fa fa-refresh fa-spin"></i>'+
+                                '</div>');
+            },
+            success: function(data) {
+                console.log(data);
+                data=JSON.parse(data);
+                $("#listaarchivos").empty()
+                data.forEach(element => {
+                  $("#listaarchivos").append('<li class="list-group-item"><div class="nombre">'+element.realn+'</div><a href="<?php echo base_url(); ?>CUsuario/descargarArchivo/'+element.nombrearchivo+'/'+element.realn+'" >descargar</a></li>');
+                });
+                
+
+                let listaArchivos=new List('lista-archivos',{
+                  valueNames:['nombre'],page: 4,pagination: true
+
+                });
+                $(".overlay").remove();
+            }
+        });
+}
+</script>
 
 <?php } ?>
 
