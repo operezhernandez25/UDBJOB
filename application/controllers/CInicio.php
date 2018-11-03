@@ -6,6 +6,9 @@ class cInicio extends CI_Controller
    {
     parent::__construct();
     $this->load->model("MMensajes");
+    if (!$this->session->userdata('s_idusuario')) {
+      redirect('login');
+    }
    }
 
    public function index()
