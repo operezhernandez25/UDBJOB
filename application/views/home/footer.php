@@ -311,6 +311,12 @@ $(document).ready(function() {
 <!-- SCRIPT para el chat -->
 <?php if($this->uri->segment(1)=='CEmpresa' && $this->uri->segment(2)=='perfilPostulante') { ?>
 <script src="<?php echo base_url(); ?>public/dist/js/chat.js"></script>
+<script>
+  let listaArchivos=new List('listaArchivos',{
+                  valueNames:['nombre'],page: 4,pagination: true
+
+                });
+</script>
 
 <?php } ?>
 
@@ -364,6 +370,7 @@ function cargarListado()
 
                 });
                 $(".overlay").remove();
+               
             }
         });
 }

@@ -149,6 +149,35 @@
                         </ul>
                     </div>
                 </div>
+                <div class="box box-primary">
+                    <div class="box-header">
+                            Archivos Subidos
+                    </div>
+                    <div class="box-body">
+                            <div id="listaArchivos">
+                                <div class="form-group">
+                                    <input  class=" search form-control" placeholder="Search" />
+                                </div>
+                                <ul class="list list-group" id="listadodearchivos">
+                                <?php 
+                                    if(isset($archivosSubidos))
+                                    {
+                                        foreach($archivosSubidos as $archiv)
+                                        {
+                                            ?>
+                                            <li class="list-group-item">
+                                                <div class="nombre"> <?php echo $archiv->realn ?></div>
+                                                <a href="<?php echo base_url(); ?>CUsuario/descargarArchivo/<?php echo $archiv->nombrearchivo?>/<?php echo $archiv->realn ?>" >descargar</a>
+                                            </li>
+                                            <?php
+                                        }
+                                    }
+                                ?>
+                                </ul>
+                                <ul class="pagination"></ul>
+                            </div>
+                    </div>
+                </div>
             </div>
             
         </div>
@@ -258,9 +287,9 @@
         <style>
     .chat-caja {
    position: fixed;
-   z-index:4;
+   z-index:41000;
   
-   right: 0;
+   left: 0;
    bottom: 0;
    padding: 10px;
    margin: 0 auto;

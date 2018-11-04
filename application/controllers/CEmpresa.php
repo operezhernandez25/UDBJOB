@@ -205,8 +205,12 @@ class CEmpresa extends CI_Controller
             $this->db->update("mensajes",array("visto"=>1));
         }
 
-        //Poniendo en visto todos los mensajes
-      //  $this->db->
+   
+        $this->db->select("idarchivo,idusuario,nombrearchivo,realn");
+        $this->db->from("archivosUsuarios");
+        $this->db->where("idusuario",$id);
+        $data["archivosSubidos"]=$this->db->get()->result(); 
+
 
         echo '<script> var idPostulacion="'.$data["estadoPostulacion"]->idPostulacion.'"</script>';
         
