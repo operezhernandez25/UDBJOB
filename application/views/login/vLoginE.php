@@ -2,7 +2,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>TrabajoSV | Log in</title>
+  <title>EmpleoSV | Log in</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -29,7 +29,7 @@
 <body class="hold-transition login-page" style="background-image: url('<?php echo base_url(); ?>public/img/login2.png'); background-repeat: no-repeat;background-size: cover;">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>Trabajo</b>SV</a>
+    <a href="../../index2.html"><b>Empleo</b>SV</a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
@@ -54,7 +54,7 @@
       </div>
     </form>
     <a href="<?php echo base_url(); ?>login" class="text-center">Ingresar como usuario,</a><br>
-    <a href="<?php echo base_url(); ?>" class="text-center">Registrarte en TrabajoSV</a><br>
+    <a href="<?php echo base_url(); ?>" class="text-center">Registrarte en EmpleoSV</a><br>
     <a href="<?php echo base_url(); ?>" class="text-center">Registrarte como empresa.</a>
 
     <?php

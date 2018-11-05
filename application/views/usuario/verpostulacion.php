@@ -90,7 +90,7 @@
                                     
                                         <div class="input-group">
                                         <?php 
-                                        if($postulacion->estado<3)
+                                        if($postulacion->estado<5)
                                         { ?>
                                        
                                         <input type="text" autocomplete="off" name="message" id="MensajeEnviar" placeholder="Escribe un mensaje ..." class="form-control">
