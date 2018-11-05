@@ -218,7 +218,7 @@ class MUsuarioE extends CI_Model
             'error'=>true,
             'mensaje'=>'Faltan datos');
        }
-       $datos=array("img"=>'/uploads/usere/'.$nombreArchivo.'.jpg');
+       $datos=array("img"=>'uploads/usere/'.$nombreArchivo.'.jpg');
        $this->db->reset_query();
        $this->db->where("idUsuarioEmpresa",$id);
        $this->db->update("usuarioEmpresa",$datos);
@@ -240,7 +240,7 @@ class MUsuarioE extends CI_Model
             //decodificando la imagen
             $data = base64_decode($img);
             //Asignando nombre al archivo y la carpeta donde estara
-            $file =  'uploads/usere/'.$nombreArchivo.'.jpg';
+            $file =  './uploads/usere/'.$nombreArchivo.'.jpg';
             //guardando imagen
                 file_put_contents($file, $data);
             return array(
