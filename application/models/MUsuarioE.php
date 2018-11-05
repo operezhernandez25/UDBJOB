@@ -240,7 +240,7 @@ class MUsuarioE extends CI_Model
             //decodificando la imagen
             $data = base64_decode($img);
             //Asignando nombre al archivo y la carpeta donde estara
-            $file =  'uploads/usere/'.$nombreArchivo.'.jpg';
+            $file =  './uploads/usere/'.$nombreArchivo.'.jpg';
             //guardando imagen
                 file_put_contents($file, $data);
             return array(
