@@ -77,8 +77,10 @@
                         <img class=" img-responsive img-circle" src="<?php echo base_url(); ?>public/photos/<?php echo $datosUsuario->foto; ?>" alt="User profile picture">
                         <hr>
                         <p>
-                            <a href="<?php echo base_url(); ?>CEmpresa/descargarCurriculum/<?php echo $datosUsuario->idUsuario ?>" class="btn btn-success btn-block">Descargar Curriculum</a>
-                           
+                            <a href="<?php echo base_url(); ?>CEmpresa/descargarCurriculumMod/<?php echo $datosUsuario->idUsuario ?>" class="btn btn-success btn-block">Descargar Curriculum</a>
+                            <a href="<?php echo base_url(); ?>CEmpresa/descargarNITMod/<?php echo $datosUsuario->idUsuario ?>" class="btn btn-success btn-block">Descargar NIT</a>
+                            <a href="<?php echo base_url(); ?>CEmpresa/descargarDUIMod/<?php echo $datosUsuario->idUsuario ?>" class="btn btn-success btn-block">Descargar DUI</a>
+                            <a href="<?php echo base_url(); ?>CEmpresa/descargarSolvenciaMod/<?php echo $datosUsuario->idUsuario ?>" class="btn btn-success btn-block">Descargar Solvencia</a>
                            <?php
                             if($estadoPostulacion->estado==0){
                            ?>
@@ -338,7 +340,7 @@
     </div>
   </div>
 </div>
-valoracionyde
+
 
 <!-- Modal Entrevista realizada-->
 <div class="modal fade" id="valoracionyde" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
