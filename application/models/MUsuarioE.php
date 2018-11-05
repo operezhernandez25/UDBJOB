@@ -218,7 +218,7 @@ class MUsuarioE extends CI_Model
             'error'=>true,
             'mensaje'=>'Faltan datos');
        }
-       $datos=array("img"=>'uploads/usere/'.$nombreArchivo.'.jpg');
+       $datos=array("img"=>'/uploads/usere/'.$nombreArchivo.'.jpg');
        $this->db->reset_query();
        $this->db->where("idUsuarioEmpresa",$id);
        $this->db->update("usuarioEmpresa",$datos);

@@ -99,7 +99,7 @@ class CUsuarioE extends CI_Controller
 
    public function updateImagen()
    {
-    $imagen= $this->input->post("imgSend");
+    $imagen= $this->input->post("imagenGuardarMod");
     $nombreArchivo=$this->input->post("nombreMod");
     $id= $this->input->post("id");
     $respuesta=$this->MUsuarioE->updateImagen($id,$imagen,$nombreArchivo);
