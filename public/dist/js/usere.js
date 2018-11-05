@@ -313,7 +313,7 @@ $(document).ready(function()
         $.ajax({
             url: baseurl+'index.php/CUsuarioE/updateImagen',
             method: 'post',
-            data:{  imgSend:baseurlImg,
+            data:{  imagenGuardarMod:baseurlImg,
                     nombreMod:$("#nombreArchivoMod").val(),
                     id:$("#idModificar").val()},
             beforeSend: function(){
