@@ -33,7 +33,7 @@ class MUsuarioE extends CI_Model
       if($insert>0)
       {
           //guardando imagen
-          $nombreArchivo=$campos["img"];
+          $z=$campos["img"];
           $img = str_replace('data:image/png;base64,', '', $img);
           $img = str_replace('data:image/jpg;base64,', '', $img);
           $img = str_replace(' ', '+', $img);
@@ -236,7 +236,7 @@ class MUsuarioE extends CI_Model
             $img = str_replace('data:image/png;base64,', '', $img);
             $img = str_replace('data:image/jpg;base64,', '', $img);
             $img = str_replace(' ', '+', $img);
-            utf8_encode($img);
+           // utf8_encode($img);
             //decodificando la imagen
             $data = base64_decode($img);
             //Asignando nombre al archivo y la carpeta donde estara
