@@ -1543,7 +1543,7 @@ a:focus {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }
 .box.box-primary {
-  border-top-color: #D81B60;
+  border-top-color: rgb(27, 178, 216);
 }
 .box.box-info {
   border-top-color: #00c0ef;
@@ -1555,7 +1555,7 @@ a:focus {
   border-top-color: #f39c12;
 }
 .box.box-success {
-  border-top-color: #001F3F
+  border-top-color: rgb(36, 223, 11)
 }
 .box.box-default {
   border-top-color: #d2d6de;

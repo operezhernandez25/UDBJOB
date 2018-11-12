@@ -158,7 +158,13 @@ class cInicio extends CI_Controller
 
     public function paginaInicio()
     {
-      $this->load->view("home/paginaInicio");
+      if (!$this->session->userdata('s_idusuario')) {
+        redirect('inicio');
+      }else
+      {
+        $this->load->view("home/paginaInicio");
+      }
+      
     }
 
 }

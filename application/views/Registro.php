@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>EmpleoSV - Pagina de registro</title>
+  <title>Computrabajo - Pagina de registro</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -30,7 +30,7 @@
 <body class="hold-transition register-page" style="background-image: url('<?php echo base_url(); ?>public/img/login.png'); background-repeat: no-repeat;background-size: cover;">
 <div class="register-box" style="border: 3px solid #000000; width:60%">
   <div class="register-logo">
-    <a href="../../index2.html"><b>EMPLEO</b>SV</a>
+    <a href="#"><b>Computrabajo</b></a>
   </div>
 
   <div class="register-box-body">
@@ -64,7 +64,7 @@
             <select id="cmbNacionalidad" name="cmbNacionalidad" class="form-control selectpicker" data-live-search="true" required>
               <option value="" selected>Seleccione su Pais</option>
               <option value="AL">Albania</option>
-              <option value="DE">Alemania</option>
+              <option value="DE">Alem ania</option>
               <option value="AD">Andorra</option>
               <option value="AO">Angola</option>
               <option value="AI">Anguilla</option>
