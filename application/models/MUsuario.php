@@ -43,7 +43,7 @@ class MUsuario extends CI_Model
         'idConocimiento'=> $param['mcmbConocimientos'],
         'idNivel'=> 1
       );
-      $this->db->insert('usuarioConocimiento',$campos);
+      $this->db->insert('usuarioconocimiento',$campos);
       return $campos['idConocimiento'];
     }
 
@@ -51,7 +51,7 @@ class MUsuario extends CI_Model
     public function eliminarConocimiento($idP){
       $this->db->where('idUsuario',$this->session->userdata('s_idusuario'));
       $this->db->where('idConocimiento',$idP);
-      $this->db->delete('usuarioConocimiento');
+      $this->db->delete('usuarioconocimiento');
     }
 
     //ingresarConocimientoNew
@@ -70,7 +70,7 @@ class MUsuario extends CI_Model
         'idConocimiento'=> $lastid,
         'idNivel'=> 1
       );
-      $this->db->insert('usuarioConocimiento',$campos);
+      $this->db->insert('usuarioconocimiento',$campos);
 
       return $lastid;
     }

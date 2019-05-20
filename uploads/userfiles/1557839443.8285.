@@ -1,0 +1,11 @@
+Como configurar el servidor de mysql
+
+primero descargar
+ luego este comando
+docker run -d -p 3306:3306 --name=mysql-server --env="MYSQL_ROOT_PASSWORD=123456" mysql
+
+mysqld --default-authentication-plugin=mysql_native_password
+
+# Through container
+docker exec -ti mysql-server bash
+mysql -u root -p

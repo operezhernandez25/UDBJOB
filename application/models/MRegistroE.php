@@ -8,7 +8,7 @@ class MRegistroE extends CI_Model {
 
   public function registrar($data)
   {
-    return $this->db->insert("usuarioEmpresa",$data);
+    return $this->db->insert("usuarioempresa",$data);
   }
 
 	public function InsertEmpresa($data)

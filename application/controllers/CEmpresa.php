@@ -35,9 +35,9 @@ class CEmpresa extends CI_Controller
     function verMisPropuestas()
     {
         $this->db->select("idPropuesta,titulo,fecha,propuesta.estado,jornada,salario,propuesta.estado");
-        $this->db->join("usuarioEmpresa","usuarioEmpresa.idUsuarioEmpresa=propuesta.idUsuarioEmpresa");
+        $this->db->join("usuarioempresa","usuarioempresa.idUsuarioEmpresa=propuesta.idUsuarioempresa");
         $this->db->from("propuesta");
-        $this->db->where("usuarioEmpresa.idEmpresa",$this->session->userdata("s_idempresa"));
+        $this->db->where("usuarioempresa.idEmpresa",$this->session->userdata("s_idempresa"));
         
         $data["propuestas"]=$this->db->get()->result();
         
@@ -68,8 +68,8 @@ class CEmpresa extends CI_Controller
 
         //conocimientos
         $this->db->select("conocimientos.conocimientos,conocimientos.idConocimiento,idPropuesta");
-        $this->db->from("propuestaConocimiento");
-        $this->db->join("conocimientos",'conocimientos.idConocimiento=propuestaConocimiento.idConocimiento');
+        $this->db->from("propuestaconocimiento");
+        $this->db->join("conocimientos",'conocimientos.idConocimiento=propuestaconocimiento.idConocimiento');
         $this->db->where("idPropuesta",$id);
         $data["conocimientos"]=$this->db->get()->result();
 
@@ -130,7 +130,7 @@ class CEmpresa extends CI_Controller
                 'idConocimiento'=>$cono,
                 'idNivel'=>1
             );
-            $this->db->insert("propuestaConocimiento",$dataConocimiento);
+            $this->db->insert("propuestaconocimiento",$dataConocimiento);
         }
 
 
@@ -166,7 +166,7 @@ class CEmpresa extends CI_Controller
             $data["estadoPostulacion"]->estado=1;
           //  echo json_encode($data["estadoPostulacion"]);
             $datos=array('idpostulacion'=>$data["estadoPostulacion"]->idPostulacion,'texto'=>'Perfil Visto','fecha'=>date('Y-m-d h:i:s'));
-            $this->db->insert("postulacionEventos",$datos);
+            $this->db->insert("postulacioneventos",$datos);
         }
 
 
@@ -184,9 +184,9 @@ class CEmpresa extends CI_Controller
         $data["datosUsuario"]=$this->db->get()->result()[0];
 
         //Obteniendo conocimientos del usuario
-        $this->db->select("usuarioConocimiento.idConocimiento,conocimientos");
-        $this->db->from("usuarioConocimiento");
-        $this->db->join("conocimientos","usuarioConocimiento.idConocimiento= conocimientos.idConocimiento");
+        $this->db->select("usuarioconocimiento.idConocimiento,conocimientos");
+        $this->db->from("usuarioconocimiento");
+        $this->db->join("conocimientos","usuarioconocimiento.idConocimiento= conocimientos.idConocimiento");
         $this->db->where("idUsuario",$id);
         $data["conocimientosUsuario"]=$this->db->get()->result();
 
@@ -262,7 +262,7 @@ class CEmpresa extends CI_Controller
         $this->db->update("postulaciones",array('estado'=>1));
 
         $data=array('idpostulacion'=>$data["idPostulacion"]->idPostulacion,'texto'=>'Contactar mediante chat','fecha'=>date('Y-m-d h:i:s'));
-        $this->db->insert("postulacionEventos",$data);
+        $this->db->insert("postulacioneventos",$data);
         redirect('/CEmpresa/perfilPostulante/'.$idUsuario.'/'.$idPropuesta,'refresh');
     }
 
@@ -280,7 +280,7 @@ class CEmpresa extends CI_Controller
         $this->db->update("postulaciones",array('estado'=>2));
 
         $data=array('idpostulacion'=>$data["idPostulacion"]->idPostulacion,'texto'=>'VideoLlamada realizada','fecha'=>date('Y-m-d h:i:s'));
-        $this->db->insert("postulacionEventos",$data);
+        $this->db->insert("postulacioneventos",$data);
         redirect('/CEmpresa/perfilPostulante/'.$idUsuario.'/'.$idPropuesta,'refresh');
     }
 
@@ -298,7 +298,7 @@ class CEmpresa extends CI_Controller
         $this->db->update("postulaciones",array('estado'=>3));
         
         $data=array('idpostulacion'=>$data["idPostulacion"]->idPostulacion,'texto'=>'VideoLlamada realizada','fecha'=>date('Y-m-d h:i:s'));
-        $this->db->insert("postulacionEventos",$data);
+        $this->db->insert("postulacioneventos",$data);
         redirect('/CEmpresa/perfilPostulante/'.$idUsuario.'/'.$idPropuesta,'refresh');
     }
 
@@ -316,7 +316,7 @@ class CEmpresa extends CI_Controller
         $this->db->update("postulaciones",array('estado'=>4 ));
         
         $data=array('idpostulacion'=>$data["idPostulacion"]->idPostulacion,'texto'=>'Valoracion realizada','fecha'=>date('Y-m-d h:i:s'));
-        $this->db->insert("postulacionEventos",$data);
+        $this->db->insert("postulacioneventos",$data);
         redirect('/CEmpresa/perfilPostulante/'.$idUsuario.'/'.$idPropuesta,'refresh');
     }
 
@@ -334,7 +334,7 @@ class CEmpresa extends CI_Controller
         $this->db->update("postulaciones",array('estado'=>5));
         
         $data=array('idpostulacion'=>$data["idPostulacion"]->idPostulacion,'texto'=>'Trabajo realizado','fecha'=>date('Y-m-d h:i:s'));
-        $this->db->insert("postulacionEventos",$data);
+        $this->db->insert("postulacioneventos",$data);
 
         //Cambiando el estado a la propuesta
         $this->db->where("idPropuesta",$idPropuesta);
@@ -357,7 +357,7 @@ class CEmpresa extends CI_Controller
         $this->db->update("postulaciones",array('estado'=>6));
         
         $data=array('idpostulacion'=>$data["idPostulacion"]->idPostulacion,'texto'=>'Trabajo realizado','fecha'=>date('Y-m-d h:i:s'));
-        $this->db->insert("postulacionEventos",$data);
+        $this->db->insert("postulacioneventos",$data);
 
         redirect('/CEmpresa/perfilPostulante/'.$idUsuario.'/'.$idPropuesta,'refresh');
     }

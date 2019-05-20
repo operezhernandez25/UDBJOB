@@ -47,7 +47,7 @@
 
     public function ingresarEmpresa($email,$pass){
       $this->db->select('idUsuarioEmpresa, nombre, apellido, idEmpresa, tipoUsuario,administrador,img');
-      $this->db->from('usuarioEmpresa');
+      $this->db->from('usuarioempresa');
       $this->db->where('correoElectronico',$email);
       $this->db->where('password',$pass);
 

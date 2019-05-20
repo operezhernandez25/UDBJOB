@@ -62,7 +62,7 @@ class CUsuarioE extends CI_Controller
     $data=$this->MUsuarioE->setUserE($datos,$img);
     $this->session->set_flashdata('mensaje',$data["mensaje"]);
     $this->session->set_flashdata('error',$data["error"]);
-    redirect('usuarioEmpresa','refresh');
+   redirect('usuarioEmpresa','refresh');
    }
 
    public function updateNombre()

@@ -14,16 +14,16 @@ class CUsuario extends CI_Controller
        //INFORMACION DE LA PROPUESTA
     $this->db->select("propuesta.idPropuesta,UPPER(propuesta.titulo) titulo,empresa.direccion,UPPER(propuesta.descripcion) descripcion,cast( propuesta.fecha as date) fecha,propuesta.jornada,propuesta.salario,empresa.nombre,empresa.pais,empresa.sector");
     $this->db->from("propuesta");
-    $this->db->join("usuarioEmpresa","usuarioEmpresa.idUsuarioEmpresa=propuesta.idUsuarioEmpresa");
-    $this->db->join("empresa","empresa.idEmpresa = usuarioEmpresa.idEmpresa");
+    $this->db->join("usuarioempresa","usuarioempresa.idUsuarioEmpresa=propuesta.idUsuarioEmpresa");
+    $this->db->join("empresa","empresa.idEmpresa = usuarioempresa.idEmpresa");
     $this->db->where("propuesta.idPropuesta",$id);
     $data["propuesta"]=$this->db->get()->result()[0];
 
     //CONOCIMIENTOS
     $this->db->select("conocimientos.idConocimiento, conocimientos.conocimientos");
     $this->db->from("conocimientos");
-    $this->db->join("propuestaConocimiento","propuestaConocimiento.idConocimiento=conocimientos.idConocimiento");
-    $this->db->where("propuestaConocimiento.idPropuesta",$id);
+    $this->db->join("propuestaconocimiento","propuestaconocimiento.idConocimiento=conocimientos.idConocimiento");
+    $this->db->where("propuestaconocimiento.idPropuesta",$id);
     $data["conocimientos"]=$this->db->get()->result();
 
        //verificar si ya se realizo la postulacion
@@ -77,8 +77,8 @@ class CUsuario extends CI_Controller
         $this->db->select("postulaciones.idPostulacion,postulaciones.idPropuesta,empresa.pais,empresa.direccion,propuesta.descripcion,empresa.nombre empresa,postulaciones.estado,postulaciones.fecha,postulaciones.idPostulacion,propuesta.titulo, propuesta.salario,propuesta.jornada");
         $this->db->from("postulaciones");
         $this->db->join("propuesta","postulaciones.idPropuesta = propuesta.idPropuesta");
-        $this->db->join("usuarioEmpresa","propuesta.idUsuarioEmpresa=usuarioEmpresa.idUsuarioEmpresa");
-        $this->db->join("empresa","empresa.idEmpresa = usuarioEmpresa.idEmpresa");
+        $this->db->join("usuarioempresa","propuesta.idUsuarioEmpresa=usuarioempresa.idUsuarioEmpresa");
+        $this->db->join("empresa","empresa.idEmpresa = usuarioempresa.idEmpresa");
         $this->db->where("postulaciones.idUsuario",$this->session->userdata("s_idusuario"));
         $this->db->where("postulaciones.idPropuesta",$id);
         $data["postulacion"]=$this->db->get()->result()[0];
@@ -95,8 +95,8 @@ class CUsuario extends CI_Controller
         //CONOCIMIENTOS
         $this->db->select("conocimientos.idConocimiento, conocimientos.conocimientos");
         $this->db->from("conocimientos");
-        $this->db->join("propuestaConocimiento","propuestaConocimiento.idConocimiento=conocimientos.idConocimiento");
-        $this->db->where("propuestaConocimiento.idPropuesta",$id);
+        $this->db->join("propuestaconocimiento","propuestaconocimiento.idConocimiento=conocimientos.idConocimiento");
+        $this->db->where("propuestaconocimiento.idPropuesta",$id);
         $data["conocimientos"]=$this->db->get()->result();
 
         echo '<script> var idPostulacion="'.$data["postulacion"]->idPostulacion.'"</script>';
@@ -189,8 +189,8 @@ class CUsuario extends CI_Controller
 
     //CONOCIMIENTOS
     $this->db->select("conocimientos.conocimientos");
-    $this->db->from("usuarioConocimiento");
-    $this->db->join("conocimientos","conocimientos.idConocimiento=usuarioConocimiento.idConocimiento");
+    $this->db->from("usuarioconocimiento");
+    $this->db->join("conocimientos","conocimientos.idConocimiento=usuarioconocimiento.idConocimiento");
     $this->db->where("idUsuario",$this->session->userdata('s_idusuario'));
     $data["conocimientos"]=$this->db->get()->result();
 
@@ -251,7 +251,7 @@ class CUsuario extends CI_Controller
     public function getConocimientosUser()
     {
       $this->db->select("*");
-      $this->db->from("usuarioConocimiento");
+      $this->db->from("usuarioconocimiento");
       $this->db->where("idUsuario",$this->session->userdata('s_idusuario'));
       echo json_encode($this->db->get()->result());
     }
@@ -358,7 +358,7 @@ class CUsuario extends CI_Controller
   public function countConocimiento()
   {
     $this->db->select("count(idConocimiento) numconocimiento");
-    $this->db->from("usuarioConocimiento");
+    $this->db->from("usuarioconocimiento");
     $this->db->where("idUsuario",$this->session->userdata('s_idusuario'));
     echo json_encode($this->db->get()->result());
   }
@@ -546,7 +546,7 @@ class CUsuario extends CI_Controller
     if (!empty($_FILES['modfoto']['name']))
     {
         // Configuración para el Archivo
-        $config['upload_path'] = 'public/photos/';
+        $config['upload_path'] = 'var/www/html/public/photos/';
         $config['allowed_types'] = 'pdf|jpg|jpeg|png';
 
         // Cargamos la configuración del Archivo
@@ -557,51 +557,57 @@ class CUsuario extends CI_Controller
         {
             $data = $this->upload->data();
             $foto = $data['file_name'];
+            $this->db->where('idUsuario',$this->session->userdata('s_idusuario'));
+            $this->db->update('usuario',array('foto'=>$foto));
+            if($this->db->affected_rows()>0)
+            {
+              $this->db->select('idUsuario, nombres, apellidos, email, foto');
+              $this->db->from('usuario');
+              $this->db->where('idUsuario',$this->session->userdata('s_idusuario'));
+      
+              $resultado=$this->db->get();
+      
+              if ($resultado->num_rows()==1) {
+                $r=$resultado->row();
+      
+                $s_usuario=array(
+                  's_idusuario'=>$r->idUsuario,
+                  's_usuario'=>$r->apellidos.", ".$r->nombres,
+                  's_Correo'=>$r->email,
+                  's_Foto'=>$r->foto,
+                  's_tipo'=>1
+                );
+      
+                $this->session->set_userdata($s_usuario);
+              }
+      
+              $this->session->set_flashdata('mensaje',"Foto de perfil actualizada!");
+              $this->session->set_flashdata('error',false);
+              
         }
         else
         {
             echo $this->upload->display_errors();
             $this->session->set_flashdata('mensaje',"Ocurrio un error, revise si la extension es correcta!");
-        	  $this->session->set_flashdata('error',true);
+            $this->session->set_flashdata('error',true);
+           
         }
+      
     }
     else
     {
       $this->session->set_flashdata('mensaje',"Debes subir los archivos necesarios!");
       $this->session->set_flashdata('error',true);
+      //redirect('perfil','refresh');
     }
-
-		  $this->db->where('idUsuario',$this->session->userdata('s_idusuario'));
-		  $this->db->update('usuario',array('foto'=>$foto));
-		  if($this->db->affected_rows()>0)
-      {
-        $this->db->select('idUsuario, nombres, apellidos, email, foto');
-        $this->db->from('usuario');
-        $this->db->where('idUsuario',$this->session->userdata('s_idusuario'));
-
-        $resultado=$this->db->get();
-
-        if ($resultado->num_rows()==1) {
-          $r=$resultado->row();
-
-          $s_usuario=array(
-            's_idusuario'=>$r->idUsuario,
-            's_usuario'=>$r->apellidos.", ".$r->nombres,
-            's_Correo'=>$r->email,
-            's_Foto'=>$r->foto,
-            's_tipo'=>1
-          );
-
-          $this->session->set_userdata($s_usuario);
-        }
-
-        $this->session->set_flashdata('mensaje',"Foto de perfil actualizada!");
-    	  $this->session->set_flashdata('error',false);
-      	redirect('perfil','refresh');
-		  }else{
-      	redirect('perfil','refresh');
-		  }
+    
+		 //redirect('perfil','refresh');
+		 // }else{
+      //	redirect('perfil','refresh');
+		 // }
   }
+  redirect('perfil','refresh');
+}
 
 
   public function subirarchivo()
@@ -618,7 +624,7 @@ class CUsuario extends CI_Controller
                   'nombrearchivo'=>$nombrearchivo,
                   'realn'=>$nombrereal
       );
-      $this->db->insert("archivosUsuarios",$data);
+      $this->db->insert("archivosusuarios",$data);
 
     }
   }
@@ -626,7 +632,7 @@ class CUsuario extends CI_Controller
   {
     $id =$this->session->userdata("s_idusuario");
     $this->db->select("idarchivo,idusuario,nombrearchivo,realn");
-    $this->db->from("archivosUsuarios");
+    $this->db->from("archivosusuarios");
     $this->db->where("idusuario",$id);
     echo json_encode($this->db->get()->result());
   }

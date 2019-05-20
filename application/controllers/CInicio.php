@@ -16,14 +16,14 @@ class cInicio extends CI_Controller
     if($this->session->userdata("s_tipo")==1)
     {
     
-      $this->db->select("propuestaConocimiento.idConocimiento,propuestaConocimiento.idPropuesta");
-      $this->db->from("propuestaConocimiento");
-      $this->db->join("propuesta","propuesta.idPropuesta=propuestaConocimiento.idPropuesta");
+      $this->db->select("propuestaconocimiento.idConocimiento,propuestaconocimiento.idPropuesta");
+      $this->db->from("propuestaconocimiento");
+      $this->db->join("propuesta","propuesta.idPropuesta=propuestaconocimiento.idPropuesta");
       $this->db->where("propuesta.estado",0);
       $data["conocimientosPropuestas"]=$this->db->get()->result();
 
       $this->db->select("idConocimiento");
-      $this->db->from("usuarioConocimiento");
+      $this->db->from("usuarioconocimiento");
       $this->db->where("idUsuario",$this->session->userdata('s_idusuario'));
       $data["conocimientosUsuario"]=$this->db->get()->result();
 
@@ -62,9 +62,9 @@ class cInicio extends CI_Controller
 
 
       //Filtrando las propuestas mediante el 70% de parecido
-      $this->db->select("count(*) contador,propuestaConocimiento.idPropuesta");
-      $this->db->from("propuestaConocimiento");
-      $this->db->group_by("propuestaConocimiento.idPropuesta");
+      $this->db->select("count(*) contador,propuestaconocimiento.idPropuesta");
+      $this->db->from("propuestaconocimiento");
+      $this->db->group_by("propuestaconocimiento.idPropuesta");
       $data["totalConPro"]=$this->db->get()->result();
 
       $coincidenciasFiltradas[]=0;
@@ -87,8 +87,8 @@ class cInicio extends CI_Controller
 
       $this->db->select("propuesta.idPropuesta,propuesta.titulo,propuesta.descripcion,cast( propuesta.fecha as date) fecha,propuesta.jornada,propuesta.salario,empresa.nombre,empresa.pais,empresa.sector");
       $this->db->from("propuesta");
-      $this->db->join("usuarioEmpresa","usuarioEmpresa.idUsuarioEmpresa=propuesta.idUsuarioEmpresa");
-      $this->db->join("empresa","empresa.idEmpresa = usuarioEmpresa.idEmpresa");
+      $this->db->join("usuarioempresa","usuarioempresa.idUsuarioEmpresa=propuesta.idUsuarioEmpresa");
+      $this->db->join("empresa","empresa.idEmpresa = usuarioempresa.idEmpresa");
       $this->db->where_in("propuesta.idPropuesta",$coincidenciasFiltradas);
       $data["propuestas"]=$this->db->get()->result();
       //Agregando campo
@@ -127,20 +127,20 @@ class cInicio extends CI_Controller
       $data["validador"]=0;
         //Cantidad de cotizaciones de la empresa
         $this->db->select("count(idPropuesta) conta");
-        $this->db->join("usuarioEmpresa","usuarioEmpresa.idUsuarioEmpresa=propuesta.idUsuarioEmpresa");
+        $this->db->join("usuarioempresa","usuarioempresa.idUsuarioEmpresa=propuesta.idUsuarioEmpresa");
         $this->db->from("propuesta");
         if($this->session->userdata("s_administrador")==0)
-        $this->db->where("usuarioEmpresa.idEmpresa",$this->session->userdata("s_idempresa"));
+        $this->db->where("usuarioempresa.idEmpresa",$this->session->userdata("s_idempresa"));
         $data["propuestas"]=$this->db->get()->result()[0];
 
         $query="select avg(conta) promedio from
         (
         select count(postulaciones.idPostulacion) conta from postulaciones
         inner join propuesta on propuesta.idPropuesta=postulaciones.idPropuesta
-        inner join usuarioEmpresa on usuarioEmpresa.idUsuarioEmpresa=propuesta.idUsuarioEmpresa
+        inner join usuarioempresa on usuarioempresa.idUsuarioEmpresa=propuesta.idUsuarioEmpresa
        ";
        if($this->session->userdata("s_administrador")==0){
-       $query.=" where usuarioEmpresa.idEmpresa=".$this->session->userdata("s_idempresa");}
+       $query.=" where usuarioempresa.idEmpresa=".$this->session->userdata("s_idempresa");}
         $query.=" group by propuesta.idPropuesta ) f";
        $data["promedio"]= $this->db->query($query)->result();
         

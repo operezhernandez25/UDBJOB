@@ -10,7 +10,7 @@ class MUsuarioE extends CI_Model
 
     public function getUsuariosE($idempresa){
         $this->db->select("idUsuarioEmpresa, nombre, apellido, correoElectronico, tipoUsuario, img");
-        $this->db->from("usuarioEmpresa");
+        $this->db->from("usuarioempresa");
         $this->db->where("idEmpresa",$idempresa);
         $this->db->where("estado",1);
         $respuesta=$this->db->get()->result();
@@ -20,6 +20,8 @@ class MUsuarioE extends CI_Model
     public function setUserE($campos,$img)
     {
       $idUsuario=$this->session->userdata('s_idusuario');
+      echo $idUsuario;
+      $campos["estado"]=1;
       //comprobando que se este logeado para realizar la peticion
       if(!isset($idUsuario))
       {
@@ -27,7 +29,7 @@ class MUsuarioE extends CI_Model
               'error'=>true,
               'mensaje'=>'No se tiene acceso');
       }
-      $this->db->insert("usuarioEmpresa",$campos);
+      $this->db->insert("usuarioempresa",$campos);
       $insert=$this->db->affected_rows();
 
       if($insert>0)
@@ -38,6 +40,7 @@ class MUsuarioE extends CI_Model
           $img = str_replace('data:image/jpg;base64,', '', $img);
           $img = str_replace(' ', '+', $img);
           utf8_encode($img);
+          $nombreArchivo=$z;
           //decodificando la imagen
           $data = base64_decode($img);
           //Asignando nombre al archivo y la carpeta donde estara
@@ -55,6 +58,7 @@ class MUsuarioE extends CI_Model
               'mensaje'=>'¡No se inserto!'
             );
       }
+      
     }
 
     public function updateNombre($id,$nombre)
@@ -76,7 +80,7 @@ class MUsuarioE extends CI_Model
        $datos=array('nombre'=>$nombre);
        $this->db->reset_query();
        $this->db->where("idUsuarioEmpresa",$id);
-       $this->db->update("usuarioEmpresa",$datos);
+       $this->db->update("usuarioempresa",$datos);
        //verificando si se actualizo
        if($this->db->affected_rows()==0)
         {
@@ -112,7 +116,7 @@ class MUsuarioE extends CI_Model
        $datos=array('apellido'=>$apellido);
        $this->db->reset_query();
        $this->db->where("idUsuarioEmpresa",$id);
-       $this->db->update("usuarioEmpresa",$datos);
+       $this->db->update("usuarioempresa",$datos);
        //verificando si se actualizo
        if($this->db->affected_rows()==0)
         {
@@ -148,7 +152,7 @@ class MUsuarioE extends CI_Model
        $datos=array('correoElectronico'=>$correo);
        $this->db->reset_query();
        $this->db->where("idUsuarioEmpresa",$id);
-       $this->db->update("usuarioEmpresa",$datos);
+       $this->db->update("usuarioempresa",$datos);
        //verificando si se actualizo
        if($this->db->affected_rows()==0)
         {
@@ -184,7 +188,7 @@ class MUsuarioE extends CI_Model
        $datos=array('tipoUsuario'=>$tipo);
        $this->db->reset_query();
        $this->db->where("idUsuarioEmpresa",$id);
-       $this->db->update("usuarioEmpresa",$datos);
+       $this->db->update("usuarioempresa",$datos);
        //verificando si se actualizo
        if($this->db->affected_rows()==0)
         {
@@ -221,7 +225,7 @@ class MUsuarioE extends CI_Model
        $datos=array("img"=>'uploads/usere/'.$nombreArchivo.'.jpg');
        $this->db->reset_query();
        $this->db->where("idUsuarioEmpresa",$id);
-       $this->db->update("usuarioEmpresa",$datos);
+       $this->db->update("usuarioempresa",$datos);
        //verificando si actualizo
        if($this->db->affected_rows()==0)
         {
@@ -266,7 +270,7 @@ class MUsuarioE extends CI_Model
        );
        $this->db->reset_query();
        $this->db->where("idUsuarioEmpresa",$id);
-       $this->db->update('usuarioEmpresa',$datos);
+       $this->db->update('usuarioempresa',$datos);
        if($this->db->affected_rows()==0)
         {
             return array(

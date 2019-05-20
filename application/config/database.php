@@ -7,9 +7,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => '35.225.36.82',
-	'username' => 'root',
-	'password' => '123456',
+	'hostname' => 'localhost',
+	'username' => 'adminComputrabajo',
+	'password' => 'oscar123',
 	'database' => 'computrabajo',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

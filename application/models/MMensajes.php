@@ -28,10 +28,10 @@ class MMensajes extends CI_Model
         $this->db->join("postulaciones","postulaciones.idPostulacion = mensajes.idPostulacion");
         $this->db->join("usuario","usuario.idUsuario=postulaciones.idUsuario");
         $this->db->join("propuesta","propuesta.idPropuesta=postulaciones.idPropuesta");
-        $this->db->join("usuarioEmpresa","usuarioEmpresa.idUsuarioEmpresa=propuesta.idUsuarioEmpresa");
+        $this->db->join("usuarioempresa","usuarioempresa.idUsuarioEmpresa=propuesta.idUsuarioEmpresa");
         $this->db->where("remitente",1);
         $this->db->where("visto",0);
-        $this->db->where("usuarioEmpresa.idEmpresa",$this->session->userdata("s_idempresa"));
+        $this->db->where("usuarioempresa.idEmpresa",$this->session->userdata("s_idempresa"));
         $this->db->group_by("mensajes.idPostulacion,propuesta.idPropuesta");
         return $this->db->get()->result();
     }
@@ -42,9 +42,9 @@ class MMensajes extends CI_Model
         $this->db->select("propuesta.idPropuesta,propuesta.titulo,propuesta.fecha,count(propuesta.idPropuesta) contador");
         $this->db->from("postulaciones");
         $this->db->join("propuesta","propuesta.idPropuesta = postulaciones.idPropuesta");
-        $this->db->join("usuarioEmpresa","usuarioEmpresa.idUsuarioEmpresa = propuesta.idUsuarioEmpresa");
+        $this->db->join("usuarioempresa","usuarioempresa.idUsuarioEmpresa = propuesta.idUsuarioEmpresa");
         $this->db->where("postulaciones.estado",0);
-        $this->db->where("usuarioEmpresa.idEmpresa",$this->session->userdata("s_idempresa"));
+        $this->db->where("usuarioempresa.idEmpresa",$this->session->userdata("s_idempresa"));
         $this->db->group_by("propuesta.idPropuesta");
         return $this->db->get()->result();
     }

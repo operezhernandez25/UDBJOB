@@ -37,7 +37,7 @@
               foreach($usuario as $usu)
               {
               ?>
-              <img class="profile-user-img img-responsive img-circle" src="<?php echo base_url(); ?>/public/photos/<?php echo $usu->foto?>" alt="User profile picture">
+              <img class="profile-user-img img-responsive img-circle" src="<?php echo base_url(); ?>public/photos/<?php echo $usu->foto?>" alt="User profile picture">
               <h3 class="profile-username text-center"><?php echo $usu->nombres." ".$usu->apellidos; ?></h3>
 
               <p class="text-muted text-center"><?php echo $usu->email ?></p>
